@@ -190,7 +190,7 @@ export default function Hero() {
               style={{ background: 'rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.3)', color: '#a5b4fc' }}
             >
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-indigo-400" />
-              Now in Beta — Join 2,500+ teams building with Emaavy
+              Now Live — Join 2,500+ teams building with Emaavy
             </motion.div>
 
             {/* Headline — rotating */}
