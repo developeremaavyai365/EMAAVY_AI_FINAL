@@ -89,7 +89,7 @@ export default function BookDemoPage() {
     if (!canSubmit) return;
 
     // Open Calendly popup prefilled with user details
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line
     (window as any).Calendly?.initPopupWidget({
       url: CALENDLY_URL,
       prefill: {

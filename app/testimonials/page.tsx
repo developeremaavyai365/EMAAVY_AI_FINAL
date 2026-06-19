@@ -508,7 +508,7 @@ export default function TestimonialsPage() {
           <div className="mb-12 text-center px-4">
             <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/25 mb-3">From the community</p>
             <h2 className="text-[28px] sm:text-[40px] font-black text-white tracking-tight">
-              Everyone's saying it.
+              Everyone&apos;s saying it.
             </h2>
           </div>
 
@@ -557,7 +557,7 @@ export default function TestimonialsPage() {
               <div className="relative z-10">
                 <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-indigo-400/70 mb-4">Ready to join them?</p>
                 <h2 className="text-[32px] sm:text-[48px] font-black text-white leading-tight tracking-tight mb-4">
-                  Your team's story<br />starts here.
+                  Your team&apos;s story<br />starts here.
                 </h2>
                 <p className="mx-auto max-w-lg text-[15px] leading-relaxed text-white/45 mb-10">
                   Join 200+ companies that replaced manual work with Emaavy AI agents. First live call in under 20 minutes.
