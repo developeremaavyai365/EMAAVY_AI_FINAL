@@ -214,7 +214,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-10 max-w-[480px] text-lg leading-relaxed text-white/55"
+              className="mb-8 max-w-[480px] text-base sm:text-lg leading-relaxed text-white/55"
             >
               Emaavy orchestrates voice AI agents and workflow automation so your team can deploy intelligent, human-sounding conversations at any scale — in any language.
             </motion.p>
@@ -224,7 +224,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-14 flex flex-wrap items-center gap-4"
+              className="mb-8 flex flex-wrap items-center gap-3"
             >
               <Link href="/book-demo"
                 className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-gray-900 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
@@ -257,7 +257,7 @@ export default function Hero() {
                   <div className="relative">
                     <button
                       onClick={() => setDropOpen(!dropOpen)}
-                      className="flex min-w-[210px] items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white transition-all"
+                      className="flex w-full sm:min-w-[210px] items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white transition-all"
                       style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
                     >
                       <span>{USE_CASES[caseIdx]}</span>

@@ -89,10 +89,12 @@ function OrchestrationVisual() {
       </div>
 
       {/* ── Canvas ── */}
+      <div className="overflow-x-auto">
       <div
         className="relative overflow-hidden"
         style={{
           height: 252,
+          minWidth: 760,
           backgroundColor: '#fafbfc',
           backgroundImage:
             'linear-gradient(rgba(148,163,184,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.18) 1px, transparent 1px)',
@@ -188,8 +190,9 @@ function OrchestrationVisual() {
         })}
       </div>
 
+      </div>{/* close overflow-x-auto */}
       {/* ── Status footer ── */}
-      <div className="flex items-center gap-5 border-t border-slate-100 bg-[#f7f8fa] px-4 py-2">
+      <div className="flex items-center gap-5 border-t border-slate-100 bg-[#f7f8fa] px-4 py-2 overflow-x-auto">
         {[
           { l: 'Nodes', v: '6' },
           { l: 'Edges', v: '5' },
@@ -268,11 +271,11 @@ function MonitoringVisual() {
       </div>
 
       {/* ── Dual-panel body ── */}
-      <div className="flex divide-x divide-slate-100">
+      <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-slate-100">
 
         {/* LEFT — dark transcript console */}
         <div
-          className="w-[52%] overflow-hidden p-4 font-mono text-xs"
+          className="w-full md:w-[52%] overflow-hidden p-4 font-mono text-xs"
           style={{ background: '#080f1e' }}
         >
           {/* Console header */}
@@ -432,9 +435,9 @@ function ConfigVisual() {
         </div>
       </div>
 
-      <div className="flex divide-x divide-slate-100">
-        {/* IDE Code pane */}
-        <div className="w-[55%] overflow-hidden bg-[#1a1b26] p-4">
+      <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-slate-100">
+        {/* IDE Code pane — hidden on mobile */}
+        <div className="hidden md:block w-full md:w-[55%] overflow-hidden bg-[#1a1b26] p-4">
           {/* Line numbers + code */}
           <div className="space-y-[1px]">
             {CODE.map((line, li) => (
@@ -598,8 +601,8 @@ export default function UnifiedPlatform() {
             <p className="mb-5 text-[11px] font-bold uppercase tracking-[0.28em] text-indigo-500">
               Unified Platform
             </p>
-            <h2 className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 lg:text-[52px]">
-              Everything you need to<br className="hidden lg:block" /> build enterprise voice AI.
+            <h2 className="font-display text-3xl sm:text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 lg:text-[52px]">
+              Everything you need to build enterprise voice AI.
             </h2>
 
             {/* Pillar tagline row */}
@@ -639,8 +642,8 @@ export default function UnifiedPlatform() {
                   <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.22em]" style={{ color: sec.tagColor }}>
                     {sec.tag}
                   </p>
-                  <h2 className="mb-6 whitespace-pre-line font-display text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 lg:text-[44px]">
-                    {sec.headline}
+                  <h2 className="mb-6 font-display text-3xl sm:text-4xl font-bold leading-[1.15] tracking-tight text-slate-900 lg:text-[44px]">
+                    {sec.headline.replace(/\n/g, ' ')}
                   </h2>
                   <p className="mb-4 text-[15px] leading-[1.75] text-slate-500">{sec.p1}</p>
                   <p className="text-[15px] leading-[1.75] text-slate-500">{sec.p2}</p>

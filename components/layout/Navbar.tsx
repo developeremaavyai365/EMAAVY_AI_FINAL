@@ -29,9 +29,9 @@ export default function Navbar() {
   return (
     <>
       {/* Announcement bar */}
-      <div className="announce-bar">
+      <div className="announce-bar text-center text-xs sm:text-sm px-3 py-2 sm:py-2.5">
         <span className="hidden sm:inline">Deploy AI voice agents that call, qualify, and close — in under 20 minutes.</span>
-        <span className="sm:hidden">AI voice agents. Live in 20 minutes.</span>
+        <span className="sm:hidden">AI voice agents. Live in 20 min.</span>
       </div>
 
       {/* White sticky navbar */}

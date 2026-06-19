@@ -78,7 +78,7 @@ function HeroCard() {
     >
       {/* ── Background video layer ── */}
       <video
-        autoPlay loop muted playsInline
+        autoPlay loop muted playsInline preload="none"
         className="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity duration-700 group-hover:opacity-75"
         src="/automotive.mp4"
       />
@@ -166,7 +166,7 @@ function MetricCard() {
     >
       {/* Background video */}
       <video
-        autoPlay loop muted playsInline
+        autoPlay loop muted playsInline preload="none"
         className="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity duration-700 group-hover:opacity-75"
         src="/finance.mp4"
       />
@@ -245,7 +245,7 @@ function ScaleCard() {
     >
       {/* Background video */}
       <video
-        autoPlay loop muted playsInline
+        autoPlay loop muted playsInline preload="none"
         className="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity duration-700 group-hover:opacity-75"
         src="/ecommerce.mp4"
       />

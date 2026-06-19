@@ -16,13 +16,13 @@ export default function Metrics() {
   return (
     <section className="section-py" style={{ background: 'linear-gradient(180deg, #f4f6ff 0%, #eef1ff 100%)' }}>
       <div className="site-container">
-        <div className="mb-16 text-center">
-          <h2 className="font-display text-4xl font-bold text-slate-900 sm:text-5xl lg:text-6xl">
+        <div className="mb-12 text-center">
+          <h2 className="font-display text-3xl font-bold text-slate-900 sm:text-5xl lg:text-6xl">
             Everyday Calls. Extraordinary Outcomes.
           </h2>
         </div>
 
-        <div className="flex flex-wrap items-start justify-center gap-12 lg:gap-20">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:flex lg:flex-wrap lg:items-start lg:justify-center lg:gap-20">
           {STATS.map((s, i) => (
             <motion.div
               key={s.label}

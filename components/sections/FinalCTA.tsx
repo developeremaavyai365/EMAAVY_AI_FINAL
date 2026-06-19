@@ -48,7 +48,7 @@ export default function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-display text-5xl font-bold text-white sm:text-6xl lg:text-7xl">
+          <h2 className="font-display text-4xl font-bold text-white sm:text-6xl lg:text-7xl">
             Start Building
           </h2>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
