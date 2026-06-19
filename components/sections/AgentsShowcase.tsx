@@ -197,15 +197,15 @@ export default function AgentsShowcase() {
                 style={{ background: '#0d0e12', border: '1px solid #ffffff0c' }}
               >
                 {/* Top section */}
-                <div className="px-8 pt-8 pb-6 border-b" style={{ borderColor: '#ffffff08' }}>
-                  <div className="flex items-start justify-between gap-6 mb-6">
-                    <div>
+                <div className="px-5 sm:px-8 pt-6 sm:pt-8 pb-6 border-b" style={{ borderColor: '#ffffff08' }}>
+                  <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                    <div className="min-w-0">
                       <span className="inline-block text-[10px] font-semibold uppercase tracking-widest text-neutral-600 mb-3">{agent.vertical}</span>
-                      <h3 className="text-[24px] font-bold text-white mb-2" style={{ letterSpacing: '-0.02em' }}>{agent.name}</h3>
-                      <p className="text-[14px] leading-relaxed text-neutral-400 max-w-md">{agent.headline}</p>
+                      <h3 className="text-[20px] sm:text-[24px] font-bold text-white mb-2" style={{ letterSpacing: '-0.02em' }}>{agent.name}</h3>
+                      <p className="text-[13px] sm:text-[14px] leading-relaxed text-neutral-400 max-w-md">{agent.headline}</p>
                     </div>
                     <Link href="/agents"
-                      className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-[12px] font-semibold text-white border transition-all hover:bg-white/5"
+                      className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[12px] font-semibold text-white border transition-all hover:bg-white/5"
                       style={{ borderColor: '#ffffff18' }}>
                       Deploy
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -216,20 +216,20 @@ export default function AgentsShowcase() {
 
                   {/* Stat */}
                   <div className="inline-flex items-baseline gap-2">
-                    <span className="text-[38px] font-bold text-white font-mono" style={{ letterSpacing: '-0.04em' }}>{agent.stat.val}</span>
+                    <span className="text-[32px] sm:text-[38px] font-bold text-white font-mono" style={{ letterSpacing: '-0.04em' }}>{agent.stat.val}</span>
                     <span className="text-[13px] text-neutral-500">{agent.stat.label}</span>
                   </div>
                 </div>
 
                 {/* Body */}
-                <div className="px-8 py-6 border-b" style={{ borderColor: '#ffffff08' }}>
+                <div className="px-5 sm:px-8 py-6 border-b" style={{ borderColor: '#ffffff08' }}>
                   <p className="text-[13px] leading-[1.9] text-neutral-500">{agent.body}</p>
                 </div>
 
                 {/* Capabilities */}
-                <div className="px-8 py-6">
+                <div className="px-5 sm:px-8 py-6">
                   <p className="text-[10px] uppercase tracking-widest text-neutral-700 mb-4">What this agent does</p>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {agent.capabilities.map((cap, i) => (
                       <div key={i} className="flex items-center gap-2.5">
                         <svg className="w-3.5 h-3.5 shrink-0 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

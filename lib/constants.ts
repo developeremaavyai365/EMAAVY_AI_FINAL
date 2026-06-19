@@ -1,8 +1,10 @@
 export const NAV_LINKS = [
-  { label: 'Platform',   href: '/platform' },
-  { label: 'AI Agents',  href: '/platform#ai-agents' },
-  { label: 'Pricing',    href: '/pricing' },
-  { label: 'FAQ',        href: '/faq' },
+  { label: 'Platform',      href: '/platform' },
+  { label: 'AI Agents',     href: '/platform#ai-agents' },
+  { label: 'How It Works',  href: '/platform#how-it-works' },
+  { label: 'Case Studies',  href: '/testimonials' },
+  { label: 'Pricing',       href: '/pricing' },
+  { label: 'FAQ',           href: '/faq' },
 ] as const;
 
 export const INTEGRATION_CATEGORIES = [

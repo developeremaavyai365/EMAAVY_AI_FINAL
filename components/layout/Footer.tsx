@@ -27,9 +27,9 @@ export default function Footer() {
   return (
     <footer style={{ background: '#04060e', borderTop: '1px solid rgba(99,102,241,0.12)' }}>
       <div className="site-container py-16">
-        <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr]">
           {/* Brand */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <Image src="/brand/emaavy-logo.svg" alt="Emaavy" width={130} height={26} className="h-auto w-[110px] brightness-0 invert" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/35">
               AI agent &amp; workflow automation platform for modern enterprises. Deploy at any scale.

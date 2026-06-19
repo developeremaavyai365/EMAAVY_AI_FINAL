@@ -433,7 +433,7 @@ export default function AgentsPage() {
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-[52px] md:text-[72px] font-extrabold text-white leading-[1.02] mb-6"
+              className="text-[36px] sm:text-[52px] md:text-[72px] font-extrabold text-white leading-[1.02] mb-6"
               style={{ letterSpacing: '-0.04em' }}>
               Every agent your<br />
               <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(90deg, #60a5fa 0%, #a78bfa 50%, #818cf8 100%)' }}>
@@ -664,7 +664,7 @@ export default function AgentsPage() {
                     style={{ background: '#0d0e13', border: '1px solid #ffffff08' }}>
 
                     {/* Top */}
-                    <div className="px-7 pt-7 pb-6" style={{ borderBottom: '1px solid #ffffff06' }}>
+                    <div className="px-5 sm:px-7 pt-6 sm:pt-7 pb-6" style={{ borderBottom: '1px solid #ffffff06' }}>
                       <span className="text-[10px] font-semibold uppercase tracking-widest mb-3 block" style={{ color: '#3f3f46' }}>
                         {agent.vertical}
                       </span>

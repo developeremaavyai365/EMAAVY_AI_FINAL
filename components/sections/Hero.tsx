@@ -87,7 +87,6 @@ function TiltCard() {
         </div>
 
         {/* Live Emaavy dashboard — scaled interactive HTML */}
-        {/* iframe renders at 800×430, scaled down to fit ~520px card = 0.65x */}
         <div className="relative w-full overflow-hidden" style={{ height: '280px' }}>
           <iframe
             src="/emaavy_dashboard.html"
@@ -100,6 +99,7 @@ function TiltCard() {
               transform: 'scale(0.65)',
               transformOrigin: 'top left',
               pointerEvents: 'none',
+              maxWidth: 'none',
             }}
           />
           {/* Bottom fade */}
@@ -194,7 +194,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Headline — rotating */}
-            <div className="mb-6 h-[170px] overflow-hidden sm:h-[200px] lg:h-[230px]">
+            <div className="mb-6 h-[140px] overflow-hidden sm:h-[170px] md:h-[200px] lg:h-[230px]">
               <AnimatePresence mode="wait">
                 <motion.h1
                   key={headIdx}
@@ -202,7 +202,7 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -40 }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                  className="whitespace-pre-line font-display text-[52px] font-extrabold leading-[1.06] tracking-tight text-white sm:text-[64px] lg:text-[76px]"
+                  className="whitespace-pre-line font-display text-[40px] font-extrabold leading-[1.06] tracking-tight text-white sm:text-[56px] md:text-[64px] lg:text-[76px]"
                 >
                   {HEADLINES[headIdx]}
                 </motion.h1>
@@ -365,8 +365,8 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* ── RIGHT: Tilt card ── */}
-          <div className="hidden w-full lg:flex lg:w-auto lg:justify-end">
+          {/* ── RIGHT: Tilt card — hidden on mobile/tablet, shown on lg+ ── */}
+          <div className="hidden w-full lg:flex lg:w-auto lg:justify-end xl:block">
             <TiltCard />
           </div>
         </div>

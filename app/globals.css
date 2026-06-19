@@ -12,9 +12,21 @@
   --surface: #f9fafb;
 }
 
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee     { animation: marquee 40s linear infinite; }
+.animate-marquee-rev { animation: marquee-rev 44s linear infinite; }
+
 @layer base {
-  html  { scroll-behavior: smooth; }
-  body  { @apply bg-white font-sans text-gray-900 antialiased; }
+  html  { scroll-behavior: smooth; overflow-x: hidden; }
+  body  { @apply bg-white font-sans text-gray-900 antialiased; overflow-x: hidden; }
+  *, *::before, *::after { box-sizing: border-box; min-width: 0; }
   ::selection { background: rgba(26,86,219,0.15); }
 
   /* Global heading defaults — Plus Jakarta Sans feel: medium weight, tight tracking */

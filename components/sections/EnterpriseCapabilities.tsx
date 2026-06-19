@@ -198,7 +198,7 @@ export default function EnterpriseCapabilities() {
 
             {/* Bottom divider + stat row */}
             <motion.div
-              className="mt-16 grid grid-cols-3 gap-6 pt-10"
+              className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10"
               style={{ borderTop: '1px solid rgba(99,102,241,0.12)' }}
               variants={fadeUp(0.4)}
               initial="hidden"

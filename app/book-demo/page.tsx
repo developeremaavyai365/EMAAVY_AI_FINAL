@@ -112,7 +112,7 @@ export default function BookDemoPage() {
     <div className="min-h-screen flex" style={{ background: '#ffffff' }}>
 
       {/* ── LEFT: Form ── */}
-      <div className="w-full lg:w-[48%] flex flex-col px-8 py-10 lg:px-14 xl:px-16 min-h-screen"
+      <div className="w-full lg:w-[48%] flex flex-col px-5 py-8 sm:px-8 sm:py-10 lg:px-14 xl:px-16 min-h-screen"
         style={{ background: '#ffffff', borderRight: '1px solid #e5e7eb' }}>
 
         {/* Nav */}

@@ -202,7 +202,7 @@ export default function PricingPage() {
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.05 }}
-              className="text-[48px] md:text-[64px] font-extrabold text-white leading-[1.05] mb-5"
+              className="text-[34px] sm:text-[48px] md:text-[64px] font-extrabold text-white leading-[1.05] mb-5"
               style={{ letterSpacing: '-0.04em' }}>
               Straightforward pricing.<br />
               <span className="text-transparent bg-clip-text"
@@ -318,7 +318,7 @@ export default function PricingPage() {
                           <motion.span key={annual ? 'a' : 'm'}
                             initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                             transition={{ duration: 0.2 }}
-                            className="text-[48px] font-extrabold text-white font-mono leading-none"
+                            className="text-[38px] sm:text-[48px] font-extrabold text-white font-mono leading-none"
                             style={{ letterSpacing: '-0.04em' }}>
                             ₹{(annual ? plan.price.annualTotal! : plan.price.monthly!).toLocaleString('en-IN')}
                           </motion.span>

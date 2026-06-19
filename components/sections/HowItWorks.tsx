@@ -39,7 +39,7 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-[#f9f9f7] border-b border-neutral-200">
+    <section id="how-it-works" className="bg-[#f9f9f7] border-b border-neutral-200">
       {/* Header */}
       <div className="mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-16 text-center">
         <motion.p

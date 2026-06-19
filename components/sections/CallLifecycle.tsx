@@ -388,7 +388,7 @@ export default function CallLifecycle() {
                 </div>
 
                 {/* Metrics + tech log row */}
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2">
                   {/* Metrics */}
                   <div className="px-7 py-5" style={{ borderRight: '1px solid #ffffff08' }}>
                     <p className="text-[10px] uppercase tracking-widest text-neutral-600 mb-4">Stage metrics</p>
@@ -587,7 +587,7 @@ export default function CallLifecycle() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="mt-8 rounded-2xl grid grid-cols-2 md:grid-cols-4 overflow-hidden"
+              className="mt-8 rounded-2xl grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 overflow-hidden"
               style={{ border: '1px solid #4ade8030', background: '#4ade8008' }}
             >
               {[

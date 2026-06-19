@@ -246,7 +246,7 @@ export default function SystemArchitecture() {
               >
                 {/* Panel header */}
                 <div
-                  className="flex items-center justify-between px-7 py-4 border-b"
+                  className="flex flex-wrap items-center justify-between gap-3 px-4 sm:px-7 py-4 border-b"
                   style={{ borderColor: layer.accentBorder, background: layer.accentDim }}
                 >
                   <div className="flex items-center gap-3">
@@ -256,27 +256,27 @@ export default function SystemArchitecture() {
                     >
                       LAYER {layer.index}
                     </span>
-                    <span className="text-[14px] font-semibold text-white">{layer.label}</span>
+                    <span className="text-[13px] sm:text-[14px] font-semibold text-white">{layer.label}</span>
                   </div>
                   <div className="text-right">
-                    <p className="text-[22px] font-bold tabular-nums font-mono" style={{ color: layer.accent }}>{layer.stat.val}</p>
+                    <p className="text-[20px] sm:text-[22px] font-bold tabular-nums font-mono" style={{ color: layer.accent }}>{layer.stat.val}</p>
                     <p className="text-[10px] text-neutral-600 mt-0.5">{layer.stat.label}</p>
                   </div>
                 </div>
 
                 {/* Signal flow */}
-                <div className="px-7 py-5 border-b" style={{ borderColor: '#ffffff08' }}>
+                <div className="px-4 sm:px-7 py-5 border-b" style={{ borderColor: '#ffffff08' }}>
                   <p className="text-[10px] uppercase tracking-widest text-neutral-600 mb-4">Signal flow</p>
                   <FlowRow steps={layer.flow} colors={layer.flowColors} />
                 </div>
 
                 {/* Description */}
-                <div className="px-7 py-6">
-                  <p className="text-[14px] leading-[1.9] text-neutral-400">{layer.detail}</p>
+                <div className="px-4 sm:px-7 py-6">
+                  <p className="text-[13px] sm:text-[14px] leading-[1.9] text-neutral-400">{layer.detail}</p>
                 </div>
 
                 {/* Integration spotlight grid */}
-                <div className="px-7 pb-6 grid grid-cols-2 gap-3">
+                <div className="px-4 sm:px-7 pb-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {layer.integrations.map(intg => (
                     <Link
                       key={intg.name}
@@ -296,7 +296,7 @@ export default function SystemArchitecture() {
                 </div>
 
                 {/* Chip strip */}
-                <div className="px-7 py-4 border-t flex flex-wrap gap-2" style={{ borderColor: '#ffffff08' }}>
+                <div className="px-4 sm:px-7 py-4 border-t flex flex-wrap gap-2" style={{ borderColor: '#ffffff08' }}>
                   {layer.chips.map(chip => (
                     <span
                       key={chip}

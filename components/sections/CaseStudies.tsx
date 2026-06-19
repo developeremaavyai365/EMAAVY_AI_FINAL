@@ -346,7 +346,7 @@ export default function CaseStudies() {
               Real outcomes.<br />Real enterprises.
             </h2>
             <a
-              href="#"
+              href="/testimonials"
               className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-[12px] font-semibold text-white/60 backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:text-white"
             >
               View all case studies
