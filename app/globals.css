@@ -24,11 +24,9 @@
 .animate-marquee-rev { animation: marquee-rev 44s linear infinite; }
 
 @layer base {
-  /* overflow: clip prevents horizontal scroll WITHOUT creating a scroll container,
-     so position:sticky children keep working correctly */
-  html  { scroll-behavior: smooth; overflow-x: clip; }
-  body  { @apply bg-white font-sans text-gray-900 antialiased; overflow-x: clip; }
-  *, *::before, *::after { box-sizing: border-box; min-width: 0; }
+  html  { scroll-behavior: smooth; overflow-x: hidden; }
+  body  { @apply bg-white font-sans text-gray-900 antialiased; }
+  *, *::before, *::after { box-sizing: border-box; }
   ::selection { background: rgba(26,86,219,0.15); }
 
   /* Global heading defaults — Plus Jakarta Sans feel: medium weight, tight tracking */

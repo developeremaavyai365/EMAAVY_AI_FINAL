@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const VIDEO_SRC = '/hero.mp4';
@@ -44,28 +44,6 @@ const ORBS = [
   },
 ];
 
-/* Mobile-safe simplified orbs — no mix-blend-mode, lighter blur */
-const MOBILE_ORBS = [
-  {
-    style: {
-      top: '-10%', right: '-10%', width: '80vw', height: '80vw',
-      background: 'radial-gradient(circle, rgba(99,102,241,0.35) 0%, transparent 65%)',
-      filter: 'blur(40px)',
-    },
-    animate: { scale: [1, 1.08, 1] },
-    duration: 8,
-  },
-  {
-    style: {
-      bottom: '-10%', left: '-10%', width: '70vw', height: '70vw',
-      background: 'radial-gradient(circle, rgba(20,184,166,0.30) 0%, transparent 65%)',
-      filter: 'blur(40px)',
-    },
-    animate: { scale: [1, 1.06, 1] },
-    duration: 10,
-  },
-];
-
 const LASER_GRADIENT =
   'linear-gradient(90deg, transparent 0%, #06b6d4 8%, #818cf8 22%, #a78bfa 38%, #f59e0b 54%, #ec4899 68%, #22d3ee 82%, transparent 100%)';
 
@@ -96,63 +74,54 @@ function GrainOverlay() {
 interface HeroBackgroundProps { children?: React.ReactNode; }
 
 export default function HeroBackground({ children }: HeroBackgroundProps) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handler = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handler);
-    return () => window.removeEventListener('resize', handler);
-  }, []);
-
   return (
     <div className="relative min-h-screen w-full overflow-hidden" style={{ background: '#04060c' }}>
 
-      {/* Solid gradient fallback — always visible, works even if video blocked */}
+      {/* Solid gradient fallback — visible instantly before video loads */}
       <div aria-hidden className="pointer-events-none absolute inset-0"
         style={{ background: 'linear-gradient(135deg, #04060c 0%, #0d1220 40%, #080c18 100%)' }} />
 
-      {/* Video — desktop only, mobile browsers often block autoplay */}
-      {!isMobile && (
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <video src={VIDEO_SRC} autoPlay loop muted playsInline preload="metadata"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ opacity: 0.55 }} />
-        </div>
-      )}
+      {/* Ambient video — always rendered, browser decides on mobile */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <video
+          src={VIDEO_SRC}
+          autoPlay loop muted playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ opacity: 0.55 }}
+        />
+      </div>
 
       {/* Vignette */}
       <div aria-hidden className="pointer-events-none absolute inset-0"
         style={{ background: 'radial-gradient(ellipse 110% 110% at 50% 50%, transparent 25%, rgba(4,6,12,0.55) 60%, rgba(4,6,12,0.90) 100%)' }} />
 
-      {/* Desktop orbs — mix-blend-mode screen, only on md+ */}
-      {!isMobile && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block"
-          style={{ mixBlendMode: 'screen', opacity: 0.55 }}>
-          {ORBS.map((orb, i) => (
-            <motion.div key={i} aria-hidden
-              className="absolute rounded-full will-change-transform"
-              style={orb.style}
-              animate={orb.animate}
-              transition={{ duration: orb.duration, repeat: Infinity, ease: 'easeInOut', times: [0, 0.33, 0.66, 1] }} />
-          ))}
-        </div>
-      )}
+      {/* Desktop orbs — hidden on mobile via CSS (no JS detection = no hydration issues) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:block"
+        style={{ mixBlendMode: 'screen', opacity: 0.55 }}>
+        {ORBS.map((orb, i) => (
+          <motion.div key={i} aria-hidden
+            className="absolute rounded-full will-change-transform"
+            style={orb.style}
+            animate={orb.animate}
+            transition={{ duration: orb.duration, repeat: Infinity, ease: 'easeInOut', times: [0, 0.33, 0.66, 1] }} />
+        ))}
+      </div>
 
-      {/* Mobile orbs — simpler, no blend mode */}
-      {isMobile && (
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          {MOBILE_ORBS.map((orb, i) => (
-            <motion.div key={i} aria-hidden
-              className="absolute rounded-full"
-              style={orb.style}
-              animate={orb.animate}
-              transition={{ duration: orb.duration, repeat: Infinity, ease: 'easeInOut', repeatType: 'reverse' }} />
-          ))}
-        </div>
-      )}
+      {/* Mobile orbs — simpler, no blend mode, shown only on small screens */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 md:hidden">
+        <div className="absolute rounded-full" style={{
+          top: '-10%', right: '-10%', width: '80vw', height: '80vw',
+          background: 'radial-gradient(circle, rgba(99,102,241,0.35) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }} />
+        <div className="absolute rounded-full" style={{
+          bottom: '-10%', left: '-10%', width: '70vw', height: '70vw',
+          background: 'radial-gradient(circle, rgba(20,184,166,0.30) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }} />
+      </div>
 
-      {/* Dot grid — desktop only */}
+      {/* Dot grid */}
       <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block"
         style={{
           backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.75) 1px, transparent 1px)',
@@ -173,7 +142,6 @@ export default function HeroBackground({ children }: HeroBackgroundProps) {
           style={{ background: 'linear-gradient(180deg, rgba(6,182,212,0.22) 0%, rgba(139,92,246,0.12) 40%, transparent 100%)', filter: 'blur(14px)' }}
           animate={{ opacity: [0.65, 1, 0.65] }}
           transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }} />
-        {/* Scanning hot-spots — desktop only */}
         <motion.div className="absolute top-0 h-[3px] w-56 rounded-full hidden sm:block"
           style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.98), rgba(6,182,212,0.95), transparent)', filter: 'blur(3px)', boxShadow: '0 0 18px 5px rgba(6,182,212,0.75), 0 0 36px 10px rgba(139,92,246,0.45)' }}
           animate={{ left: ['-8%', '108%'] }}
