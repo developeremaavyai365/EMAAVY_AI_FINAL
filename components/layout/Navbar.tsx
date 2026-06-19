@@ -168,6 +168,7 @@ export default function Navbar() {
               <div className="mt-auto flex flex-col gap-3">
                 <Link href="/book-demo" onClick={() => setMobileOpen(false)} className="btn-black w-full py-3.5 text-center">Start Building</Link>
                 <Link href="/book-demo" onClick={() => setMobileOpen(false)} className="btn-outline w-full py-3.5 text-center">Contact Sales</Link>
+                <Link href="/signup" onClick={() => setMobileOpen(false)} className="w-full py-3 text-center text-sm font-medium text-gray-500 hover:text-gray-800">Login</Link>
               </div>
             </div>
           </motion.div>

@@ -129,9 +129,9 @@ function FeatureCard({
 /* ─── Main section ───────────────────────────────────────────────────────── */
 export default function EnterpriseCapabilities() {
   return (
-    <section className="py-16 lg:py-20" style={{ background: '#f7f9ff', borderTop: '1px solid rgba(99,102,241,0.08)' }}>
-      <div className="site-container">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:items-start md:gap-12">
+    <section className="py-16 lg:py-20" style={{ background: '#f7f9ff', borderTop: '1px solid rgba(99,102,241,0.08)', isolation: 'isolate' }}>
+      <div className="site-container" style={{ overflow: 'visible' }}>
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:items-start md:gap-12" style={{ overflow: 'visible' }}>
 
           {/* ── Left sticky text block ── */}
           <motion.div
