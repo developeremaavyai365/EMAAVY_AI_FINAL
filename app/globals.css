@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #1a56db;
+  --accent-hover: #1e429f;
+  --fg: #111827;
+  --fg-soft: #374151;
+  --fg-muted: #6b7280;
+  --border: #e5e7eb;
+  --surface: #f9fafb;
+}
+
+@layer base {
+  html  { scroll-behavior: smooth; }
+  body  { @apply bg-white font-sans text-gray-900 antialiased; }
+  ::selection { background: rgba(26,86,219,0.15); }
+
+  /* Global heading defaults — Plus Jakarta Sans feel: medium weight, tight tracking */
+  h1, h2, h3 {
+    font-family: var(--font-clash);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  h4, h5, h6 {
+    font-family: var(--font-clash);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+}
+
+@layer components {
+  /* ─── Layout ─── */
+  .site-container { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
+  .section-py     { @apply py-24 lg:py-32; }
+
+  /* ─── Announce bar ─── */
+  .announce-bar {
+    @apply flex items-center justify-center gap-3 px-4 py-2.5 text-sm text-white;
+    background: #0a0a0a;
+  }
+
+  /* ─── Nav (white) ─── */
+  .site-nav {
+    @apply sticky top-0 z-50 bg-white;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* ─── Hero ─── */
+  .hero-bg {
+    @apply relative min-h-[90vh] overflow-hidden;
+    background: #111827;
+  }
+
+  /* ─── Buttons ─── */
+  .btn-black {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-gray-800;
+  }
+  .btn-white-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 text-sm font-semibold text-gray-900 transition-all hover:border-gray-400 hover:bg-gray-50;
+  }
+
+  /* ─── Section headings ─── */
+  .section-tag   { @apply mb-3 inline-block text-xs font-medium uppercase tracking-[0.22em] text-gray-500; }
+  .section-h2    { @apply font-display text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl; }
+  .section-body  { @apply mt-5 max-w-2xl text-lg leading-relaxed text-gray-500; }
+
+  /* ─── Light card ─── */
+  .light-card {
+    @apply rounded-2xl border border-gray-100 bg-white p-7 shadow-sm transition-all duration-200 hover:shadow-md;
+  }
+
+  /* ─── Dark card ─── */
+  .dark-card {
+    @apply rounded-2xl p-7 transition-all duration-200;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+  }
+  .dark-card:hover {
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.18);
+  }
+
+  /* ─── Marquee ─── */
+  .marquee-outer     { @apply overflow-hidden; }
+  .marquee-inner     { @apply flex w-max animate-marquee items-center; }
+  .marquee-inner-rev { @apply flex w-max animate-marquee-rev items-center; }
+}
+
+@layer utilities {
+  .text-balance  { text-wrap: balance; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar  { -ms-overflow-style: none; scrollbar-width: none; }
+}

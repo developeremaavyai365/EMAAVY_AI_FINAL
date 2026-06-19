@@ -1,0 +1,624 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>html,body{margin:0;padding:0;overflow:hidden;background:#F0F2F5}</style>
+</head>
+<body>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+h2.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+body,div{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.wrap{padding:.5rem 0;position:relative;user-select:none}
+.label-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:0 2px}
+.label-bar-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.4px}
+.step-dots{display:flex;gap:6px;align-items:center}
+.shell{background:#fff;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 0 0 1px rgba(0,0,0,.1),0 4px 24px rgba(0,0,0,.08)}
+.chrome-bar{background:#1C2B3A;padding:8px 14px;display:flex;align-items:center;gap:10px}
+.chrome-dots{display:flex;gap:5px}
+.cd{width:11px;height:11px;border-radius:50%}
+.cd-r{background:#FF5F57}.cd-y{background:#FFBD2E}.cd-g{background:#28C840}
+.url-bar{flex:1;background:rgba(255,255,255,.08);border-radius:5px;padding:4px 10px;font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.2px;text-align:center}
+.chrome-right{font-size:10px;color:rgba(255,255,255,.35)}
+.body{display:flex;height:370px}
+.sidebar{width:156px;background:#0D2137;flex-shrink:0;display:flex;flex-direction:column}
+.slogo{padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,.06)}
+.slogo-text{color:#E8F4FF;font-size:15px;font-weight:600;letter-spacing:-.2px}
+.slogo-text span{color:#4fa8e8}
+.nav-group{padding:8px 0;flex:1}
+.ni{display:flex;align-items:center;gap:9px;padding:7px 16px;font-size:11.5px;color:rgba(180,210,245,.55);cursor:pointer;transition:all .15s;position:relative}
+.ni i{font-size:13px;flex-shrink:0}
+.ni.active{background:rgba(255,255,255,.08);color:#E8F4FF}
+.ni.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2.5px;background:#4fa8e8;border-radius:0 2px 2px 0}
+.sidebar-bot{padding:8px 0;border-top:1px solid rgba(255,255,255,.06)}
+.nb{display:flex;align-items:center;gap:9px;padding:7px 16px;font-size:11.5px;color:rgba(180,210,245,.45);cursor:pointer}
+.nb i{font-size:13px;flex-shrink:0}
+.nb.active{background:rgba(255,255,255,.08);color:#E8F4FF}
+.nb.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2.5px;background:#4fa8e8;border-radius:0 2px 2px 0}
+.content{flex:1;background:#F0F2F5;overflow:hidden;position:relative}
+.panel{display:none;height:100%;overflow:hidden}
+.panel.active{display:flex;flex-direction:column;animation:pfade .3s ease}
+@keyframes pfade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sli{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+@keyframes grow{from{width:0}to{width:var(--w)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.pg-header{padding:12px 16px 10px;border-bottom:1px solid rgba(0,0,0,.06);background:#fff;flex-shrink:0}
+.pg-title{font-size:16px;font-weight:600;color:#0D2137}
+.pg-sub{font-size:11px;color:#8a94a6;margin-top:1px}
+.pg-body{flex:1;padding:12px 16px;overflow:hidden}
+.filt{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:4px 9px;font-size:10.5px;color:#374151;display:flex;align-items:center;gap:4px}
+.filt i{font-size:11px;color:#6B7280}
+.btn-primary{background:#0D2137;color:#fff;border:none;border-radius:6px;padding:5px 11px;font-size:10.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px}
+.btn-sec{background:#fff;color:#0D2137;border:1px solid rgba(0,0,0,.12);border-radius:6px;padding:5px 11px;font-size:10.5px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px}
+.metric-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.mc{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:11px 13px;animation:pop .3s ease both}
+.mc-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-bottom:7px}
+.mc-pct{font-size:10px;font-weight:500;color:#16A34A;margin-bottom:3px}
+.mc-val{font-size:21px;font-weight:600;color:#0D2137;line-height:1}
+.mc-label{font-size:10px;color:#8a94a6;margin-top:3px;text-transform:uppercase;letter-spacing:.4px}
+.chart-box{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:11px 13px;margin-bottom:8px}
+.chart-title{font-size:12px;font-weight:500;color:#0D2137;margin-bottom:8px}
+.chart-area{height:56px;display:flex;align-items:flex-end;gap:3px;position:relative}
+.bar-lbl{font-size:8px;color:#9CA3AF;position:absolute;bottom:-14px}
+.tbl-box{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;overflow:hidden}
+.tbl-header{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;border-bottom:1px solid rgba(0,0,0,.06)}
+.tbl-title{font-size:12px;font-weight:500;color:#0D2137}
+.tbl-link{font-size:11px;color:#4fa8e8}
+.tbl-row{display:flex;align-items:center;gap:10px;padding:6px 13px;border-bottom:0.5px solid rgba(0,0,0,.05);font-size:11px;animation:sli .3s ease both}
+.tbl-row:last-child{border-bottom:none}
+.tc{color:#374151}
+.tm{color:#8a94a6}
+.pill{font-size:9.5px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap}
+.s-active{background:#DCFCE7;color:#14532D}
+.s-cancelled{background:#FEE2E2;color:#7F1D1D}
+.s-draft{background:#FEF3C7;color:#78350F}
+.s-valid{background:#DCFCE7;color:#14532D}
+.s-outbound{background:#DBEAFE;color:#1e3a5f}
+.s-inbound{background:#EDE9FE;color:#3730A3}
+.s-paused{background:#FEF3C7;color:#78350F}
+.ag-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:6px;animation:sli .3s ease both}
+.ag-av{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0;color:#fff}
+.ag-name{font-size:12.5px;font-weight:500;color:#0D2137}
+.ag-meta{font-size:10.5px;color:#8a94a6;margin-top:1px}
+.int-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.int-card{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:12px;animation:pop .35s ease both}
+.int-name{font-size:11.5px;font-weight:500;color:#0D2137;margin-top:6px}
+.int-desc{font-size:10px;color:#8a94a6;margin-top:2px}
+.int-status{display:flex;align-items:center;gap:4px;margin-top:8px;font-size:10px}
+.int-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.prog-bar{height:4px;background:#E5E7EB;border-radius:2px;overflow:hidden;margin-top:3px}
+.prog-fill{height:100%;background:#22C55E;border-radius:2px}
+.flow-canvas{background:#F8F9FC;border:1px solid rgba(0,0,0,.07);border-radius:0 0 8px 8px;height:152px;position:relative;overflow:hidden}
+.flow-node-mini{position:absolute;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.flow-toolbar{background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px 8px 0 0;padding:6px 10px;display:flex;align-items:center;gap:7px}
+.ftb-btn{font-size:10px;color:#374151;padding:3px 7px;border:1px solid rgba(0,0,0,.1);border-radius:5px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:4px}
+.ftb-btn i{font-size:10px}
+</style>
+
+<h2 class="sr-only">EMAAVY enterprise call intelligence â€” interactive demo dashboard</h2>
+
+<div class="wrap">
+  <div class="label-bar">
+    <span class="label-bar-title">emaavy â€” enterprise call intelligence Â· demo</span>
+    <div class="step-dots" id="DOTS"></div>
+  </div>
+
+  <div class="shell" id="SHELL">
+    <div class="chrome-bar">
+      <div class="chrome-dots"><div class="cd cd-r"></div><div class="cd cd-y"></div><div class="cd cd-g"></div></div>
+      <div class="url-bar" id="URLBAR">app.emaavy.ai/dashboard</div>
+      <div class="chrome-right">EMAAVY â€” Enterprise Call Intelligence</div>
+    </div>
+    <div class="body">
+      <div class="sidebar">
+        <div class="slogo"><div class="slogo-text">e<span>maavy</span></div></div>
+        <div class="nav-group">
+          <div class="ni active" id="NI0"><i class="ti ti-layout-dashboard" aria-hidden="true"></i>Dashboard</div>
+          <div class="ni" id="NI1"><i class="ti ti-phone" aria-hidden="true"></i>Phone Numbers</div>
+          <div class="ni" id="NI2"><i class="ti ti-robot" aria-hidden="true"></i>AI Agents</div>
+          <div class="ni" id="NI3"><i class="ti ti-speakerphone" aria-hidden="true"></i>Campaigns</div>
+          <div class="ni" id="NI4"><i class="ti ti-git-branch" aria-hidden="true"></i>Conversation Flows</div>
+        </div>
+        <div class="sidebar-bot">
+          <div class="nb" id="NI5"><i class="ti ti-plug" aria-hidden="true"></i>Integrations</div>
+          <div class="nb" id="NI6"><i class="ti ti-settings" aria-hidden="true"></i>Settings</div>
+          <div class="nb"><i class="ti ti-logout" aria-hidden="true"></i>Log out</div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- PANEL 0: Dashboard -->
+        <div class="panel active" id="P0">
+          <div class="pg-header">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+              <div><div class="pg-title">Dashboard</div><div class="pg-sub">Here's what's happening today.</div></div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;align-items:center">
+                <div class="filt"><i class="ti ti-chevron-down"></i>All Campaigns</div>
+                <div class="filt"><i class="ti ti-chevron-down"></i>All Numbers</div>
+                <div class="filt"><i class="ti ti-chevron-down"></i>All Agents</div>
+                <div class="filt"><i class="ti ti-chevron-down"></i>Last 7 Days</div>
+                <button class="btn-primary"><i class="ti ti-chart-bar" style="font-size:11px"></i>View All Calls</button>
+              </div>
+            </div>
+          </div>
+          <div class="pg-body" style="overflow:hidden">
+            <div class="metric-row">
+              <div class="mc" style="animation-delay:0s">
+                <div class="mc-icon" style="background:#EFF6FF"><i class="ti ti-phone" style="color:#1D4ED8;font-size:14px" aria-hidden="true"></i></div>
+                <div class="mc-pct">â†‘ 142.0%</div>
+                <div class="mc-val">1,284</div>
+                <div class="mc-label">Total Calls (7D)</div>
+              </div>
+              <div class="mc" style="animation-delay:.06s">
+                <div class="mc-icon" style="background:#F0FDF4"><i class="ti ti-circle-check" style="color:#16A34A;font-size:14px" aria-hidden="true"></i></div>
+                <div class="mc-pct">â†‘ 8.3%</div>
+                <div class="mc-val">68%</div>
+                <div class="mc-label">Success Rate</div>
+              </div>
+              <div class="mc" style="animation-delay:.12s">
+                <div class="mc-icon" style="background:#FFF7ED"><i class="ti ti-trending-up" style="color:#EA580C;font-size:14px" aria-hidden="true"></i></div>
+                <div class="mc-pct">â†‘ 2.0%</div>
+                <div class="mc-val">4</div>
+                <div class="mc-label">Active Campaigns</div>
+              </div>
+              <div class="mc" style="animation-delay:.18s">
+                <div class="mc-icon" style="background:#F5F3FF"><i class="ti ti-clock" style="color:#7C3AED;font-size:14px" aria-hidden="true"></i></div>
+                <div class="mc-pct" style="color:#6B7280">â†“ 12%</div>
+                <div class="mc-val">47</div>
+                <div class="mc-label">Pending Follow-Ups</div>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-title">Calls Over Time</div>
+              <div class="chart-area">
+                <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 400 56" preserveAspectRatio="none">
+                  <path d="M0,48 C30,46 57,44 114,38 C171,32 200,28 228,18 C256,10 285,6 342,4 C370,4 390,22 400,48" fill="none" stroke="#22C55E" stroke-width="2" stroke-linejoin="round"/>
+                  <circle cx="342" cy="4" r="3.5" fill="#22C55E"/>
+                  <circle cx="228" cy="18" r="3" fill="#22C55E" opacity=".7"/>
+                </svg>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Mon</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Tue</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Wed</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Thu</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Fri</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Sat</div></div>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center"><div style="font-size:8px;color:#9CA3AF;margin-top:4px">Sun</div></div>
+              </div>
+            </div>
+            <div class="tbl-box">
+              <div class="tbl-header"><span class="tbl-title">Recent Call Records</span><span class="tbl-link">View All</span></div>
+              <div class="tbl-row" style="animation-delay:.08s">
+                <div style="flex:1.1" class="tc">+91 98XXX XXXXX</div>
+                <div style="flex:1.2" class="tc">Q3 Sales Outreach</div>
+                <div style="flex:.7"><span class="pill s-active">completed</span></div>
+                <div style="flex:.5" class="tm">2m 41s</div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.16s">
+                <div style="flex:1.1" class="tc">+91 87XXX XXXXX</div>
+                <div style="flex:1.2" class="tc">Product Demo Follow-up</div>
+                <div style="flex:.7"><span class="pill s-cancelled">no-answer</span></div>
+                <div style="flex:.5" class="tm">0s</div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.24s">
+                <div style="flex:1.1" class="tc">+91 99XXX XXXXX</div>
+                <div style="flex:1.2" class="tc">Appointment Reminder</div>
+                <div style="flex:.7"><span class="pill s-draft">voicemail</span></div>
+                <div style="flex:.5" class="tm">38s</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 1: Phone Numbers -->
+        <div class="panel" id="P1">
+          <div class="pg-header">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <div><div class="pg-title">Phone Numbers</div><div class="pg-sub">Numbers provisioned in your account.</div></div>
+              <button class="btn-primary"><i class="ti ti-plus" style="font-size:11px"></i>Provision a Phone number</button>
+            </div>
+          </div>
+          <div class="pg-body">
+            <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;overflow:hidden">
+              <div style="padding:11px 13px;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <div style="font-size:13px;font-weight:500;color:#0D2137">Active Numbers</div>
+                  <div style="font-size:10.5px;color:#8a94a6;margin-top:1px">3 numbers in your account</div>
+                </div>
+                <div style="background:#F3F4F6;border:1px solid rgba(0,0,0,.08);border-radius:6px;padding:5px 10px;font-size:10.5px;color:#6B7280;display:flex;align-items:center;gap:5px"><i class="ti ti-search" style="font-size:11px" aria-hidden="true"></i>Search numbers or labels...</div>
+              </div>
+              <div style="display:flex;padding:7px 13px;background:#F8F9FA;border-bottom:0.5px solid rgba(0,0,0,.05)">
+                <div style="flex:1;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Number</div>
+                <div style="flex:1.2;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Campaign</div>
+                <div style="width:24px"></div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.05s">
+                <div style="flex:1;font-size:12px;color:#0D2137;font-weight:500">+91 80XXX XXXXX</div>
+                <div style="flex:1.2;font-size:11.5px;color:#0D2137">Q3 Sales Outreach</div>
+                <div><i class="ti ti-external-link" style="font-size:13px;color:#9CA3AF" aria-hidden="true"></i></div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.12s">
+                <div style="flex:1;font-size:12px;color:#0D2137;font-weight:500">+91 80XXX XXXXY</div>
+                <div style="flex:1.2;font-size:11.5px;color:#0D2137">Appointment Reminder</div>
+                <div><i class="ti ti-external-link" style="font-size:13px;color:#9CA3AF" aria-hidden="true"></i></div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.2s">
+                <div style="flex:1;font-size:12px;color:#0D2137;font-weight:500">+91 80XXX XXXXZ</div>
+                <div style="flex:1.2;font-size:11.5px;color:#8a94a6;font-style:italic">Unassigned</div>
+                <div><i class="ti ti-external-link" style="font-size:13px;color:#9CA3AF" aria-hidden="true"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: AI Agents -->
+        <div class="panel" id="P2">
+          <div class="pg-header">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <div><div class="pg-title">AI Agents</div><div class="pg-sub">Configure and manage your AI calling agents.</div></div>
+              <button class="btn-primary"><i class="ti ti-plus" style="font-size:11px"></i>Create Agent</button>
+            </div>
+          </div>
+          <div class="pg-body">
+            <div class="ag-card" style="animation-delay:.05s">
+              <div class="ag-av" style="background:#0D2137">A</div>
+              <div style="flex:1"><div class="ag-name">Aria â€” Sales Agent</div><div class="ag-meta">Language: Hindi Â· ElevenLabs voice</div></div>
+              <span class="pill s-active">active</span>
+            </div>
+            <div class="ag-card" style="animation-delay:.12s">
+              <div class="ag-av" style="background:#1D4ED8">R</div>
+              <div style="flex:1"><div class="ag-name">Ravi â€” Support Agent</div><div class="ag-meta">Language: English Â· Sarvam AI voice</div></div>
+              <span class="pill s-active">active</span>
+            </div>
+            <div class="ag-card" style="animation-delay:.2s">
+              <div class="ag-av" style="background:#7C3AED">M</div>
+              <div style="flex:1"><div class="ag-name">Meera â€” Booking Agent</div><div class="ag-meta">Language: Hindi + English Â· Deepgram STT</div></div>
+              <span class="pill s-active">active</span>
+            </div>
+            <div style="margin-top:8px;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:11px 13px">
+              <div style="font-size:11px;font-weight:500;color:#0D2137;margin-bottom:6px">Opening Line â€” Aria</div>
+              <div style="background:#F8F9FA;border-radius:6px;padding:8px 10px;font-size:11px;color:#374151;font-family:monospace;line-height:1.5">Hello! I'm Aria calling from [Your Company]. I'm reaching out about our upcoming offer. Is this a good time to speak?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: Campaigns -->
+        <div class="panel" id="P3">
+          <div class="pg-header">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <div><div class="pg-title">Campaigns</div><div class="pg-sub">Manage and track your automated calling campaigns.</div></div>
+              <div style="display:flex;gap:6px">
+                <button class="btn-sec"><i class="ti ti-git-branch" style="font-size:11px"></i>Manage Flows</button>
+                <button class="btn-primary"><i class="ti ti-plus" style="font-size:11px"></i>Create Campaign</button>
+              </div>
+            </div>
+          </div>
+          <div class="pg-body">
+            <div style="display:flex;gap:6px;margin-bottom:9px">
+              <div style="flex:1;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:6px;padding:5px 10px;font-size:11px;color:#9CA3AF;display:flex;align-items:center;gap:6px"><i class="ti ti-search" style="font-size:12px" aria-hidden="true"></i>Search campaigns...</div>
+              <div class="filt"><i class="ti ti-chevron-down"></i>All Statuses</div>
+              <div class="filt"><i class="ti ti-chevron-down"></i>All Time</div>
+            </div>
+            <div class="tbl-box">
+              <div style="display:flex;padding:7px 13px;background:#F8F9FA;border-bottom:0.5px solid rgba(0,0,0,.06)">
+                <div style="flex:1.3;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Campaign Name</div>
+                <div style="flex:.7;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Status</div>
+                <div style="flex:1;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Flow & Agents</div>
+                <div style="flex:.9;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Progress</div>
+                <div style="flex:.6;font-size:10px;font-weight:500;color:#6B7280;text-transform:uppercase;letter-spacing:.4px">Success Rate</div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.06s">
+                <div style="flex:1.3;font-size:12px;font-weight:500;color:#0D2137">Q3 Sales Outreach</div>
+                <div style="flex:.7"><span class="pill s-active">active</span></div>
+                <div style="flex:1"><div style="font-size:10px;color:#6B7280"><i class="ti ti-git-branch" style="font-size:10px" aria-hidden="true"></i> Sales Qualification Flow</div><div style="font-size:10px;color:#6B7280;margin-top:1px"><i class="ti ti-robot" style="font-size:10px" aria-hidden="true"></i> Aria</div></div>
+                <div style="flex:.9"><div style="font-size:10px;color:#6B7280;margin-bottom:3px">312/500 Â· 62%</div><div class="prog-bar"><div class="prog-fill" style="width:62%"></div></div></div>
+                <div style="flex:.6;font-size:11.5px;font-weight:500;color:#16A34A">71.2%</div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.13s">
+                <div style="flex:1.3;font-size:12px;font-weight:500;color:#0D2137">Product Demo Follow-up</div>
+                <div style="flex:.7"><span class="pill s-active">active</span></div>
+                <div style="flex:1"><div style="font-size:10px;color:#6B7280"><i class="ti ti-git-branch" style="font-size:10px" aria-hidden="true"></i> Demo Follow-up Flow</div><div style="font-size:10px;color:#6B7280;margin-top:1px"><i class="ti ti-robot" style="font-size:10px" aria-hidden="true"></i> Ravi</div></div>
+                <div style="flex:.9"><div style="font-size:10px;color:#6B7280;margin-bottom:3px">88/200 Â· 44%</div><div class="prog-bar"><div class="prog-fill" style="width:44%"></div></div></div>
+                <div style="flex:.6;font-size:11.5px;font-weight:500;color:#16A34A">58.4%</div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.2s">
+                <div style="flex:1.3;font-size:12px;font-weight:500;color:#0D2137">Appointment Reminder</div>
+                <div style="flex:.7"><span class="pill s-paused">paused</span></div>
+                <div style="flex:1"><div style="font-size:10px;color:#6B7280"><i class="ti ti-git-branch" style="font-size:10px" aria-hidden="true"></i> Appointment Booking Flow</div><div style="font-size:10px;color:#6B7280;margin-top:1px"><i class="ti ti-robot" style="font-size:10px" aria-hidden="true"></i> Meera</div></div>
+                <div style="flex:.9"><div style="font-size:10px;color:#6B7280;margin-bottom:3px">150/150 Â· 100%</div><div class="prog-bar"><div class="prog-fill" style="width:100%"></div></div></div>
+                <div style="flex:.6;font-size:11.5px;font-weight:500;color:#0D2137">82.0%</div>
+              </div>
+              <div class="tbl-row" style="animation-delay:.27s">
+                <div style="flex:1.3;font-size:12px;font-weight:500;color:#0D2137">Re-engagement Drive</div>
+                <div style="flex:.7"><span class="pill s-draft">draft</span></div>
+                <div style="flex:1"><div style="font-size:10px;color:#6B7280"><i class="ti ti-git-branch" style="font-size:10px" aria-hidden="true"></i> Re-engagement Flow</div><div style="font-size:10px;color:#6B7280;margin-top:1px"><i class="ti ti-robot" style="font-size:10px" aria-hidden="true"></i> Aria</div></div>
+                <div style="flex:.9"><div style="font-size:10px;color:#6B7280;margin-bottom:3px">0/350 Â· 0%</div><div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div></div>
+                <div style="flex:.6;font-size:11.5px;font-weight:500;color:#8a94a6">â€”</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4: Conversation Flows -->
+        <div class="panel" id="P4">
+          <div class="pg-header">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between">
+              <div><div class="pg-title">Conversation Flows</div><div class="pg-sub">Design and manage dialogue paths for your agents.</div></div>
+              <button class="btn-primary"><i class="ti ti-plus" style="font-size:11px"></i>Create Flow</button>
+            </div>
+          </div>
+          <div class="pg-body" style="padding:10px 14px">
+            <div style="background:#F3F4F6;border:1px solid rgba(0,0,0,.08);border-radius:6px;padding:5px 10px;font-size:11px;color:#9CA3AF;display:flex;align-items:center;gap:6px;margin-bottom:9px"><i class="ti ti-search" style="font-size:12px" aria-hidden="true"></i>Search flows by name or type...</div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:8px">
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;padding:10px;animation:pop .3s ease both">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:#EFF6FF;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-git-branch" style="font-size:11px;color:#1D4ED8" aria-hidden="true"></i></div>
+                  <div style="font-size:10.5px;font-weight:500;color:#0D2137">Sales Qualification Flow</div>
+                </div>
+                <div style="display:flex;gap:4px;margin-bottom:5px"><span class="pill s-valid">Valid</span><span class="pill s-outbound">Outbound</span></div>
+                <div style="font-size:10px;color:#8a94a6;margin-bottom:5px">Qualify inbound leads with AI-driven conversation.</div>
+                <div style="display:flex;justify-content:space-between;font-size:9px;color:#8a94a6"><span>2 hours ago</span><span>Used by 1 campaign</span></div>
+                <div style="margin-top:5px"><span class="pill s-active">Active</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;padding:10px;animation:pop .3s ease both;animation-delay:.07s">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:#EDE9FE;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-git-branch" style="font-size:11px;color:#7C3AED" aria-hidden="true"></i></div>
+                  <div style="font-size:10.5px;font-weight:500;color:#0D2137">Appointment Booking Flow</div>
+                </div>
+                <div style="display:flex;gap:4px;margin-bottom:5px"><span class="pill s-valid">Valid</span><span class="pill s-inbound">Inbound</span></div>
+                <div style="font-size:10px;color:#8a94a6;margin-bottom:5px">Book, reschedule, or cancel appointments with callers.</div>
+                <div style="display:flex;justify-content:space-between;font-size:9px;color:#8a94a6"><span>1 day ago</span><span>Used by 1 campaign</span></div>
+                <div style="margin-top:5px"><span class="pill s-active">Active</span></div>
+              </div>
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;padding:10px;animation:pop .3s ease both;animation-delay:.14s">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:#FEF3C7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-git-branch" style="font-size:11px;color:#D97706" aria-hidden="true"></i></div>
+                  <div style="font-size:10.5px;font-weight:500;color:#0D2137">Re-engagement Flow</div>
+                </div>
+                <div style="display:flex;gap:4px;margin-bottom:5px"><span class="pill s-draft">Draft</span><span class="pill s-outbound">Outbound</span></div>
+                <div style="font-size:10px;color:#8a94a6;margin-bottom:5px">Win back lapsed customers with personalised outreach.</div>
+                <div style="display:flex;justify-content:space-between;font-size:9px;color:#8a94a6"><span>3 days ago</span><span>Used by 0 campaigns</span></div>
+                <div style="margin-top:5px"><span class="pill s-draft">Draft</span></div>
+              </div>
+            </div>
+            <div>
+              <div class="flow-toolbar">
+                <span style="font-size:11px;font-weight:500;color:#0D2137;margin-right:4px">Sales Qualification Flow</span>
+                <div class="ftb-btn"><i class="ti ti-plus" aria-hidden="true"></i>Step</div>
+                <div class="ftb-btn" style="color:#EF4444"><i class="ti ti-x" aria-hidden="true"></i>End</div>
+                <div class="ftb-btn"><i class="ti ti-template" aria-hidden="true"></i>Templates</div>
+                <div class="ftb-btn"><i class="ti ti-layout" aria-hidden="true"></i>Arrange</div>
+                <div class="ftb-btn" style="background:#0D2137;color:#fff;border-color:#0D2137;margin-left:auto"><i class="ti ti-sparkles" aria-hidden="true"></i>AI Validate</div>
+              </div>
+              <div class="flow-canvas">
+                <div style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:#0D2137;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff">â–¶</div>
+                <div style="position:absolute;left:42px;top:28%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">hook<br><span style="color:#8a94a6;font-size:8px">yes / not a good time</span></div>
+                <div style="position:absolute;left:42px;top:62%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">objection handler</div>
+                <div style="position:absolute;left:145px;top:14%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">qualify interest<br><span style="color:#8a94a6;font-size:8px">budget / timeline / fit</span></div>
+                <div style="position:absolute;left:145px;top:55%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">collect details</div>
+                <div style="position:absolute;left:250px;top:20%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">book demo<br><span style="color:#8a94a6;font-size:8px">calendar invite sent</span></div>
+                <div style="position:absolute;left:250px;top:58%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">follow-up trigger</div>
+                <div style="position:absolute;left:355px;top:35%;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:5px;padding:4px 7px;font-size:9px;color:#374151;box-shadow:0 1px 3px rgba(0,0,0,.06)">conclude<br><span style="color:#8a94a6;font-size:8px">Thank you + WhatsApp</span></div>
+                <div style="position:absolute;right:10px;top:72%;width:16px;height:16px;border-radius:50%;background:#991B1B;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff">â– </div>
+                <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 420 152" preserveAspectRatio="none">
+                  <path d="M30,76 C36,76 36,52 42,52" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M30,76 C36,76 36,100 42,100" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M140,52 C146,52 146,36 148,36" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M140,100 C146,100 146,90 148,90" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M244,36 C248,36 248,50 252,50" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M244,90 C248,90 248,96 252,96" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M348,50 C354,50 354,70 358,70" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                  <path d="M348,96 C354,96 354,118 406,118" fill="none" stroke="#A5B4FC" stroke-width="1.2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 5: Integrations -->
+        <div class="panel" id="P5">
+          <div class="pg-header">
+            <div><div class="pg-title">Integrations</div><div class="pg-sub">Connect your tools and data sources to EMAAVY.</div></div>
+          </div>
+          <div class="pg-body">
+            <div class="int-grid">
+              <div class="int-card" style="animation-delay:0s">
+                <div style="width:32px;height:32px;border-radius:8px;background:#DBEAFE;display:flex;align-items:center;justify-content:center"><i class="ti ti-wave-sine" style="font-size:16px;color:#1D4ED8" aria-hidden="true"></i></div>
+                <div class="int-name">ElevenLabs</div>
+                <div class="int-desc">AI voice synthesis â€” Hindi & English TTS</div>
+                <div class="int-status"><div class="int-dot" style="background:#22C55E"></div><span style="color:#16A34A">Connected</span></div>
+              </div>
+              <div class="int-card" style="animation-delay:.07s">
+                <div style="width:32px;height:32px;border-radius:8px;background:#DCFCE7;display:flex;align-items:center;justify-content:center"><i class="ti ti-ear" style="font-size:16px;color:#16A34A" aria-hidden="true"></i></div>
+                <div class="int-name">Sarvam AI</div>
+                <div class="int-desc">Indian language STT + TTS</div>
+                <div class="int-status"><div class="int-dot" style="background:#22C55E"></div><span style="color:#16A34A">Connected</span></div>
+              </div>
+              <div class="int-card" style="animation-delay:.14s">
+                <div style="width:32px;height:32px;border-radius:8px;background:#EDE9FE;display:flex;align-items:center;justify-content:center"><i class="ti ti-microphone" style="font-size:16px;color:#7C3AED" aria-hidden="true"></i></div>
+                <div class="int-name">Deepgram</div>
+                <div class="int-desc">Nova-2 real-time speech recognition</div>
+                <div class="int-status"><div class="int-dot" style="background:#22C55E"></div><span style="color:#16A34A">Connected</span></div>
+              </div>
+              <div class="int-card" style="animation-delay:.21s">
+                <div style="width:32px;height:32px;border-radius:8px;background:#DCFCE7;display:flex;align-items:center;justify-content:center"><i class="ti ti-brand-whatsapp" style="font-size:16px;color:#16A34A" aria-hidden="true"></i></div>
+                <div class="int-name">WhatsApp</div>
+                <div class="int-desc">Automated follow-up messages</div>
+                <div class="int-status"><div class="int-dot" style="background:#22C55E"></div><span style="color:#16A34A">Connected</span></div>
+              </div>
+              <div class="int-card" style="animation-delay:.28s">
+                <div style="width:32px;height:32px;border-radius:8px;background:#F3F4F6;display:flex;align-items:center;justify-content:center"><i class="ti ti-database" style="font-size:16px;color:#374151" aria-hidden="true"></i></div>
+                <div class="int-name">CRM</div>
+                <div class="int-desc">Sync contacts & call outcomes</div>
+                <div class="int-status"><div class="int-dot" style="background:#22C55E"></div><span style="color:#16A34A">Connected</span></div>
+              </div>
+              <div class="int-card" style="animation-delay:.35s">
+                <div style="width:32px;height:32px;border-radius:8px;background:#FEE2E2;display:flex;align-items:center;justify-content:center"><i class="ti ti-plug" style="font-size:16px;color:#DC2626" aria-hidden="true"></i></div>
+                <div class="int-name">Webhook</div>
+                <div class="int-desc">Custom HTTP endpoint integration</div>
+                <div class="int-status"><div class="int-dot" style="background:#D1D5DB"></div><span style="color:#6B7280">Not configured</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 6: Settings -->
+        <div class="panel" id="P6">
+          <div class="pg-header">
+            <div><div class="pg-title">Settings</div><div class="pg-sub">Manage your account and platform preferences.</div></div>
+          </div>
+          <div class="pg-body">
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:12px 13px;animation:pop .3s ease both">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><i class="ti ti-building" style="font-size:15px;color:#374151" aria-hidden="true"></i><div style="font-size:12px;font-weight:500;color:#0D2137">Account Details</div></div>
+                <div style="font-size:10.5px;color:#6B7280;margin-bottom:3px">Organisation name</div>
+                <div style="font-size:11.5px;color:#0D2137;font-weight:500;margin-bottom:8px">Acme Corp Demo</div>
+                <div style="font-size:10.5px;color:#6B7280;margin-bottom:3px">Plan</div>
+                <div style="font-size:11.5px;color:#0D2137;font-weight:500">Enterprise</div>
+              </div>
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:12px 13px;animation:pop .3s ease both;animation-delay:.08s">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><i class="ti ti-bell" style="font-size:15px;color:#374151" aria-hidden="true"></i><div style="font-size:12px;font-weight:500;color:#0D2137">Notifications</div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span style="font-size:10.5px;color:#6B7280">Campaign completion</span><div style="width:30px;height:16px;background:#0D2137;border-radius:8px;position:relative"><div style="position:absolute;right:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span style="font-size:10.5px;color:#6B7280">Failed calls alert</span><div style="width:30px;height:16px;background:#0D2137;border-radius:8px;position:relative"><div style="position:absolute;right:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:10.5px;color:#6B7280">Daily summary email</span><div style="width:30px;height:16px;background:#D1D5DB;border-radius:8px;position:relative"><div style="position:absolute;left:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff"></div></div></div>
+              </div>
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:12px 13px;animation:pop .3s ease both;animation-delay:.16s">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><i class="ti ti-key" style="font-size:15px;color:#374151" aria-hidden="true"></i><div style="font-size:12px;font-weight:500;color:#0D2137">API Keys</div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                  <span style="font-size:10.5px;color:#6B7280">Production key</span>
+                  <span style="font-size:10px;font-family:monospace;color:#0D2137;background:#F3F4F6;padding:2px 6px;border-radius:4px">em_live_â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢</span>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                  <span style="font-size:10.5px;color:#6B7280">Test key</span>
+                  <span style="font-size:10px;font-family:monospace;color:#0D2137;background:#F3F4F6;padding:2px 6px;border-radius:4px">em_test_â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢</span>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:12px 13px;animation:pop .3s ease both;animation-delay:.24s">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><i class="ti ti-clock" style="font-size:15px;color:#374151" aria-hidden="true"></i><div style="font-size:12px;font-weight:500;color:#0D2137">Calling Hours</div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font-size:10.5px;color:#6B7280">Timezone</span><span style="font-size:10.5px;font-weight:500;color:#0D2137">IST (UTC +5:30)</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px"><span style="font-size:10.5px;color:#6B7280">Start time</span><span style="font-size:10.5px;font-weight:500;color:#0D2137">09:00 AM</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:10.5px;color:#6B7280">End time</span><span style="font-size:10.5px;font-weight:500;color:#0D2137">07:00 PM</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg id="CUR" style="position:absolute;pointer-events:none;z-index:9999;width:22px;height:26px;opacity:0;transition:opacity .2s" viewBox="0 0 22 26" xmlns="http://www.w3.org/2000/svg">
+  <defs><filter id="csf" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-color="rgba(0,0,0,.28)"/></filter></defs>
+  <g filter="url(#csf)">
+    <path d="M4 2L4 21L8.8 17L12 24.5L15 23.2L11.8 15.8L18.5 15.8L4 2Z" fill="white" stroke="#111" stroke-width="1.1" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+</svg>
+<div id="RIP" style="position:absolute;pointer-events:none;z-index:9998;width:26px;height:26px;border-radius:50%;border:1.5px solid #4fa8e8;opacity:0;transform:scale(.3);transition:none"></div>
+
+<script>
+const TABS=[
+  {ni:0,url:'app.emaavy.ai/dashboard',isNb:false},
+  {ni:1,url:'app.emaavy.ai/phone-numbers',isNb:false},
+  {ni:2,url:'app.emaavy.ai/agents',isNb:false},
+  {ni:3,url:'app.emaavy.ai/campaigns',isNb:false},
+  {ni:4,url:'app.emaavy.ai/flows',isNb:false},
+  {ni:5,url:'app.emaavy.ai/integrations',isNb:true},
+  {ni:6,url:'app.emaavy.ai/settings',isNb:true}
+];
+const cur=document.getElementById('CUR');
+const rip=document.getElementById('RIP');
+const urlbar=document.getElementById('URLBAR');
+const shell=document.getElementById('SHELL');
+const dotsEl=document.getElementById('DOTS');
+let cx=0,cy=0,tx=0,ty=0,raf=null,curTab=0,autoT=null,paused=false;
+
+TABS.forEach((_,i)=>{
+  const d=document.createElement('div');
+  d.style.cssText='height:5px;border-radius:2.5px;background:rgba(0,0,0,.15);transition:all .3s;cursor:pointer;flex-shrink:0;width:5px';
+  d.onclick=()=>{paused=true;clearTimeout(autoT);goTo(i);};
+  dotsEl.appendChild(d);
+});
+
+function updateDots(i){
+  dotsEl.querySelectorAll('div').forEach((d,j)=>{
+    d.style.width=j===i?'16px':'5px';
+    d.style.background=j===i?'#0D2137':'rgba(0,0,0,.15)';
+  });
+}
+
+function getNavPos(tabIdx){
+  const t=TABS[tabIdx];
+  const el=document.getElementById('NI'+t.ni);
+  if(!el)return{x:78,y:160};
+  const er=el.getBoundingClientRect();
+  const sr=shell.getBoundingClientRect();
+  return{x:er.left-sr.left+er.width*0.42,y:er.top-sr.top+er.height/2};
+}
+
+function lerp(a,b,t){return a+(b-a)*t}
+
+function tickCursor(){
+  cx=lerp(cx,tx,.11);cy=lerp(cy,ty,.11);
+  cur.style.left=(cx-5)+'px';cur.style.top=(cy-3)+'px';
+  rip.style.left=(cx-13)+'px';rip.style.top=(cy-13)+'px';
+  if(Math.abs(cx-tx)>0.5||Math.abs(cy-ty)>0.5){raf=requestAnimationFrame(tickCursor);}
+  else{cx=tx;cy=ty;raf=null;}
+}
+function moveTo(x,y){tx=x;ty=y;cur.style.opacity='1';if(!raf)raf=requestAnimationFrame(tickCursor);}
+function waitArrived(x,y,cb){const c=()=>{if(Math.abs(cx-x)<5&&Math.abs(cy-y)<5)cb();else setTimeout(c,30);};c();}
+
+function doClick(x,y,cb){
+  rip.style.transition='none';rip.style.opacity='0';rip.style.transform='scale(.3)';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    rip.style.transition='transform .45s ease,opacity .45s ease';
+    rip.style.opacity='1';rip.style.transform='scale(1)';
+    setTimeout(()=>{rip.style.opacity='0';rip.style.transform='scale(1.8)';},100);
+  }));
+  cur.style.transform='scale(.72)';
+  setTimeout(()=>{cur.style.transform='scale(1)';if(cb)cb();},200);
+}
+
+function goTo(idx){
+  curTab=idx;
+  document.querySelectorAll('.ni').forEach((n,i)=>n.classList.toggle('active',i===idx&&idx<5));
+  document.querySelectorAll('.nb').forEach((n,i)=>n.classList.toggle('active',i===idx-5&&idx>=5));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const p=document.getElementById('P'+idx);if(p)p.classList.add('active');
+  urlbar.textContent=TABS[idx].url;
+  updateDots(idx);
+}
+
+function animateNext(){
+  if(paused)return;
+  const next=(curTab+1)%TABS.length;
+  const pos=getNavPos(next);
+  moveTo(pos.x,pos.y);
+  waitArrived(pos.x,pos.y,()=>{
+    if(paused)return;
+    doClick(pos.x,pos.y,()=>{
+      if(paused)return;
+      goTo(next);
+      autoT=setTimeout(animateNext,4200);
+    });
+  });
+}
+
+cur.style.cssText+='position:absolute;';
+rip.style.cssText+='position:absolute;';
+updateDots(0);
+
+setTimeout(()=>{
+  const p0=getNavPos(0);
+  cx=p0.x;cy=p0.y;
+  cur.style.left=(cx-5)+'px';cur.style.top=(cy-3)+'px';
+  cur.style.opacity='1';
+  autoT=setTimeout(animateNext,2500);
+},800);
+</script>
+
+</body>
+</html>
