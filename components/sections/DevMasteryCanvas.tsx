@@ -405,7 +405,7 @@ const PROVIDERS = [
   { id: 'google',    label: 'Google',       badge: 'Gemini',     color: '#60a5fa' },
   { id: 'anthropic', label: 'Anthropic',    badge: 'Claude',   color: '#f97316' },
   { id: 'groq',      label: 'Groq',         badge: 'Fast',     color: '#facc15' },
-  { id: 'cerebras',  label: 'Cerebras',     badge: 'Ultra',    color: '#e879f9' },
+  { id: 'cerebras',  label: 'Cerebras',     badge: 'Soon',     color: '#6b7280' },
 ];
 
 function OwnLLMCard() {
@@ -452,9 +452,9 @@ function OwnLLMCard() {
               return (
                 <div key={p.id} style={{ borderBottom: '1px solid #161b22' }}>
                   <button
-                    onClick={() => setSel(p.id)}
+                    onClick={() => p.badge !== 'Soon' && setSel(p.id)}
                     className="w-full flex items-center gap-3 px-5 py-3.5 text-left transition-colors"
-                    style={{ background: isActive ? '#161b22' : 'transparent' }}
+                    style={{ background: isActive ? '#161b22' : 'transparent', opacity: p.badge === 'Soon' ? 0.45 : 1, cursor: p.badge === 'Soon' ? 'not-allowed' : 'pointer' }}
                   >
                     <div
                       className="w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-all"
