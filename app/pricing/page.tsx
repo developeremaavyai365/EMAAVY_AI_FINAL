@@ -413,7 +413,7 @@ export default function PricingPage() {
               {[
                 { val: '20 min', label: 'Time to first live call', sub: 'Fastest in the industry' },
                 { val: '99.97%', label: 'Platform uptime SLA', sub: 'Across all paid plans' },
-                { val: '0',      label: 'Setup fees ever', sub: 'No onboarding charges' },
+                { val: '<500ms', label: 'End-to-end latency', sub: 'From caller speaks to agent replies' },
               ].map((s, i) => (
                 <div key={i} className="text-center">
                   <p className="text-[38px] font-extrabold text-white font-mono mb-1" style={{ letterSpacing: '-0.04em' }}>{s.val}</p>
