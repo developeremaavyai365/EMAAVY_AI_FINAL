@@ -624,10 +624,10 @@ export default function IntegrationsPage() {
                   <p className="mb-4 text-xs font-bold uppercase tracking-widest text-white/30">Voice selector</p>
                   <div className="space-y-2.5">
                     {[
-                      { name: 'Rachel',   provider: 'ElevenLabs', lang: 'EN-US', active: true },
-                      { name: 'Aria',     provider: 'Sarvam AI',  lang: 'HI-IN', active: false },
-                      { name: 'Neural EN', provider: 'Azure TTS', lang: 'EN-GB', active: false },
-                      { name: 'Aura',     provider: 'Deepgram',   lang: 'EN-US', active: false },
+                      { name: 'Priya',   provider: 'ElevenLabs', lang: 'EN-IN', active: true },
+                      { name: 'Arjun',   provider: 'ElevenLabs', lang: 'EN-IN', active: false },
+                      { name: 'Kavya',   provider: 'ElevenLabs', lang: 'HI-IN', active: false },
+                      { name: 'Rohan',   provider: 'ElevenLabs', lang: 'EN-IN', active: false },
                     ].map(({ name, provider, lang, active }) => (
                       <div key={name} className="flex items-center justify-between rounded-xl p-3 transition-colors"
                         style={{ background: active ? 'rgba(244,63,94,0.12)' : 'rgba(255,255,255,0.03)', border: `1px solid ${active ? 'rgba(244,63,94,0.3)' : 'rgba(255,255,255,0.07)'}` }}>
@@ -647,7 +647,7 @@ export default function IntegrationsPage() {
                     ))}
                   </div>
                   <div className="mt-4 rounded-xl border border-rose-500/20 bg-rose-500/8 p-4">
-                    <p className="text-xs text-white/50">Playing <span className="font-semibold text-rose-400">Rachel</span> · ElevenLabs Turbo v2</p>
+                    <p className="text-xs text-white/50">Playing <span className="font-semibold text-rose-400">Priya</span> · ElevenLabs Turbo v2</p>
                     <div className="mt-3 flex items-center gap-2">
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-rose-500/20">
                         <HiOutlineSpeakerWave className="h-3 w-3 text-rose-400" />
