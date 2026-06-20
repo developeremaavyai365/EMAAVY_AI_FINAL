@@ -286,9 +286,6 @@ export default function SystemArchitecture() {
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-[13px] font-semibold text-neutral-200 group-hover:text-white transition-colors">{intg.name}</span>
-                        <svg className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-1 group-hover:translate-x-0 duration-200" style={{ color: layer.accent }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
                       </div>
                       <span className="text-[11px] text-neutral-600 leading-snug">{intg.desc}</span>
                     </Link>
