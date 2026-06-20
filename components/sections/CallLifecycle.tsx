@@ -92,14 +92,14 @@ const STAGES = [
         <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
       </svg>
     ),
-    detail: "Raw PCM audio streams into Emaavy's STT layer (Deepgram Nova-2 by default). Word-level timestamps, speaker diarization, and filler-word detection run in real time at under 90ms lag.",
+    detail: "The caller's voice streams into ElevenLabs' speech-to-text layer in real time. Every word is transcribed as it's spoken — no waiting for the caller to finish — so the AI agent can respond naturally without any awkward pause.",
     metrics: [
-      { label: 'STT engine', val: 'Deepgram' },
+      { label: 'STT engine', val: 'ElevenLabs' },
       { label: 'Transcription lag', val: '88ms' },
       { label: 'Confidence', val: '97.4%' },
     ],
     transcript: { speaker: 'Prospect', text: 'Hello?' },
-    tech: ['Deepgram Nova-2 streaming', 'Speaker: PROSPECT identified', 'Word timestamps: active', 'Filler filter: enabled'],
+    tech: ['ElevenLabs STT streaming', 'Speaker: PROSPECT identified', 'Word timestamps: active', 'Filler filter: enabled'],
   },
   {
     id: 'llm',
