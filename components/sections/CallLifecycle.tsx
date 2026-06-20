@@ -33,8 +33,8 @@ const STAGES = [
     id: 'routing',
     index: 1,
     phase: 'Network',
-    label: 'PSTN Routing',
-    sublabel: 'Carrier handshake / E.164 resolved',
+    label: 'Carrier Routing',
+    sublabel: 'Vobiz / Exotel / Plivo / Twilio',
     time: '12 ms',
     color: '#38bdf8',
     dim: '#38bdf818',
@@ -44,7 +44,7 @@ const STAGES = [
         <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
       </svg>
     ),
-    detail: 'Emaavy routes via the optimal carrier (Twilio -> Telnyx failover) using geo-latency scoring. SIP trunk established, caller ID set, SRTP encryption activated on both legs.',
+    detail: 'Emaavy routes the call through your connected telephony provider — Vobiz, Exotel, Plivo, or Twilio — picking the best available carrier automatically. If one fails, it switches over instantly with no dropped call.',
     metrics: [
       { label: 'Carrier selected', val: 'Twilio' },
       { label: 'Route latency', val: '12ms' },
