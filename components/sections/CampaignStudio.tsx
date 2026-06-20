@@ -548,11 +548,6 @@ export default function CampaignStudio() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
-              <Link href="/campaigns/templates"
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-[12px] font-semibold transition-all"
-                style={{ background: '#ffffff06', color: '#6b7280', border: '1px solid #ffffff0a' }}>
-                Browse templates
-              </Link>
             </div>
           </motion.div>
 
