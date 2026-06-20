@@ -192,7 +192,7 @@ export default function AgentsShowcase() {
                       <h3 className="text-[20px] sm:text-[24px] font-bold text-white mb-2" style={{ letterSpacing: '-0.02em' }}>{agent.name}</h3>
                       <p className="text-[13px] sm:text-[14px] leading-relaxed text-neutral-400 max-w-md">{agent.headline}</p>
                     </div>
-                    <Link href="/agents"
+                    <Link href="/signup"
                       className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-[12px] font-semibold text-white border transition-all hover:bg-white/5"
                       style={{ borderColor: '#ffffff18' }}>
                       Deploy
@@ -239,7 +239,7 @@ export default function AgentsShowcase() {
             10 agents across 4 verticals &mdash; or request a custom agent built for your workflow.
           </p>
           <div className="flex items-center gap-3">
-            <Link href="/agents"
+            <Link href="/signup"
               className="inline-flex items-center gap-2 text-[13px] font-medium text-white border px-5 py-2.5 rounded-lg transition-all hover:bg-white/5"
               style={{ borderColor: '#ffffff14' }}>
               Browse all agents
