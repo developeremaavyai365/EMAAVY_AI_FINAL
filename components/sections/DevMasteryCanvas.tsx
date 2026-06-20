@@ -177,10 +177,11 @@ function VoiceCallingCard() {
    bg: warm deep amber-brown #100e08 — gold sliders, live oscillation
 ───────────────────────────────────────────────────────────────────────────── */
 function ConversationControlCard() {
-  const [waitVal,   setWaitVal]   = useState(0.42);
-  const [punctVal,  setPunctVal]  = useState(0.65);
-  const [numberVal, setNumberVal] = useState(0.30);
-  const [drift, setDrift]         = useState(0);
+  const [creativity,  setCreativity]  = useState(0.72);
+  const [eagerness,   setEagerness]   = useState(0.55);
+  const [responseSpd, setResponseSpd] = useState(0.80);
+  const [empathy,     setEmpathy]     = useState(0.60);
+  const [drift, setDrift]             = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => setDrift(d => d + 0.04), 80);
@@ -189,10 +190,13 @@ function ConversationControlCard() {
 
   const oscillate = (base: number, amp: number) => Math.min(Math.max(base + Math.sin(drift) * amp, 0), 1);
 
+  const pct = (v: number) => `${Math.round(v * 100)}%`;
+
   const sliders = [
-    { label: 'Wait Seconds',           val: oscillate(waitVal, 0.04),   raw: waitVal,   set: setWaitVal,   max: 2,  fmt: (v: number) => `${v.toFixed(2)}s`, color: '#f59e0b' },
-    { label: 'On Punctuation Seconds', val: oscillate(punctVal, 0.03),  raw: punctVal,  set: setPunctVal,  max: 2,  fmt: (v: number) => `${v.toFixed(2)}s`, color: '#fb923c' },
-    { label: 'On Number Seconds',      val: oscillate(numberVal, 0.025),raw: numberVal, set: setNumberVal, max: 1,  fmt: (v: number) => `${v.toFixed(2)}s`, color: '#fbbf24' },
+    { label: 'Creativity',        val: oscillate(creativity,  0.03), raw: creativity,  set: setCreativity,  max: 1, fmt: pct, color: '#f59e0b' },
+    { label: 'Eagerness to Speak',val: oscillate(eagerness,   0.04), raw: eagerness,   set: setEagerness,   max: 1, fmt: pct, color: '#fb923c' },
+    { label: 'Response Speed',    val: oscillate(responseSpd, 0.02), raw: responseSpd, set: setResponseSpd, max: 1, fmt: pct, color: '#fbbf24' },
+    { label: 'Empathy Level',     val: oscillate(empathy,     0.03), raw: empathy,     set: setEmpathy,     max: 1, fmt: pct, color: '#f97316' },
   ];
 
   return (
@@ -265,8 +269,8 @@ function ConversationControlCard() {
         {/* Status bar */}
         <div className="grid grid-cols-2 gap-3 pt-4 border-t" style={{ borderColor: '#211d12' }}>
           {[
-            { label: 'Interruptions', val: '23 today' },
-            { label: 'Avg Talk Ratio', val: '62% / 38%' },
+            { label: 'Sentiment Score', val: '8.4 / 10' },
+            { label: 'Avg Talk Ratio',  val: '62% / 38%' },
           ].map(s => (
             <div key={s.label} className="rounded-lg px-4 py-3" style={{ background: '#181208', border: '1px solid #2a2010' }}>
               <p className="text-[9px] uppercase tracking-wider mb-1" style={{ color: '#6b5c3a' }}>{s.label}</p>
