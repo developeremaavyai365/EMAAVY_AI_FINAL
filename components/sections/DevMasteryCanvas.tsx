@@ -508,7 +508,6 @@ function OwnLLMCard() {
    bg: deep purple #12082e — lavender tones, live call routing animation
 ───────────────────────────────────────────────────────────────────────────── */
 const PHONE_OPTS = [
-  { id: 'free',   label: 'Free Emaavy Number',  desc: 'Instant setup, no carrier needed' },
   { id: 'twilio', label: 'Import Twilio',        desc: 'Bring existing Twilio numbers'     },
   { id: 'vonage', label: 'Import Vonage',        desc: 'Vonage API integration'            },
   { id: 'telnyx', label: 'Import Telnyx',        desc: 'Telnyx SIP + PSTN'                 },

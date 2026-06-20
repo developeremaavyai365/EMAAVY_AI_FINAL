@@ -16,7 +16,7 @@ const LAYERS = [
     accentBorder: '#6366f130',
     chips: ['Twilio', 'Vonage', 'Telnyx', 'WebRTC', 'BYOC SIP', 'Free DID'],
     stat: { val: '140+', label: 'Countries covered' },
-    detail: 'Elastic carrier routing with automatic failover across Twilio, Vonage, and Telnyx. Bring your own SIP trunk or provision a free Emaavy number in 60 seconds. All calls are E.164-normalized and recorded with per-leg SRTP encryption.',
+    detail: 'Elastic carrier routing with automatic failover across Twilio, Vonage, and Telnyx. Bring your own SIP trunk or connect your existing numbers in seconds. All calls are E.164-normalized and recorded with per-leg SRTP encryption.',
     flow: ['Inbound PSTN', 'SIP Gateway', 'Emaavy Edge', 'Agent Runtime'],
     flowColors: ['#6366f1', '#818cf8', '#a5b4fc', '#c7d2fe'],
     integrations: [
