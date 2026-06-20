@@ -10,8 +10,8 @@ const AGENTS = [
     vertical: 'Sales',
     name: 'Sales Qualifier',
     headline: 'Qualifies every inbound lead before your team picks up the phone.',
-    body: 'Runs BANT or MEDDIC qualification on every inbound prospect, scores against your ICP, logs intent signals to your CRM, and books only meetings that are worth your team\'s calendar.',
-    capabilities: ['Lead scoring', 'BANT / MEDDIC qualification', 'CRM auto-logging', 'Calendar booking'],
+    body: 'Calls every inbound lead instantly, asks the right questions to filter serious buyers, logs the conversation and intent signals to your CRM, and books a meeting only if they\'re a genuine fit — so your team shows up to calls that actually close.',
+    capabilities: ['Lead qualification', 'Intent detection', 'CRM auto-logging', 'Calendar booking'],
     stat: { val: '74%', label: 'average qualification rate' },
   },
   {
