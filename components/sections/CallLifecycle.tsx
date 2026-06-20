@@ -20,7 +20,7 @@ const STAGES = [
         <path d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    detail: 'The Emaavy campaign engine evaluates all active flows, selects the best-matched AI agent persona, pulls CRM context, and fires the outbound dial in under 2 ms.',
+    detail: 'The Emaavy campaign engine picks up every lead the moment they come in, pulls their details from your CRM, and fires the outbound call instantly — no filters, no scoring, no one left behind.',
     metrics: [
       { label: 'Engine startup', val: '0.8ms' },
       { label: 'Agent selected', val: 'Aria v2' },
