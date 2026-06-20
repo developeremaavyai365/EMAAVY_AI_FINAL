@@ -17,11 +17,7 @@ const PLANS = [
     features: [
       '1 active AI agent',
       '1 phone number included',
-      '50 calls / month',
       'ElevenLabs voice included',
-      'Webhook integration',
-      'Basic call analytics',
-      'Community support',
     ],
     cta: 'Start for free',
     href: '/signup',
