@@ -670,7 +670,7 @@ function EnterpriseReliabilityCard() {
                 transition={{ duration: 2, ease: 'easeInOut', delay: 0.2 }}
               />
             </svg>
-            <p className="text-[15px] font-semibold font-mono mt-2" style={{ color: '#34d399' }}>$12,847</p>
+            <p className="text-[15px] font-semibold font-mono mt-2" style={{ color: '#34d399' }}>$3,860</p>
           </div>
         </div>
       </div>
