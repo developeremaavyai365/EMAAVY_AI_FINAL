@@ -116,18 +116,6 @@ export default function AgentsShowcase() {
             </p>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="shrink-0">
-            <Link
-              href="/agents"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-lg text-[13px] font-semibold text-white border transition-all duration-200 hover:bg-white/5"
-              style={{ borderColor: '#ffffff18', background: 'transparent' }}
-            >
-              Explore all agents
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </motion.div>
         </div>
 
         {/* ── Filter row ── */}
