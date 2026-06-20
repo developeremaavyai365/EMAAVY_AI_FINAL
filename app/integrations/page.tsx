@@ -245,12 +245,12 @@ export default function IntegrationsPage() {
                   <span className="text-blue-400">built for scale.</span>
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-white/60">
-                  Deploy AI calling agents on the world&apos;s most reliable telephony networks. Emaavy integrates natively with 8 leading providers — giving you the flexibility to choose by region, latency, or cost without changing your agent logic.
+                  Deploy AI calling agents on India&apos;s most reliable telephony networks. Emaavy connects natively with Vobiz, Exotel, Plivo, and Twilio — with automatic failover so your calls never drop.
                 </p>
               </div>
               <div className="shrink-0 rounded-2xl border border-blue-500/20 bg-blue-500/5 p-6 text-center">
-                <p className="text-4xl font-black text-blue-400">190+</p>
-                <p className="mt-1 text-sm text-white/50">Countries covered</p>
+                <p className="text-4xl font-black text-blue-400">&lt;500ms</p>
+                <p className="mt-1 text-sm text-white/50">Avg connect time</p>
               </div>
             </div>
           </FadeSection>
@@ -260,9 +260,9 @@ export default function IntegrationsPage() {
             <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { icon: HiOutlineBolt,          label: 'Sub-500ms connect time',   desc: 'Agent picks up before the second ring' },
-                { icon: HiOutlineGlobeAlt,      label: 'Global PSTN reach',        desc: 'Call any number in 190+ countries' },
-                { icon: HiOutlineShieldCheck,   label: 'Carrier-grade reliability', desc: '99.95% voice call completion rate' },
-                { icon: HiOutlineCommandLine,   label: 'Provider-agnostic API',    desc: 'Switch carriers without rewriting logic' },
+                { icon: HiOutlineGlobeAlt,      label: 'India & global coverage',  desc: 'Vobiz, Exotel, Plivo, and Twilio supported' },
+                { icon: HiOutlineShieldCheck,   label: 'Automatic failover',       desc: 'If one carrier drops, another takes over instantly' },
+                { icon: HiOutlineCommandLine,   label: 'Bring your own number',    desc: 'Connect your existing numbers in seconds' },
               ].map(({ icon: Icon, label, desc }) => (
                 <div key={label} className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
                   <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/15">
@@ -280,14 +280,14 @@ export default function IntegrationsPage() {
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">Supported Providers</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
               {[
-                { name: 'Twilio',      badge: 'Popular' },
-                { name: 'Plivo',       badge: undefined },
+                { name: 'Vobiz',       badge: 'Native' },
                 { name: 'Exotel',      badge: 'India' },
-                { name: 'Telnyx',      badge: undefined },
-                { name: 'Vonage',      badge: undefined },
-                { name: 'Bandwidth',   badge: undefined },
-                { name: 'Aircall',     badge: undefined },
-                { name: 'RingCentral', badge: undefined },
+                { name: 'Plivo',       badge: 'Live' },
+                { name: 'Twilio',      badge: 'Live' },
+                { name: 'Telnyx',      badge: 'Soon' },
+                { name: 'Vonage',      badge: 'Soon' },
+                { name: 'Aircall',     badge: 'Soon' },
+                { name: 'RingCentral', badge: 'Soon' },
               ].map(p => <Chip key={p.name} name={p.name} badge={p.badge} />)}
             </div>
           </FadeSection>
@@ -296,10 +296,10 @@ export default function IntegrationsPage() {
           <FadeSection className="mt-10">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {[
-                { name: 'Twilio', desc: 'Global programmable voice & SMS. Deploy AI agents on any number worldwide with 99.95% uptime SLA.' },
-                { name: 'Exotel', desc: 'India-first cloud telephony built for high-volume enterprise calling — 10M+ calls/day capacity.' },
-                { name: 'Telnyx', desc: 'Carrier-grade SIP trunking with real-time analytics and elastic scaling for outbound campaigns.' },
-                { name: 'Plivo',  desc: 'High-volume voice API with ultra-low latency across 190+ countries and a flat global rate.' },
+                { name: 'Vobiz',  desc: "Emaavy's native telephony partner for India — the default carrier powering every Emaavy call out of the box." },
+                { name: 'Exotel', desc: "India's leading cloud telephony platform, built for high-volume enterprise calling with strong local reliability." },
+                { name: 'Plivo',  desc: 'High-volume voice API with strong India and global coverage — ideal for large outbound campaign volumes.' },
+                { name: 'Twilio', desc: 'Global programmable voice with wide number availability and automatic failover across regions.' },
               ].map(({ name, desc }) => {
                 const brand = BRANDS[name] ?? { color: '#6366f1' };
                 const BIcon = brand.Icon;
