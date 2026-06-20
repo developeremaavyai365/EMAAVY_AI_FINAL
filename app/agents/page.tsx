@@ -11,26 +11,26 @@ const AGENTS = [
   {
     id: 'sales-qualifier',
     vertical: 'Sales',
-    name: 'Sales Qualifier',
-    tagline: 'Qualifies every lead before your team picks up the phone.',
-    description: 'Calls every inbound lead the moment they show interest, has a natural conversation, captures their details and requirements, logs everything to your CRM, and books a meeting — every time. No lead goes unanswered, no opportunity slips through.',
-    stat: { val: '74%', label: 'avg. qualification rate' },
-    efficiency: '6x faster than manual SDR qualification',
+    name: 'Inbound Response Agent',
+    tagline: 'Calls every inbound lead instantly — no one waits, no one is missed.',
+    description: 'The moment a lead submits a form or shows interest, this agent calls them back within 90 seconds. It has a natural conversation, captures their details, books a meeting directly into your calendar, and fires a webhook with everything — every time. No lead waits. No lead goes cold.',
+    stat: { val: '<90s', label: 'avg. lead response time' },
+    efficiency: '6x faster response than any human team',
     metrics: [
-      { label: 'Leads qualified / hr', val: '340+' },
-      { label: 'CRM accuracy', val: '99.2%' },
+      { label: 'Leads reached / hr', val: '340+' },
+      { label: 'Meeting book rate', val: '41%' },
       { label: 'Avg. handle time', val: '3.4 min' },
     ],
-    useCases: ['Inbound lead routing', 'Trade show follow-up', 'Trial-to-paid conversion', 'Partner referral intake'],
-    capabilities: ['Instant lead response', 'Natural conversation', 'CRM auto-logging', 'Calendar booking', 'Objection handling', 'Multi-language support'],
+    useCases: ['Inbound lead callback', 'Trade show follow-up', 'Demo request follow-up', 'Partner referral intake'],
+    capabilities: ['Instant lead callback', 'Natural conversation', 'Webhook data push', 'Calendar booking', 'Objection handling', 'Consistent follow-up'],
     callSim: [
       { speaker: 'Agent', text: 'Hi, this is Aria from Emaavy. Is this a good time to connect about your inquiry?' },
       { speaker: 'Prospect', text: 'Sure, I have a few minutes.' },
       { speaker: 'Agent', text: 'Great. Could you tell me a bit about your current outbound setup and what prompted you to reach out?' },
-      { speaker: 'Prospect', text: 'We have a five-person SDR team but we\'re struggling to hit quota consistently.' },
-      { speaker: 'Agent', text: 'Understood. What\'s your target monthly pipeline — are we talking two hundred, five hundred, over a million?' },
-      { speaker: 'Prospect', text: 'We need about 800K monthly to hit our targets.' },
-      { speaker: 'Agent', text: 'Perfect. I\'ve found a slot with our solutions team tomorrow at 10 AM — does that work for you?' },
+      { speaker: 'Prospect', text: 'We have a five-person team but we\'re struggling to follow up with leads fast enough.' },
+      { speaker: 'Agent', text: 'Understood — speed-to-lead is everything. I\'ve found a slot with our team tomorrow at 10 AM — does that work?' },
+      { speaker: 'Prospect', text: 'Yes, book me in.' },
+      { speaker: 'Agent', text: 'Done. Calendar invite sent. Looking forward to speaking with you tomorrow.' },
     ],
     color: '#3b82f6',
     accent: '#1d4ed8',
@@ -40,22 +40,22 @@ const AGENTS = [
     vertical: 'Sales',
     name: 'Outbound SDR',
     tagline: 'Runs autonomous cold outreach at a scale no human team can match.',
-    description: 'Executes complete outbound sequences — cold calls, voicemail drops, and personalised follow-ups — using live CRM data to tailor every touchpoint to the prospect\'s role, company size, and industry. Scales to thousands of dials per day without adding headcount.',
+    description: 'Executes complete outbound sequences — cold calls, voicemail drops, and personalised follow-ups — reaching every contact on your list with a consistent, professional pitch. Scales to thousands of dials per day without adding headcount. Every outcome is pushed via webhook.',
     stat: { val: '340', label: 'dials per hour, per agent' },
     efficiency: '12x the output of a human SDR',
     metrics: [
       { label: 'Connect rate', val: '18.4%' },
       { label: 'Meetings booked / 100', val: '6.2' },
-      { label: 'Cost per meeting', val: '$12' },
+      { label: 'Cost per meeting', val: '₹980' },
     ],
-    useCases: ['Cold prospecting campaigns', 'Event follow-up sequences', 'Competitive displacement', 'Market expansion'],
-    capabilities: ['Cold calling at scale', 'Voicemail drops', 'Follow-up cadences', 'CRM personalisation', 'A/B script testing', 'Real-time objection scripts'],
+    useCases: ['Cold prospecting campaigns', 'Event follow-up sequences', 'Re-engagement outreach', 'Market expansion'],
+    capabilities: ['Cold calling at scale', 'Voicemail drops', 'Follow-up cadences', 'Personalised scripts', 'Webhook outcome push', 'Real-time objection handling'],
     callSim: [
-      { speaker: 'Agent', text: 'Hey Marcus, this is Aria — I noticed Clarivate just expanded into the EMEA market. Congrats on the growth.' },
-      { speaker: 'Prospect', text: 'Thanks — how can I help you?' },
-      { speaker: 'Agent', text: 'We help sales teams entering new markets hit pipeline targets in under 60 days using AI agents. Worth 15 minutes?' },
+      { speaker: 'Agent', text: 'Hi Rahul, this is Aria — I\'m reaching out from Emaavy about your outbound sales process. Got 2 minutes?' },
+      { speaker: 'Prospect', text: 'Sure, go ahead.' },
+      { speaker: 'Agent', text: 'We help B2B sales teams run outbound at scale using AI agents — every lead gets called, no one is skipped. Worth a quick look?' },
       { speaker: 'Prospect', text: 'Yeah, actually. Send me something first.' },
-      { speaker: 'Agent', text: 'Sending a case study to your LinkedIn email right now. I\'ll follow up Thursday at 9 — does that work?' },
+      { speaker: 'Agent', text: 'Sending a case study to your email right now. I\'ll follow up Thursday at 10 AM — does that work?' },
     ],
     color: '#8b5cf6',
     accent: '#6d28d9',
@@ -74,7 +74,7 @@ const AGENTS = [
       { label: 'Avg. deal recovered', val: '$18K' },
     ],
     useCases: ['Churned customer re-engagement', 'Expired trial recovery', 'Lapsed subscription win-back', 'Competitive loss recovery'],
-    capabilities: ['Churn signal detection', 'Personalised win-back scripts', 'Re-qualification flows', 'Offer sequencing', 'Sentiment tracking', 'CRM win-back tagging'],
+    capabilities: ['Dormant account outreach', 'Personalised win-back scripts', 'Re-engagement flows', 'Offer sequencing', 'Outcome webhook push', 'Follow-up sequencing'],
     callSim: [
       { speaker: 'Agent', text: 'Hi Daniel, this is Aria from Pinnacle Labs. It\'s been a while — I wanted to personally reach out.' },
       { speaker: 'Prospect', text: 'Oh hey. Yeah, we paused things a few months ago.' },
@@ -99,11 +99,11 @@ const AGENTS = [
       { label: 'Escalation rate', val: '32%' },
     ],
     useCases: ['Inbound support queues', 'After-hours coverage', 'Overflow handling', 'Multi-language support'],
-    capabilities: ['Knowledge base resolution', 'Tier-1 deflection', 'Smart escalation routing', 'Full context handoff', 'CSAT collection', 'Ticket auto-creation'],
+    capabilities: ['Knowledge base resolution', 'Tier-1 deflection', 'Smart escalation routing', 'Full context handoff', 'Customer satisfaction tracking', 'Webhook outcome logging'],
     callSim: [
-      { speaker: 'Agent', text: 'Thanks for calling Nexora support. I\'m Aria. Can I get your account email?' },
-      { speaker: 'Customer', text: 'Sure — it\'s priya@nexora.com.' },
-      { speaker: 'Agent', text: 'Got it, Priya. I can see your last order — it looks like there was a payment processing error on Monday. I\'m issuing a full refund now.' },
+      { speaker: 'Agent', text: 'Thanks for calling support. I\'m Aria. Can I get your registered mobile number?' },
+      { speaker: 'Customer', text: 'Sure — it\'s 98765 43210.' },
+      { speaker: 'Agent', text: 'Got it, Priya. I can see your last order — there was a payment processing error on Monday. I\'m issuing a full refund now.' },
       { speaker: 'Customer', text: 'Oh wow, that\'s it?' },
       { speaker: 'Agent', text: 'Yes. Refund confirmed. You\'ll see it in 3–5 business days. Is there anything else?' },
     ],
@@ -116,20 +116,20 @@ const AGENTS = [
     name: 'Customer Success Agent',
     tagline: 'Monitors accounts proactively. Intervenes before churn occurs.',
     description: 'Tracks health scores across your entire book of business, identifies at-risk signals like reduced logins, declining usage, or missed milestones, and proactively calls those accounts before they escalate. Also handles periodic account check-ins, customer feedback calls, and upsell conversations at full scale.',
-    stat: { val: '$2.1M', label: 'ARR retained per month' },
+    stat: { val: '₹1.8Cr', label: 'avg. revenue retained / month' },
     efficiency: 'Monitors 10,000+ accounts simultaneously',
     metrics: [
       { label: 'Churn rate reduction', val: '41%' },
       { label: 'Customer satisfaction improvement', val: '+22pts' },
       { label: 'Upsell conversion', val: '14%' },
     ],
-    useCases: ['At-risk account intervention', 'Account check-in scheduling', 'Customer feedback calls', 'Expansion revenue calls'],
-    capabilities: ['Health score monitoring', 'Proactive outreach triggers', 'Account check-ins', 'Customer feedback calls', 'Usage analytics sync', 'Upsell qualification'],
+    useCases: ['Proactive account check-ins', 'Customer feedback calls', 'Renewal reminder calls', 'Expansion revenue calls'],
+    capabilities: ['Proactive account outreach', 'Scheduled check-in calls', 'Customer feedback calls', 'Webhook outcome push', 'Follow-up sequencing', 'Escalation routing'],
     callSim: [
-      { speaker: 'Agent', text: 'Hi Sofia, this is Aria from Vento SaaS. I noticed usage on your team\'s account dropped last week — wanted to check in.' },
-      { speaker: 'Customer', text: 'Yeah, we\'ve been having trouble getting the team onboarded.' },
-      { speaker: 'Agent', text: 'I\'ve scheduled a 20-minute onboarding session with our CS team for Thursday. I\'m also sending a custom tutorial for your workflow type.' },
-      { speaker: 'Customer', text: 'That would actually be really helpful.' },
+      { speaker: 'Agent', text: 'Hi Ananya, this is Aria from your account team. Just calling to check in — how\'s everything going with the platform?' },
+      { speaker: 'Customer', text: 'Honestly, we\'ve had a bit of trouble getting the team onboarded.' },
+      { speaker: 'Agent', text: 'I\'ve scheduled a 20-minute onboarding session with our CS team for Thursday. I\'m also sending a setup guide for your workflow.' },
+      { speaker: 'Customer', text: 'That would actually be really helpful, thank you.' },
     ],
     color: '#ec4899',
     accent: '#db2777',
@@ -139,7 +139,7 @@ const AGENTS = [
     vertical: 'Scheduling',
     name: 'Appointment Setter',
     tagline: 'Responds to every inbound lead in under 90 seconds.',
-    description: 'Picks up form fills and inbound inquiries the moment they arrive, qualifies the prospect\'s fit, and books directly into your team\'s calendar — before your competition has even replied to the inquiry email. Speed-to-lead is the single biggest predictor of conversion, and this agent never sleeps.',
+    description: 'Picks up form fills and inbound inquiries the moment they arrive, has a brief conversation, and books directly into your team\'s calendar — before your competition has even replied to the inquiry email. Speed-to-lead is the single biggest predictor of conversion, and this agent never sleeps.',
     stat: { val: '82s', label: 'avg. response time' },
     efficiency: '9x faster response than human follow-up',
     metrics: [
@@ -150,11 +150,11 @@ const AGENTS = [
     useCases: ['Web form follow-up', 'Ad campaign lead intake', 'Event registration', 'Referral partner intake'],
     capabilities: ['Instant lead response (<90s)', 'Qualification screening', 'Direct calendar booking', 'No-show follow-up', 'Timezone-aware scheduling', 'Multi-calendar sync'],
     callSim: [
-      { speaker: 'Agent', text: 'Hi James, you just submitted a demo request on our site — I\'m Aria. Great timing, I caught you right away!' },
+      { speaker: 'Agent', text: 'Hi Rohan, you just submitted a demo request on our site — I\'m Aria. Great timing, calling you right away!' },
       { speaker: 'Prospect', text: 'Oh wow, that was fast.' },
       { speaker: 'Agent', text: 'We always call within 90 seconds. Quick question — are you looking at this for your sales team or ops?' },
       { speaker: 'Prospect', text: 'Sales team, about 12 reps.' },
-      { speaker: 'Agent', text: 'Perfect. I have Thursday 2 PM or Friday 10 AM available. Which works better?' },
+      { speaker: 'Agent', text: 'Great. I have Thursday 2 PM or Friday 10 AM available — which works better?' },
     ],
     color: '#06b6d4',
     accent: '#0891b2',
@@ -175,9 +175,9 @@ const AGENTS = [
     useCases: ['Webinar registration', 'Conference attendance drive', 'Product launch events', 'Partner & channel events'],
     capabilities: ['Attendee outreach', 'Registration Q&A', 'Confirmation flows', 'Smart reminder sequences', 'Cancellation recovery', 'Wait-list management'],
     callSim: [
-      { speaker: 'Agent', text: 'Hi Thomas, this is Aria. You recently attended our Q1 webinar — we have an exclusive in-person summit next month in NYC.' },
+      { speaker: 'Agent', text: 'Hi Vikram, this is Aria. You attended our last webinar — we have an exclusive in-person summit next month in Bengaluru.' },
       { speaker: 'Prospect', text: 'Interesting. What\'s it about?' },
-      { speaker: 'Agent', text: 'It\'s a half-day on AI-powered revenue operations. Twenty CROs, intimate format. Want me to hold a spot for you?' },
+      { speaker: 'Agent', text: 'It\'s a half-day on AI-powered revenue operations. Intimate format, limited seats. Want me to hold a spot for you?' },
       { speaker: 'Prospect', text: 'Yeah, I\'d be interested.' },
       { speaker: 'Agent', text: 'Done. Confirmation and logistics going to your email now.' },
     ],
@@ -198,7 +198,7 @@ const AGENTS = [
       { label: 'Avg. days to collect', val: '4.2' },
     ],
     useCases: ['Overdue invoice recovery', 'Subscription churn prevention', 'Payment plan negotiation', 'High-value dispute escalation'],
-    capabilities: ['Overdue account outreach', 'Payment plan negotiation', 'Billing system sync', 'Dispute routing', 'Compliance-safe scripts', 'Multi-attempt sequencing'],
+    capabilities: ['Overdue account outreach', 'Payment plan negotiation', 'Webhook outcome push', 'Dispute escalation routing', 'Compliance-safe scripts', 'Multi-attempt sequencing'],
     callSim: [
       { speaker: 'Agent', text: 'Hi, this is Aria from billing. I\'m reaching out about invoice #4821 — it\'s 14 days past due. Is everything okay on your end?' },
       { speaker: 'Customer', text: 'Yeah, we\'ve had a cash flow issue this month.' },
@@ -223,13 +223,13 @@ const AGENTS = [
       { label: 'Time-to-screen reduction', val: '70%' },
     ],
     useCases: ['High-volume recruiting', 'Seasonal hiring ramps', 'Campus recruiting', 'Role-specific technical screens'],
-    capabilities: ['Structured phone screens', 'Fit scoring matrix', 'ATS integration', 'Interview scheduling', 'Candidate feedback loops', 'Bias-controlled frameworks'],
+    capabilities: ['Structured phone screens', 'Role-fit conversation', 'Webhook candidate data push', 'Interview scheduling', 'Candidate feedback loops', 'Consistent screening scripts'],
     callSim: [
-      { speaker: 'Agent', text: 'Hi, I\'m Aria from Stratum Capital recruiting. Thanks for applying for the Account Executive role. This will take about 10 minutes.' },
+      { speaker: 'Agent', text: 'Hi Deepak, I\'m Aria from the recruiting team. Thanks for applying for the Account Executive role. This will take about 10 minutes.' },
       { speaker: 'Candidate', text: 'Of course, ready when you are.' },
-      { speaker: 'Agent', text: 'Walk me through your most successful enterprise deal — size, cycle length, and your specific role in closing it.' },
-      { speaker: 'Candidate', text: 'Sure — it was a $420K deal with a 6-month cycle. I ran the entire commercial process.' },
-      { speaker: 'Agent', text: 'Excellent. Based on your answers you qualify for the next round — I\'m scheduling you with the hiring manager for Tuesday.' },
+      { speaker: 'Agent', text: 'Walk me through your most successful deal — size, cycle length, and your specific role in closing it.' },
+      { speaker: 'Candidate', text: 'Sure — it was a ₹45L deal with a 4-month cycle. I ran the entire commercial process end to end.' },
+      { speaker: 'Agent', text: 'Great. I\'m scheduling you with the hiring manager for Tuesday — you\'ll get a calendar invite shortly.' },
     ],
     color: '#a855f7',
     accent: '#9333ea',
@@ -342,7 +342,7 @@ function CallSimulator({ agent }: { agent: (typeof AGENTS)[number] }) {
             <motion.div key="done" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-2">
               <span className="text-[11px] px-3 py-1.5 rounded-full font-medium"
                 style={{ background: '#22c55e18', color: '#22c55e', border: '1px solid #22c55e30' }}>
-                Call completed &mdash; outcome logged to CRM
+                Call completed &mdash; outcome logged via webhook
               </span>
             </motion.div>
           )}
@@ -444,7 +444,7 @@ export default function AgentsPage() {
             <motion.p
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.12 }}
               className="text-[17px] leading-relaxed max-w-2xl mx-auto mb-10" style={{ color: '#71717a' }}>
-              Emaavy agents are purpose-built for specific business functions — not generic chatbots. Each one is trained, tested, and deployed to outperform the human it replaces.
+              Emaavy agents are purpose-built for specific business functions — not generic chatbots. Each one is trained, tested, and deployed to handle the work at a scale no human team can match.
             </motion.p>
 
             <motion.div
@@ -471,7 +471,7 @@ export default function AgentsPage() {
             {[
               { val: '9',     label: 'Purpose-built agents' },
               { val: '4',     label: 'Business verticals' },
-              { val: '4.2M+', label: 'Calls handled monthly' },
+              { val: '1M+', label: 'Calls handled monthly' },
               { val: '<500ms', label: 'Avg. response latency' },
             ].map((s, i) => (
               <div key={i} className="px-8 py-7 text-center" style={{ background: '#06070a' }}>
@@ -507,7 +507,7 @@ export default function AgentsPage() {
                 },
                 {
                   title: 'Live system integrations',
-                  body: 'Agents don\'t just talk — they act. Every call outcome is written back to HubSpot, Salesforce, your calendar, billing system, or ATS in real time. No manual logging, ever.',
+                  body: 'Agents don\'t just talk — they act. Every call outcome fires a webhook to your backend, books into your calendar, or sends a WhatsApp follow-up in real time. No manual logging, ever.',
                   icon: (
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
@@ -527,7 +527,7 @@ export default function AgentsPage() {
                 },
                 {
                   title: 'Human-quality voice',
-                  body: 'Powered by ElevenLabs and Deepgram, Emaavy agents speak with natural cadence, handle interruptions, manage cross-talk, and adjust tone based on sentiment — indistinguishable from a trained human rep.',
+                  body: 'Powered by ElevenLabs, Emaavy agents speak with natural cadence, handle interruptions, and manage cross-talk seamlessly — clear, warm voices that callers actually want to listen to.',
                   icon: (
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
@@ -547,7 +547,7 @@ export default function AgentsPage() {
                 },
                 {
                   title: 'Real-time analytics',
-                  body: 'Every conversation generates structured data — sentiment scores, talk ratios, objection frequency, conversion rates, and outcome logs. Your managers see more data from AI calls than they ever had from humans.',
+                  body: 'Every conversation generates structured data — full transcripts, talk ratios, call outcomes, and conversion rates. Your managers see more insight from AI calls than they ever had from manual processes.',
                   icon: (
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
@@ -762,13 +762,13 @@ export default function AgentsPage() {
                   name: 'Sales',
                   color: '#3b82f6',
                   headline: 'Pipeline that never sleeps.',
-                  body: 'Emaavy sales agents run outbound sequences, qualify inbound leads, recover dormant accounts, and book meetings — simultaneously, around the clock. They handle objections, personalise every conversation from your CRM data, and log outcomes automatically. Your human reps inherit hot, qualified meetings — not cold lead lists.',
+                  body: 'Emaavy sales agents run outbound sequences, respond to every inbound lead instantly, re-engage dormant accounts, and book meetings — simultaneously, around the clock. They handle objections, personalise every conversation, and push outcomes via webhook automatically. Your human reps inherit booked meetings — not cold lead lists.',
                   numbers: [
                     { val: '340+', label: 'dials per hour' },
-                    { val: '74%',  label: 'qualification rate' },
+                    { val: '41%',  label: 'meeting booked rate' },
                     { val: '12x',  label: 'output vs. human SDR' },
                   ],
-                  agents: ['Sales Qualifier', 'Outbound SDR', 'Win-Back Agent'],
+                  agents: ['Inbound Response Agent', 'Outbound SDR', 'Win-Back Agent'],
                 },
                 {
                   name: 'Customer Support',
@@ -863,11 +863,11 @@ export default function AgentsPage() {
                 style={{ background: 'linear-gradient(to bottom, transparent, #ffffff10 20%, #ffffff10 80%, transparent)' }} />
               <div className="space-y-6">
                 {[
-                  { step: '01', title: 'Connect your stack', body: 'Link your CRM, calendar, telephony, and knowledge base. Emaavy reads your live data on every call — no manual uploads.' },
-                  { step: '02', title: 'Define the agent', body: 'Choose a role, upload your call script or let Emaavy generate one, set qualification criteria, and configure escalation rules.' },
+                  { step: '01', title: 'Connect your stack', body: 'Link your telephony, calendar, and webhook endpoint. Emaavy fires call outcomes to your backend in real time — no manual uploads.' },
+                  { step: '02', title: 'Define the agent', body: 'Choose a role, upload your call script or let Emaavy generate one, set your call rules, and configure escalation flows.' },
                   { step: '03', title: 'Run a test call', body: 'Place a live test call to yourself. Hear exactly how the agent sounds, edit the script in real time, and replay edge cases.' },
-                  { step: '04', title: 'Go live', body: 'Flip the switch. Your agent starts handling real calls immediately — qualifying leads, resolving tickets, booking meetings, or collecting payments.' },
-                  { step: '05', title: 'Analyse & improve', body: 'Every call generates a transcript, sentiment score, and outcome log. Continuously tune your agent from the analytics dashboard.' },
+                  { step: '04', title: 'Go live', body: 'Flip the switch. Your agent starts handling real calls immediately — responding to leads, booking meetings, or collecting payments.' },
+                  { step: '05', title: 'Analyse & improve', body: 'Every call generates a full transcript and outcome log. Continuously tune your agent from the analytics dashboard.' },
                 ].map((s, i) => (
                   <motion.div key={i}
                     initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
