@@ -783,12 +783,12 @@ export default function IntegrationsPage() {
                     <span className="text-amber-400">tool your team uses.</span>
                   </h2>
                   <p className="mt-5 text-lg leading-relaxed text-white/60">
-                    Emaavy agents don&apos;t replace your stack — they plug into it. When an agent qualifies a lead, the CRM updates. When a call ends, the ticket is created. When a meeting is booked, the calendar invite is sent. Automatically.
+                    Emaavy agents don&apos;t replace your stack — they plug into it. When a call ends, a webhook fires. When a meeting is booked, the calendar invite is sent. When a follow-up is needed, WhatsApp delivers it. Automatically.
                   </p>
                 </div>
                 <div className="shrink-0 rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 text-center">
-                  <p className="text-4xl font-black text-amber-400">16+</p>
-                  <p className="mt-1 text-sm text-white/50">Business tools</p>
+                  <p className="text-4xl font-black text-amber-400">4 Live</p>
+                  <p className="mt-1 text-sm text-white/50">Tools available now</p>
                 </div>
               </div>
             </div>
@@ -799,28 +799,28 @@ export default function IntegrationsPage() {
             <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  cat: 'CRM',
+                  cat: 'Live Now',
+                  color: '#10B981',
+                  tools: ['Webhooks', 'WhatsApp', 'Google Calendar', 'Cal.com'],
+                  desc: 'Fire webhooks to your backend, send WhatsApp follow-ups via MSG91, and book meetings directly into Google Calendar or Cal.com.',
+                },
+                {
+                  cat: 'CRM — Coming Soon',
                   color: '#00A1E0',
                   tools: ['HubSpot (Soon)', 'Salesforce (Soon)', 'Pipedrive (Soon)', 'Zoho (Soon)'],
-                  desc: 'CRM integrations are coming soon. Connect Emaavy to your CRM to auto-log calls, update contacts, and trigger follow-up sequences.',
+                  desc: 'Auto-log every call, update contacts, and push deal stages. CRM integrations are coming soon.',
                 },
                 {
-                  cat: 'Communication',
-                  color: '#25D366',
-                  tools: ['WhatsApp', 'Webhooks', 'Google Calendar', 'Cal.com'],
-                  desc: 'Send WhatsApp follow-ups via MSG91, fire webhooks to your backend, and book meetings directly into Google Calendar or Cal.com.',
-                },
-                {
-                  cat: 'Support & Success',
+                  cat: 'Support — Coming Soon',
                   color: '#286EFA',
-                  tools: ['Intercom', 'Freshdesk', 'Calendly', 'Notion'],
-                  desc: 'Auto-create tickets, escalate conversations with full context, book meetings, and update knowledge bases.',
+                  tools: ['Intercom', 'Freshdesk', 'Slack', 'Zoom'],
+                  desc: 'Auto-create support tickets, escalate calls with full context, and notify your team in real time.',
                 },
                 {
-                  cat: 'E-commerce',
-                  color: '#96BF48',
-                  tools: ['Shopify', 'Stripe', 'Airtable', 'Zapier'],
-                  desc: 'Handle order events, subscription changes, and payment notifications inside automated workflows.',
+                  cat: 'Automation — Coming Soon',
+                  color: '#F59E0B',
+                  tools: ['Zapier', 'Shopify', 'Stripe', 'Airtable'],
+                  desc: 'Connect Emaavy to thousands of tools via Zapier, or trigger actions from e-commerce and billing events.',
                 },
               ].map(({ cat, color, tools, desc }) => (
                 <div key={cat} className="rounded-2xl border border-white/8 bg-white/[0.03] p-6">
@@ -878,11 +878,11 @@ export default function IntegrationsPage() {
               <h3 className="text-xl font-bold text-white">How it works end-to-end</h3>
               <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
                 {[
-                  { step: '1', action: 'Agent calls lead', detail: 'Via Twilio outbound' },
-                  { step: '2', action: 'Qualifies interest', detail: 'GPT-4o reasoning' },
-                  { step: '3', action: 'Books meeting',    detail: 'Calendly real-time' },
-                  { step: '4', action: 'Updates CRM',      detail: 'HubSpot deal stage' },
-                  { step: '5', action: 'Notifies rep',     detail: 'Slack message sent' },
+                  { step: '1', action: 'Agent calls lead',    detail: 'Via Vobiz / Exotel' },
+                  { step: '2', action: 'Conversation ends',  detail: 'AI handles full call' },
+                  { step: '3', action: 'Books meeting',      detail: 'Google Calendar / Cal.com' },
+                  { step: '4', action: 'Webhook fired',      detail: 'POST to your backend' },
+                  { step: '5', action: 'WhatsApp sent',      detail: 'Follow-up via MSG91' },
                 ].map(({ step, action, detail }, i) => (
                   <div key={step} className="relative flex flex-col rounded-xl border border-amber-500/15 bg-amber-500/5 p-4">
                     {i < 4 && (
@@ -899,7 +899,7 @@ export default function IntegrationsPage() {
 
           <FadeSection className="mt-8">
             <div className="flex flex-wrap gap-2">
-              {['CRM auto-update', 'Support ticket creation', 'Lead routing', 'Meeting booking', 'E-commerce automation', 'Notification workflows', 'Custom API calls'].map(uc => (
+              {['Webhook on call end', 'WhatsApp follow-up', 'Calendar booking', 'Backend data sync', 'Real-time notifications', 'Custom API calls', 'CRM update (soon)'].map(uc => (
                 <span key={uc} className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/8 px-3 py-1.5 text-xs font-medium text-amber-300">
                   <HiOutlineCheckCircle className="h-3 w-3" /> {uc}
                 </span>
