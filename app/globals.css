@@ -26,7 +26,7 @@
 @layer base {
   html  { scroll-behavior: smooth; overflow-x: hidden; }
   body  { @apply bg-white font-sans text-gray-900 antialiased; }
-  *, *::before, *::after { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; min-width: 0; }
   ::selection { background: rgba(26,86,219,0.15); }
 
   /* Global heading defaults — Plus Jakarta Sans feel: medium weight, tight tracking */

@@ -229,13 +229,13 @@ function ConversationControlCard() {
         {/* Sliders */}
         <div className="space-y-7 flex-1">
           {sliders.map(s => {
-            const pct = (s.val / s.max) * 100;
+            const fillPct = (s.val / s.max) * 100;
             return (
               <div key={s.label}>
                 <div className="flex justify-between mb-3">
                   <span className="text-[12px]" style={{ color: '#8a7455' }}>{s.label}</span>
                   <motion.span
-                    key={pct.toFixed(1)}
+                    key={fillPct.toFixed(1)}
                     className="text-[12px] font-semibold tabular-nums"
                     style={{ color: s.color }}
                   >
@@ -246,13 +246,13 @@ function ConversationControlCard() {
                   <motion.div
                     className="absolute left-0 top-0 h-full rounded-full"
                     style={{ background: s.color }}
-                    animate={{ width: `${pct}%` }}
+                    animate={{ width: `${fillPct}%` }}
                     transition={{ duration: 0.08 }}
                   />
                   <motion.div
                     className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full shadow-lg"
                     style={{ background: s.color, boxShadow: `0 0 8px ${s.color}80` }}
-                    animate={{ left: `calc(${pct}% - 6px)` }}
+                    animate={{ left: `calc(${fillPct}% - 6px)` }}
                     transition={{ duration: 0.08 }}
                   />
                 </div>
@@ -677,9 +677,6 @@ function EnterpriseReliabilityCard() {
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   ROOT — scroll-linked split layout
-───────────────────────────────────────────────────────────────────────────── */
 /* ─────────────────────────────────────────────────────────────────────────────
    ROOT — scroll-linked split layout
 ───────────────────────────────────────────────────────────────────────────── */
