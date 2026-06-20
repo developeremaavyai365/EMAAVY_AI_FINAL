@@ -456,13 +456,9 @@ export default function CampaignStudio() {
                           <p className="text-[10px] text-neutral-600">{f.nodes} nodes · edited {f.updated}</p>
                         </div>
                       </div>
-                      <button className="text-[10px] font-semibold px-3 py-1 rounded-lg transition-colors"
-                        style={{ background: '#ffffff08', color: '#94a3b8', border: '1px solid #ffffff10' }}>
-                        Edit
-                      </button>
                     </div>
                   ))}
-                  <Link href="/flows/new"
+                  <Link href="/signup"
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[12px] font-semibold transition-colors"
                     style={{ border: '1px dashed #2e3348', color: '#4b5563' }}>
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
