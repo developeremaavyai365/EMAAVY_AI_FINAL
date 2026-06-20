@@ -402,7 +402,7 @@ function WorkflowAutomationCard() {
 const PROVIDERS = [
   { id: 'openai',    label: 'OpenAI',       badge: 'GPT-4o',   color: '#10b981' },
   { id: 'custom',    label: 'CustomLLM',    badge: 'BYOM',     color: '#a78bfa' },
-  { id: 'azure',     label: 'Azure OpenAI', badge: 'Enterprise', color: '#60a5fa' },
+  { id: 'google',    label: 'Google',       badge: 'Gemini',     color: '#60a5fa' },
   { id: 'anthropic', label: 'Anthropic',    badge: 'Claude',   color: '#f97316' },
   { id: 'groq',      label: 'Groq',         badge: 'Fast',     color: '#facc15' },
   { id: 'cerebras',  label: 'Cerebras',     badge: 'Ultra',    color: '#e879f9' },
