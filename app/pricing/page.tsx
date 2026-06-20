@@ -52,12 +52,10 @@ const PLANS = [
     features: [
       'Everything in Starter',
       'Unlimited active agents',
-      'Up to 50,000 calls / month',
       'Webhooks, WhatsApp & Calendar',
       'ElevenLabs premium voice',
       'Advanced analytics & reporting',
-      'A/B script testing',
-      'Priority support (4h SLA)',
+      'Priority support',
       'Dedicated onboarding session',
       'Custom call scripts',
       'Custom flows & logic',
