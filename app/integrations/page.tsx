@@ -364,12 +364,12 @@ export default function IntegrationsPage() {
                   <span className="text-violet-400">every task.</span>
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-white/60">
-                  Emaavy agents aren&apos;t locked to a single model. Choose the right LLM per use case — mix GPT-4o for complex reasoning, Groq for real-time voice latency, and open-source Llama for cost-sensitive workflows — without changing your agent logic.
+                  Emaavy agents aren&apos;t locked to a single model. Plug in OpenAI, Google Gemini, Anthropic, Groq, or bring your own — and switch at any time without changing your agent logic.
                 </p>
               </div>
               <div className="shrink-0 rounded-2xl border border-violet-500/20 bg-violet-500/5 p-6 text-center">
-                <p className="text-4xl font-black text-violet-400">8+</p>
-                <p className="mt-1 text-sm text-white/50">Model providers</p>
+                <p className="text-4xl font-black text-violet-400">5</p>
+                <p className="mt-1 text-sm text-white/50">Live model providers</p>
               </div>
             </div>
           </FadeSection>
@@ -399,14 +399,14 @@ export default function IntegrationsPage() {
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">Supported Models</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
               {[
-                { name: 'OpenAI',      badge: 'Popular' },
-                { name: 'Anthropic',   badge: undefined },
-                { name: 'Google',      badge: undefined },
-                { name: 'Mistral',     badge: 'EU' },
-                { name: 'Meta',        badge: 'Open' },
-                { name: 'Groq',        badge: 'Fast' },
-                { name: 'Together AI', badge: undefined },
-                { name: 'Cohere',      badge: 'RAG' },
+                { name: 'OpenAI',      badge: 'Live' },
+                { name: 'Anthropic',   badge: 'Live' },
+                { name: 'Google',      badge: 'Live' },
+                { name: 'Groq',        badge: 'Live' },
+                { name: 'Custom LLM',  badge: 'Live' },
+                { name: 'Mistral',     badge: 'Soon' },
+                { name: 'Meta',        badge: 'Soon' },
+                { name: 'Together AI', badge: 'Soon' },
               ].map(p => <Chip key={p.name} name={p.name} badge={p.badge} />)}
             </div>
           </FadeSection>
@@ -425,15 +425,18 @@ export default function IntegrationsPage() {
                 </thead>
                 <tbody className="divide-y divide-white/[0.05]">
                   {[
-                    { name: 'OpenAI GPT-4o',    best: 'Complex reasoning & tool use',  ctx: '128K',  str: 'Best-in-class function calling' },
-                    { name: 'Anthropic Claude',  best: 'Long-form & instruction follow', ctx: '200K',  str: 'Safety & nuanced responses' },
-                    { name: 'Groq / Llama-3',    best: 'Real-time voice agents',        ctx: '8K',    str: 'Fastest inference (300+ t/s)' },
-                    { name: 'Google Gemini',     best: 'Multimodal & Google ecosystem', ctx: '1M',    str: 'Largest context window' },
-                    { name: 'Mistral',           best: 'EU data residency',             ctx: '32K',   str: 'Open-weight, on-premise option' },
-                    { name: 'Cohere Command',    best: 'RAG & enterprise search',       ctx: '128K',  str: 'Best retrieval + embeddings' },
-                  ].map(({ name, best, ctx, str }) => (
-                    <tr key={name} className="transition-colors hover:bg-white/[0.02]">
-                      <td className="px-5 py-4 font-semibold text-white">{name}</td>
+                    { name: 'OpenAI',          best: 'Complex reasoning & conversations', ctx: '128K', str: 'Strong function calling & reliability', live: true },
+                    { name: 'Anthropic Claude', best: 'Thoughtful, nuanced responses',    ctx: '200K', str: 'Excellent instruction following',       live: true },
+                    { name: 'Google Gemini',   best: 'Multilingual conversations',        ctx: '1M',   str: 'Large context, multimodal support',     live: true },
+                    { name: 'Groq',            best: 'Real-time voice agents',            ctx: '32K',  str: 'Fastest inference for voice use cases', live: true },
+                    { name: 'Custom LLM',      best: 'Your own fine-tuned model',         ctx: 'Any',  str: 'Any OpenAI-compatible endpoint',        live: true },
+                    { name: 'Mistral',         best: 'Coming soon',                       ctx: '32K',  str: 'Open-weight model option',              live: false },
+                  ].map(({ name, best, ctx, str, live }) => (
+                    <tr key={name} className="transition-colors hover:bg-white/[0.02]" style={{ opacity: live ? 1 : 0.45 }}>
+                      <td className="px-5 py-4 font-semibold text-white">
+                        <span>{name}</span>
+                        {!live && <span className="ml-2 text-[10px] font-medium text-white/30">Soon</span>}
+                      </td>
                       <td className="px-5 py-4 text-white/60">{best}</td>
                       <td className="hidden px-5 py-4 font-mono text-violet-400 sm:table-cell">{ctx}</td>
                       <td className="hidden px-5 py-4 text-white/50 md:table-cell">{str}</td>
@@ -447,7 +450,7 @@ export default function IntegrationsPage() {
           {/* Use cases */}
           <FadeSection className="mt-10">
             <div className="flex flex-wrap gap-2">
-              {['Intelligent agent reasoning', 'Knowledge base Q&A', 'Intent classification', 'Personalised content', 'Multilingual conversations', 'Structured data extraction', 'Real-time voice dialogue'].map(uc => (
+              {['Natural voice conversations', 'Multilingual agent calls', 'Knowledge base Q&A', 'Personalised outreach', 'Real-time voice dialogue', 'Custom model deployment', 'Low-latency responses'].map(uc => (
                 <span key={uc} className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/20 bg-violet-500/8 px-3 py-1.5 text-xs font-medium text-violet-300">
                   <HiOutlineCheckCircle className="h-3 w-3" /> {uc}
                 </span>
