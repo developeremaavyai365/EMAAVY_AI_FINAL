@@ -5,7 +5,7 @@
 import { motion } from 'framer-motion';
 
 const STATS = [
-  { val: '1 Billion', label: 'calls supported' },
+  { val: '2.5M+',     label: 'calls supported' },
   { val: '99.9%',     label: 'uptime for enterprise clients' },
   { val: '2.5M+',     label: 'agents launched' },
   { val: '750K+',     label: 'developers' },

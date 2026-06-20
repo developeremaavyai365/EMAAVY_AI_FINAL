@@ -132,7 +132,7 @@ export default function PlatformPage() {
                 { val: '312ms',  label: 'Median Round-trip Latency' },
                 { val: '99.99%', label: 'Guaranteed Platform Uptime' },
                 { val: '50+',    label: 'Native API Integrations' },
-                { val: '1B+',    label: 'Orchestrated Executions' },
+                { val: '5M+',    label: 'Orchestrated Executions' },
               ].map((s) => (
                 <div
                   key={s.val}
