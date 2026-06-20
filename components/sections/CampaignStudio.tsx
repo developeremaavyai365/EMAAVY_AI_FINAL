@@ -231,7 +231,7 @@ export default function CampaignStudio() {
               New campaign
             </Link>
             <Link
-              href="/campaigns"
+              href="/signup"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[13px] font-semibold transition-all duration-200"
               style={{ background: '#ffffff08', border: '1px solid #ffffff12', color: '#94a3b8' }}
             >
