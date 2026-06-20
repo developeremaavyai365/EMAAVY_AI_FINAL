@@ -43,14 +43,14 @@ const STORIES = [
     color: '#8b5cf6',
     bg: 'from-violet-900/40 to-violet-950/60',
     border: 'rgba(139,92,246,0.25)',
-    quote: 'We deployed a lead qualification agent in one afternoon. It books meetings directly into our reps\' calendars. Complete game changer.',
+    quote: 'We deployed an outbound calling agent in one afternoon. It books meetings directly into our reps\' calendars. Complete game changer.',
     impact: [
       { metric: '340', label: 'Dials / hour' },
-      { metric: '41%', label: 'Meeting rate' },
-      { metric: '0', label: 'SDRs needed' },
+      { metric: '41%', label: 'Meeting booked rate' },
+      { metric: '2×', label: 'Pipeline in 60 days' },
     ],
     tag: 'Sales',
-    detail: 'Our SDR team was burning out on cold calling. We replaced the top-of-funnel with an Emaavy outbound agent and re-deployed those reps to closing. Pipeline doubled in 60 days.',
+    detail: 'Our SDR team was burning out on cold calling. We put Emaavy on top-of-funnel outreach and re-deployed those reps to closing. Every lead gets called — no one gets skipped. Pipeline doubled in 60 days.',
     callSim: [
       { speaker: 'Agent', text: 'Hi Marcus, this is Aria from Emaavy. I\'m reaching out about automating your outbound process — got 2 minutes?' },
       { speaker: 'Prospect', text: 'Sure, but we already have an SDR team.' },
@@ -119,9 +119,9 @@ const STORIES = [
     border: 'rgba(244,63,94,0.25)',
     quote: 'Enterprise-grade security and seamless integrations made Emaavy the obvious choice for our global operations team.',
     impact: [
-      { metric: '22', label: 'Tools connected' },
+      { metric: '4', label: 'Tools connected live' },
       { metric: '0', label: 'Integration failures' },
-      { metric: '4.9★', label: 'Internal NPS' },
+      { metric: '<20', label: 'Min to go live' },
     ],
     tag: 'Enterprise',
     detail: 'Our compliance team was the hardest sell. Once they saw the SOC 2 audit trails, GDPR controls, and call recording consent flows — they signed off in a day. That never happens.',
@@ -136,7 +136,7 @@ const STORIES = [
 const WALL_QUOTES = [
   { quote: 'Cut our SDR headcount by 4 and doubled pipeline.', name: 'Rahul D.', role: 'VP Sales · Scalr', color: '#6366f1' },
   { quote: 'First live AI call in under 20 minutes. Unbelievable.', name: 'Mia K.', role: 'Founder · Cortex', color: '#10b981' },
-  { quote: 'Our NPS went up after we switched support to Emaavy.', name: 'James T.', role: 'CX Lead · Orbit', color: '#f59e0b' },
+  { quote: 'Support calls resolve faster and customers are happier since switching to Emaavy.', name: 'James T.', role: 'CX Lead · Orbit', color: '#f59e0b' },
   { quote: 'The voice quality is indistinguishable from a human rep.', name: 'Ana S.', role: 'COO · Vanta', color: '#f43f5e' },
   { quote: 'Replaced 3 tools with one. Costs dropped 60%.', name: 'Kenji M.', role: 'CTO · Relay', color: '#8b5cf6' },
   { quote: 'Agent handled 94% of tickets without escalation last week.', name: 'Preet R.', role: 'Support Head · Nova', color: '#3b82f6' },
@@ -149,9 +149,9 @@ const WALL_QUOTES = [
 ];
 
 const STATS = [
-  { val: '4.9', unit: '/5', label: 'Average rating', sub: 'across 200+ reviews' },
+  { val: '4.9', unit: '/5', label: 'Average rating', sub: 'across 100+ customer reviews' },
   { val: '97%', unit: '', label: 'Retention rate', sub: 'industry avg: 74%' },
-  { val: '72', unit: 'NPS', label: 'Net Promoter Score', sub: 'world-class threshold: 50' },
+  { val: '<500', unit: 'ms', label: 'End-to-end latency', sub: 'from caller speaks to agent replies' },
   { val: '<20', unit: 'min', label: 'Time to first call', sub: 'from sign-up to live agent' },
 ];
 
@@ -231,7 +231,7 @@ function CallSim({ lines, color }: { lines: { speaker: string; text: string }[];
             <motion.div key="done" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-2">
               <span className="text-[10px] px-3 py-1.5 rounded-full font-semibold"
                 style={{ background: '#22c55e15', color: '#22c55e', border: '1px solid #22c55e25' }}>
-                ✓ Call complete — outcome logged to CRM
+                ✓ Call complete — outcome logged via webhook
               </span>
             </motion.div>
           )}
@@ -354,7 +354,7 @@ export default function TestimonialsPage() {
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-indigo-400">
                 <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse" />
-                200+ Companies. Real Results.
+                100+ Companies. Real Results.
               </span>
             </motion.div>
 
@@ -383,7 +383,7 @@ export default function TestimonialsPage() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
               </span>
               <span className="text-[12px] font-medium text-white/50">
-                4.2M+ calls handled this month across all customers
+                1M+ calls handled this month across all customers
               </span>
             </motion.div>
           </div>
@@ -560,7 +560,7 @@ export default function TestimonialsPage() {
                   Your team&apos;s story<br />starts here.
                 </h2>
                 <p className="mx-auto max-w-lg text-[15px] leading-relaxed text-white/45 mb-10">
-                  Join 200+ companies that replaced manual work with Emaavy AI agents. First live call in under 20 minutes.
+                  Join 100+ companies that replaced manual work with Emaavy AI agents. First live call in under 20 minutes.
                 </p>
 
                 {/* Stars */}
@@ -572,7 +572,7 @@ export default function TestimonialsPage() {
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </motion.svg>
                   ))}
-                  <span className="ml-2 text-[13px] font-semibold text-white/50">4.9 / 5 from 200+ reviews</span>
+                  <span className="ml-2 text-[13px] font-semibold text-white/50">4.9 / 5 from 100+ reviews</span>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-center gap-4">
