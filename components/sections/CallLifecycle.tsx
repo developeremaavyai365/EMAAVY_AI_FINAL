@@ -46,7 +46,7 @@ const STAGES = [
     ),
     detail: 'Emaavy routes the call through your connected telephony provider — Vobiz, Exotel, Plivo, or Twilio — picking the best available carrier automatically. If one fails, it switches over instantly with no dropped call.',
     metrics: [
-      { label: 'Carrier selected', val: 'Twilio' },
+      { label: 'Carrier selected', val: 'Vobiz' },
       { label: 'Route latency', val: '12ms' },
       { label: 'Encryption', val: 'SRTP' },
     ],
