@@ -206,7 +206,7 @@ function ConversationControlCard() {
           <motion.span animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-2 h-2 rounded-full" style={{ background: '#f59e0b' }} />
           <span className="text-[11px] font-mono uppercase tracking-widest" style={{ color: '#6b5c3a' }}>Agent Configuration</span>
         </div>
-        <span className="text-[11px] font-mono" style={{ color: '#6b5c3a' }}>elliot-v2</span>
+        <span className="text-[11px] font-mono" style={{ color: '#6b5c3a' }}>arjun-v2</span>
       </div>
 
       <div className="p-8 flex flex-col gap-7 flex-1">
@@ -214,7 +214,7 @@ function ConversationControlCard() {
         <div className="flex items-center gap-4 pb-6 border-b" style={{ borderColor: '#211d12' }}>
           <div className="w-10 h-10 rounded-full shrink-0" style={{ background: 'linear-gradient(135deg, #f59e0b, #fb923c, #ef4444)' }} />
           <div>
-            <p className="text-[16px] font-semibold text-neutral-100">Elliot</p>
+            <p className="text-[16px] font-semibold text-neutral-100">Arjun</p>
             <p className="text-[11px]" style={{ color: '#6b5c3a' }}>Sales Qualifier — v2</p>
           </div>
           <div className="ml-auto flex gap-2">
