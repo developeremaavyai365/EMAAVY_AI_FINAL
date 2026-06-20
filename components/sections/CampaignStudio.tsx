@@ -143,7 +143,7 @@ export default function CampaignStudio() {
         return NODE_ORDER[(idx + 1) % NODE_ORDER.length];
       });
     }, 1400);
-    return () => clearTimeout(timerRef.current);
+    return () => clearTimeout(timerRef.current ?? undefined);
   }, [activeNode]);
 
   /* Live campaign metric ticks */
