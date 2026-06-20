@@ -221,7 +221,7 @@ export default function CampaignStudio() {
             className="flex gap-3 shrink-0"
           >
             <Link
-              href="/book-demo"
+              href="/signup"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-[13px] font-semibold text-white transition-all duration-200 hover:brightness-110"
               style={{ background: 'linear-gradient(135deg,#7c3aed,#4f46e5)', boxShadow: '0 0 28px rgba(124,58,237,0.3)' }}
             >
@@ -540,7 +540,7 @@ export default function CampaignStudio() {
               </p>
             </div>
             <div className="p-5 pt-0 space-y-2">
-              <Link href="/book-demo"
+              <Link href="/signup"
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[13px] font-semibold text-white transition-all hover:brightness-110"
                 style={{ background: 'linear-gradient(135deg,#7c3aed,#4f46e5)', boxShadow: '0 0 20px rgba(124,58,237,0.25)' }}>
                 Start building
