@@ -27,21 +27,20 @@ const STATIC_HEALTH = Array.from({ length: 90 }, (_, i) => i % 29 !== 0 && i % 6
    CARD 1 — REAL-TIME VOICE AI CALLING
    bg: deep charcoal #0d0d0d — neon-green waveform, live latency dial
 ───────────────────────────────────────────────────────────────────────────── */
+const R = 38, C = 50, CIRC = 2 * Math.PI * R;
+
 function VoiceCallingCard() {
-  const [bars, setBars]     = useState<number[]>(STATIC_BARS);
+  const [bars, setBars]       = useState<number[]>(STATIC_BARS);
   const [latency, setLatency] = useState(450);
-  const [tick, setTick]     = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
       setBars(Array.from({ length: 20 }, () => 6 + Math.floor(Math.random() * 36)));
       setLatency(420 + Math.floor(Math.random() * 80));
-      setTick(t => t + 1);
-    }, 320);
+    }, 500);
     return () => clearInterval(id);
   }, []);
 
-  const R = 38, C = 50, circ = 2 * Math.PI * R;
   const pct = 1 - latency / 800;
 
   const transcript = [
@@ -79,8 +78,8 @@ function VoiceCallingCard() {
                 <motion.circle
                   cx={C} cy={C} r={R} fill="none"
                   stroke="#4ade80" strokeWidth="9" strokeLinecap="butt"
-                  strokeDasharray={circ}
-                  animate={{ strokeDashoffset: circ * (1 - pct) }}
+                  strokeDasharray={CIRC}
+                  animate={{ strokeDashoffset: CIRC * (1 - pct) }}
                   transition={{ duration: 0.35, ease: 'easeInOut' }}
                 />
               </svg>
@@ -113,12 +112,14 @@ function VoiceCallingCard() {
             </p>
             <div className="flex items-end gap-[3px]" style={{ height: 48 }}>
               {bars.map((h, i) => (
-                <motion.div
+                <div
                   key={i}
                   className="flex-1 rounded-[1px]"
-                  style={{ background: `rgba(74,222,128,${0.4 + (h / 42) * 0.6})` }}
-                  animate={{ height: `${h}px` }}
-                  transition={{ duration: 0.22, ease: 'easeInOut' }}
+                  style={{
+                    height: `${h}px`,
+                    background: `rgba(74,222,128,${0.4 + (h / 42) * 0.6})`,
+                    transition: 'height 0.3s ease-in-out',
+                  }}
                 />
               ))}
             </div>
@@ -638,12 +639,12 @@ function EnterpriseReliabilityCard() {
             <p className="text-[11px] mb-3" style={{ color: '#2a6a60' }}>Total Call Minutes</p>
             <svg viewBox="0 0 100 40" className="w-full" preserveAspectRatio="none" style={{ height: 80 }}>
               <defs>
-                <linearGradient id="cgrad3" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="erc-cgrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#4ade80" stopOpacity="0.3" />
                   <stop offset="100%" stopColor="#4ade80" stopOpacity="0" />
                 </linearGradient>
               </defs>
-              <path d={toSvgArea(CALL_PTS)} fill="url(#cgrad3)" />
+              <path d={toSvgArea(CALL_PTS)} fill="url(#erc-cgrad)" />
               <motion.path d={toSvgPath(CALL_PTS)} fill="none" stroke="#4ade80" strokeWidth="1.2"
                 initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
                 transition={{ duration: 2, ease: 'easeInOut' }}
@@ -657,12 +658,12 @@ function EnterpriseReliabilityCard() {
             <p className="text-[11px] mb-3" style={{ color: '#2a6a60' }}>Total Spent</p>
             <svg viewBox="0 0 100 40" className="w-full" preserveAspectRatio="none" style={{ height: 80 }}>
               <defs>
-                <linearGradient id="sgrad3" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="erc-sgrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#34d399" stopOpacity="0.25" />
                   <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
                 </linearGradient>
               </defs>
-              <path d={toSvgArea(SPEND_PTS)} fill="url(#sgrad3)" />
+              <path d={toSvgArea(SPEND_PTS)} fill="url(#erc-sgrad)" />
               <motion.path d={toSvgPath(SPEND_PTS)} fill="none" stroke="#34d399" strokeWidth="1.2"
                 initial={{ pathLength: 0 }} animate={{ pathLength: 1 }}
                 transition={{ duration: 2, ease: 'easeInOut', delay: 0.2 }}

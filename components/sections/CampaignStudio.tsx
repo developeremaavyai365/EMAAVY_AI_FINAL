@@ -87,7 +87,7 @@ function FlowCanvas({ activeNode }: { activeNode: string }) {
       {FLOW_EDGES.filter(e => e.from === activeNode).map((e, i) => {
         const from = nodeMap[e.from]; const to = nodeMap[e.to];
         return (
-          <motion.circle key={`pulse-${i}`} r="3" fill={from.color}
+          <motion.circle key={`pulse-${e.from}-${e.to}`} r="3" fill={from.color}
             initial={{ cx: from.x + 48, cy: from.y + 16 }}
             animate={{ cx: to.x, cy: to.y + 16 }}
             transition={{ duration: 0.7, ease: 'easeInOut', repeat: Infinity, repeatDelay: 0.8 }}
@@ -132,7 +132,8 @@ export default function CampaignStudio() {
   const [activeTab, setActiveTab]     = useState<'flows' | 'templates'>('flows');
   const [launching, setLaunching]     = useState<string | null>(null);
   const [hoveredTpl, setHoveredTpl]  = useState<string | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null!);
+  const timerRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const launchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /* Auto-walk nodes */
   useEffect(() => {
@@ -158,12 +159,15 @@ export default function CampaignStudio() {
   }, []);
 
   const handleLaunch = (id: string) => {
+    if (launchTimer.current) clearTimeout(launchTimer.current);
     setLaunching(id);
-    setTimeout(() => {
+    launchTimer.current = setTimeout(() => {
       setCampaigns(prev => prev.map(c => c.id === id ? { ...c, status: 'live' } : c));
       setLaunching(null);
     }, 1800);
   };
+
+  useEffect(() => () => { if (launchTimer.current) clearTimeout(launchTimer.current); }, []);
 
   return (
     <section
