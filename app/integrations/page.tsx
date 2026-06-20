@@ -191,7 +191,7 @@ export default function IntegrationsPage() {
             className="mt-10 flex flex-wrap items-center justify-center gap-6">
             {[
               { icon: HiOutlineGlobeAlt,       val: '100+',   label: 'Integrations' },
-              { icon: HiOutlineSignal,          val: '<200ms', label: 'Avg latency' },
+              { icon: HiOutlineSignal,          val: '<500ms', label: 'Avg latency' },
               { icon: HiOutlineShieldCheck,     val: 'SOC 2',  label: 'Certified' },
               { icon: HiOutlineArrowTrendingUp, val: '99.9%',  label: 'Uptime SLA' },
             ].map(({ icon: Icon, val, label }) => (
@@ -381,7 +381,7 @@ export default function IntegrationsPage() {
                 { icon: HiOutlineBolt,        label: 'Model routing',         desc: 'Swap models per task with zero config changes' },
                 { icon: HiOutlineCommandLine, label: 'Function calling',      desc: 'Tool-use & structured outputs across all providers' },
                 { icon: HiOutlineShieldCheck, label: 'Fallback chains',       desc: 'Auto-failover to backup model on timeout or error' },
-                { icon: HiOutlineSignal,      label: 'Streaming responses',   desc: 'Token-by-token streaming for sub-200ms TTFB' },
+                { icon: HiOutlineSignal,      label: 'Streaming responses',   desc: 'Token-by-token streaming for sub-500ms TTFB' },
               ].map(({ icon: Icon, label, desc }) => (
                 <div key={label} className="rounded-2xl border border-white/8 bg-white/[0.03] p-5">
                   <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-violet-500/15">
