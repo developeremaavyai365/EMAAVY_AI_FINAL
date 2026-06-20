@@ -15,15 +15,6 @@ const AGENTS = [
     stat: { val: '74%', label: 'average qualification rate' },
   },
   {
-    id: 'outbound-sdr',
-    vertical: 'Sales',
-    name: 'Outbound SDR',
-    headline: 'Runs autonomous cold outreach at a scale no human team can match.',
-    body: 'Executes outbound sequences — cold calls, voicemail drops, personalised follow-ups — using live CRM data to tailor every touchpoint without SDR headcount.',
-    capabilities: ['Cold calling', 'Voicemail drops', 'Follow-up cadences', 'CRM personalisation'],
-    stat: { val: '340', label: 'dials per hour, per agent' },
-  },
-  {
     id: 'win-back',
     vertical: 'Sales',
     name: 'Win-Back Agent',
@@ -49,6 +40,15 @@ const AGENTS = [
     body: 'Tracks health scores across your entire book of business, calls at-risk accounts before they escalate, and handles QBR prep, check-ins, and NPS follow-ups at full scale.',
     capabilities: ['Health score monitoring', 'Proactive outreach', 'QBR preparation', 'NPS follow-up'],
     stat: { val: '$2.1M', label: 'ARR retained per month' },
+  },
+  {
+    id: 'outbound-sdr',
+    vertical: 'Sales',
+    name: 'Outbound SDR',
+    headline: 'Runs autonomous cold outreach at a scale no human team can match.',
+    body: 'Executes outbound sequences — cold calls, voicemail drops, personalised follow-ups — using live CRM data to tailor every touchpoint without SDR headcount.',
+    capabilities: ['Cold calling', 'Voicemail drops', 'Follow-up cadences', 'CRM personalisation'],
+    stat: { val: '340', label: 'dials per hour, per agent' },
   },
   {
     id: 'appointment-setter',
