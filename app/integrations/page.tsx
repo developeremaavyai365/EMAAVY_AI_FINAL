@@ -485,14 +485,14 @@ export default function IntegrationsPage() {
                   <span className="text-emerald-400">perfectly.</span>
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-white/60">
-                  Precision transcription powers your agents&apos; understanding. Emaavy integrates with 8 STT engines — optimised for real-time voice, batch audio, regional languages, and compliance recording.
+                  Emaavy uses ElevenLabs for real-time speech-to-text — the caller&apos;s words are transcribed as they speak so the agent can respond naturally without any awkward pause.
                 </p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   {[
-                    { label: 'Real-time streaming', desc: 'Word-by-word transcription as the caller speaks' },
-                    { label: 'Speaker diarisation', desc: 'Who said what, automatically labelled' },
-                    { label: 'Accent robustness',   desc: 'Trained on diverse global voice datasets' },
-                    { label: 'Indic language STT',  desc: 'Hindi, Tamil, Telugu, Bengali & 10+ more' },
+                    { label: 'Real-time streaming',  desc: 'Word-by-word transcription as the caller speaks' },
+                    { label: 'No wait time',         desc: 'Agent starts understanding before the caller finishes' },
+                    { label: 'Accent robustness',    desc: 'Works across Indian accents and English dialects' },
+                    { label: 'More providers soon',  desc: 'Deepgram, Sarvam AI, and others coming soon' },
                   ].map(({ label, desc }) => (
                     <div key={label} className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
                       <div className="flex items-center gap-2">
@@ -514,7 +514,7 @@ export default function IntegrationsPage() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-white">Live transcription</p>
-                      <p className="text-xs text-white/40">Streaming · 47ms latency</p>
+                      <p className="text-xs text-white/40">Streaming · &lt;500ms latency</p>
                     </div>
                     <span className="ml-auto flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]">
                     </span>
@@ -544,40 +544,41 @@ export default function IntegrationsPage() {
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">STT Providers</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
               {[
-                { name: 'Deepgram',   badge: 'Best RT' },
-                { name: 'OpenAI',     badge: 'Whisper' },
-                { name: 'Sarvam AI',  badge: 'Indic' },
-                { name: 'AssemblyAI', badge: undefined },
-                { name: 'Rev',        badge: undefined },
-                { name: 'Microsoft',  badge: undefined },
-                { name: 'Google',     badge: undefined },
-                { name: 'Amazon',     badge: undefined },
+                { name: 'ElevenLabs', badge: 'Live' },
+                { name: 'Deepgram',   badge: 'Soon' },
+                { name: 'Sarvam AI',  badge: 'Soon' },
+                { name: 'AssemblyAI', badge: 'Soon' },
+                { name: 'Microsoft',  badge: 'Soon' },
+                { name: 'Google',     badge: 'Soon' },
+                { name: 'Amazon',     badge: 'Soon' },
+                { name: 'OpenAI',     badge: 'Soon' },
               ].map(p => <Chip key={p.name} name={p.name} badge={p.badge} />)}
             </div>
           </FadeSection>
 
-          {/* Deepgram spotlight */}
+          {/* ElevenLabs spotlight */}
           <FadeSection className="mt-8">
             <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8">
               <div className="grid gap-8 md:grid-cols-3">
                 <div className="md:col-span-2">
-                  <p className="mb-2 text-xs font-bold uppercase tracking-widest text-emerald-400">Recommended for Voice Agents</p>
-                  <h3 className="text-2xl font-bold text-white">Deepgram Nova-2</h3>
+                  <p className="mb-2 text-xs font-bold uppercase tracking-widest text-emerald-400">Emaavy&apos;s STT Provider</p>
+                  <h3 className="text-2xl font-bold text-white">ElevenLabs Speech-to-Text</h3>
                   <p className="mt-3 leading-relaxed text-white/60">
-                    The gold standard for real-time voice AI. Nova-2 delivers word-level timestamps, speaker diarisation, and confidence scores in under 300ms — optimised specifically for conversational phone audio. Emaavy&apos;s default STT provider.
+                    Emaavy uses ElevenLabs for real-time speech transcription. Every word the caller speaks is transcribed instantly and fed to the AI agent — enabling natural, flowing conversations without any noticeable delay.
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {['&lt;300ms streaming', 'Speaker diarisation', '98.1% accuracy', '30+ languages', 'PII redaction'].map(f => (
-                      <span key={f} className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300"
-                        dangerouslySetInnerHTML={{ __html: f }} />
+                    {['Real-time streaming', 'High accuracy', 'Works across accents', 'Low latency', 'Instant response'].map(f => (
+                      <span key={f} className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300">
+                        {f}
+                      </span>
                     ))}
                   </div>
                 </div>
                 <div className="flex flex-col gap-4">
                   {[
-                    { val: '<300ms', label: 'Streaming latency' },
-                    { val: '98.1%',  label: 'WER accuracy' },
-                    { val: '30+',    label: 'Languages' },
+                    { val: '<500ms', label: 'End-to-end latency' },
+                    { val: 'Live',   label: 'Available now' },
+                    { val: '24/7',   label: 'Always on' },
                   ].map(({ val, label }) => (
                     <div key={label} className="rounded-xl border border-emerald-500/20 bg-emerald-500/8 p-4 text-center">
                       <p className="text-2xl font-black text-emerald-400">{val}</p>
@@ -591,7 +592,7 @@ export default function IntegrationsPage() {
 
           <FadeSection className="mt-8">
             <div className="flex flex-wrap gap-2">
-              {['Real-time call transcription', 'Voice bot understanding', 'Meeting summarisation', 'Compliance recording', 'Multilingual IVR', 'PII redaction', 'Quality monitoring'].map(uc => (
+              {['Real-time call transcription', 'Natural voice conversations', 'Instant agent responses', 'Inbound call handling', 'Outbound campaign calls', 'Call recording & replay'].map(uc => (
                 <span key={uc} className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/8 px-3 py-1.5 text-xs font-medium text-emerald-300">
                   <HiOutlineCheckCircle className="h-3 w-3" /> {uc}
                 </span>
