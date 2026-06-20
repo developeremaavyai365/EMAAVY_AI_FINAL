@@ -78,6 +78,7 @@ const PLANS = [
       'Custom data residency',
       'SLA up to 99.99% uptime',
       '24/7 dedicated support',
+      'Dedicated account manager',
       'Quarterly executive reviews',
       'Custom SLA & contract terms',
     ],
