@@ -34,7 +34,6 @@ const PLANS = [
       '3 active AI agents',
       '3 campaigns',
       '60 minutes included',
-      'Up to 5,000 calls / month',
       'Webhooks + Google Calendar',
       'ElevenLabs voice',
       'Basic call analytics dashboard',
