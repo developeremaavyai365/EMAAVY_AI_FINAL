@@ -239,10 +239,10 @@ export default function AgentsShowcase() {
             10 agents across 4 verticals &mdash; or request a custom agent built for your workflow.
           </p>
           <div className="flex items-center gap-3">
-            <Link href="/signup"
+            <Link href="/agents"
               className="inline-flex items-center gap-2 text-[13px] font-medium text-white border px-5 py-2.5 rounded-lg transition-all hover:bg-white/5"
               style={{ borderColor: '#ffffff14' }}>
-              Browse all agents
+              Explore all agents
             </Link>
             <Link href="/book-demo"
               className="inline-flex items-center gap-2 text-[13px] font-medium text-neutral-500 hover:text-neutral-300 transition-colors">
