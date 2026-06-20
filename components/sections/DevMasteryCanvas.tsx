@@ -613,7 +613,7 @@ function EnterpriseReliabilityCard() {
         {/* Health grid */}
         <div className="rounded-lg px-5 py-4" style={{ background: '#0a1f1c', border: '1px solid #0a2420' }}>
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-[12px] text-emerald-300/70">Emaavy API — 90-day history</span>
+            <span className="text-[12px] text-emerald-300/70">Emaavy API — No outages in 3 months</span>
             <span className="ml-auto text-[11px] font-semibold text-emerald-400 font-mono">{uptime}</span>
           </div>
           <div className="flex gap-[2px]">
