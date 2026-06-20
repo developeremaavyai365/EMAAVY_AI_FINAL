@@ -13,7 +13,6 @@ const SECTIONS = [
   { id: 'own-llm',                label: 'Plug in your own LLM',            bg: '#120a24', dark: true },
   { id: 'omnichannel',            label: 'Omnichannel reach',               bg: '#1a0832', dark: true },
   { id: 'enterprise-reliability', label: 'Enterprise reliability',           bg: '#011a0e', dark: true },
-  { id: 'sdk-api',                label: 'Developer SDK & API access',      bg: '#0d1117', dark: true },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]['id'];
@@ -679,101 +678,8 @@ function EnterpriseReliabilityCard() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   CARD 7 — DEVELOPER SDK & API ACCESS
-   bg: #0d1117 — VS Code dark terminal with type-on animation
+   ROOT — scroll-linked split layout
 ───────────────────────────────────────────────────────────────────────────── */
-const SDK_SOURCE = `import { EmaavyClient } from '@emaavy/sdk';
-
-const client = new EmaavyClient({
-  apiKey: process.env.EMAAVY_API_KEY,
-  region: 'us-east-1',
-});
-
-const call = await client.calls.create({
-  agentId: 'agt_sales_qualifier_v2',
-  to:      '+14155550192',
-  from:    '+18005550100',
-  model: {
-    provider:    'openai',
-    id:          'gpt-4o',
-    temperature: 0.25,
-  },
-  voice: {
-    provider: 'elevenlabs',
-    voiceId:  'sarah',
-  },
-  tools: [
-    'hubspot.logCall',
-    'calendar.bookMeeting',
-    'sms.sendFollowUp',
-  ],
-});
-
-call.onTranscript((turn) => {
-  console.log(turn.role, turn.text);
-});`;
-
-function syntaxColor(raw: string): string {
-  return raw
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/(\/\/.*)/g,                           '<span style="color:#6b7280">$1</span>')
-    .replace(/('(?:[^'\\]|\\.)*')/g,                '<span style="color:#86efac">$1</span>')
-    .replace(/\b(import|from|const|let|await|new|return|process)\b/g, '<span style="color:#c4b5fd">$1</span>')
-    .replace(/\b(true|false|null|undefined)\b/g,    '<span style="color:#f9a8d4">$1</span>');
-}
-
-function SdkApiCard() {
-  const [copied, setCopied]       = useState(false);
-  const [visible, setVisible]     = useState(0);
-
-  useEffect(() => {
-    if (visible >= SDK_SOURCE.length) return;
-    const id = setTimeout(() => setVisible(v => Math.min(v + 4, SDK_SOURCE.length)), 18);
-    return () => clearTimeout(id);
-  }, [visible]);
-
-  return (
-    <div className="rounded-xl overflow-hidden min-h-[500px] w-full flex flex-col" style={{ background: '#0d1117', border: '1px solid #161b22' }}>
-      {/* Title bar */}
-      <div className="flex items-center justify-between px-5 py-3 border-b" style={{ borderColor: '#161b22' }}>
-        <div className="flex gap-1.5">
-          <span className="w-3 h-3 rounded-full" style={{ background: '#3a3a3a' }} />
-          <span className="w-3 h-3 rounded-full" style={{ background: '#3a3a3a' }} />
-          <span className="w-3 h-3 rounded-full" style={{ background: '#3a3a3a' }} />
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-[11px]" style={{ color: '#484f58' }}>emaavy-client.ts</span>
-          <span className="text-[10px] px-2 py-0.5 rounded font-mono" style={{ background: '#161b22', color: '#c4b5fd', border: '1px solid #30363d' }}>TypeScript</span>
-        </div>
-        <button
-          onClick={async () => { await navigator.clipboard.writeText(SDK_SOURCE); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
-          className="text-[10px] transition-colors px-2 py-1 rounded font-mono"
-          style={{ color: copied ? '#4ade80' : '#484f58' }}
-        >
-          {copied ? '✓ Copied' : 'Copy'}
-        </button>
-      </div>
-
-      {/* Code with type-on effect */}
-      <pre
-        className="flex-1 overflow-auto p-6 font-mono text-[12px] leading-[1.85]"
-        style={{ color: '#e6edf3', maxHeight: 420 }}
-        dangerouslySetInnerHTML={{ __html: syntaxColor(SDK_SOURCE.slice(0, visible)) + (visible < SDK_SOURCE.length ? '<span style="color:#c4b5fd;animation:blink 0.8s step-end infinite">▋</span>' : '') }}
-      />
-
-      {/* Install strip */}
-      <div className="border-t px-5 py-3 flex items-center gap-6 flex-wrap" style={{ borderColor: '#161b22', background: '#0d1117' }}>
-        {['npm', 'yarn', 'pnpm'].map(pm => (
-          <span key={pm} className="font-mono text-[11px]" style={{ color: '#484f58' }}>
-            {pm} add <span style={{ color: '#c4b5fd' }}>@emaavy/sdk</span>
-          </span>
-        ))}
-        <span className="ml-auto text-[11px] font-mono" style={{ color: '#484f58' }}>v2.4.1</span>
-      </div>
-    </div>
-  );
-}
-
 /* ─────────────────────────────────────────────────────────────────────────────
    ROOT — scroll-linked split layout
 ───────────────────────────────────────────────────────────────────────────── */
@@ -895,7 +801,6 @@ export default function DevMasteryCanvas() {
                 {s.id === 'own-llm'                && <OwnLLMCard />}
                 {s.id === 'omnichannel'            && <OmnichannelCard />}
                 {s.id === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
-                {s.id === 'sdk-api'                && <SdkApiCard />}
               </div>
             ))}
           </div>
