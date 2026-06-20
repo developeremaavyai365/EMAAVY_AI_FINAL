@@ -669,11 +669,11 @@ export default function IntegrationsPage() {
                   <HiOutlineSpeakerWave className="h-4 w-4" /> Text to Speech
                 </div>
                 <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-                  A voice that sounds<br />
-                  <span className="text-rose-400">unmistakably human.</span>
+                  A voice your callers<br />
+                  <span className="text-rose-400">actually want to hear.</span>
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-white/60">
-                  First impressions happen in the first syllable. Emaavy&apos;s TTS integrations deliver voices so natural, callers don&apos;t know they&apos;re talking to AI — with sub-100ms first-audio latency for seamless conversations.
+                  Emaavy agents speak with ElevenLabs voices — clear, natural, and warm. No robotic tone, no awkward pauses. Just a smooth conversation that gets to the point fast.
                 </p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   {[
