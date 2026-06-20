@@ -677,10 +677,10 @@ export default function IntegrationsPage() {
                 </p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-2">
                   {[
-                    { label: 'Streaming audio',       desc: 'First audio chunk in under 100ms' },
-                    { label: 'Voice cloning',          desc: 'Deploy your brand&apos;s custom voice' },
-                    { label: 'Emotion & prosody',      desc: 'Tone, pace, and emphasis control via SSML' },
-                    { label: 'Indic language TTS',     desc: 'Sarvam AI for natural Hindi, Tamil & more' },
+                    { label: 'Streaming audio',      desc: 'Agent starts speaking in under 500ms' },
+                    { label: 'Natural tone',          desc: 'Clear, warm voices — no robotic sound' },
+                    { label: 'Custom voice',          desc: 'Deploy your own branded voice with ElevenLabs' },
+                    { label: 'More voices coming',    desc: 'Sarvam AI for Hindi & Indic languages coming soon' },
                   ].map(({ label, desc }) => (
                     <div key={label} className="rounded-xl border border-white/8 bg-white/[0.03] p-4">
                       <div className="flex items-center gap-2">
@@ -699,14 +699,14 @@ export default function IntegrationsPage() {
             <p className="mb-5 text-xs font-bold uppercase tracking-widest text-white/30">TTS Providers</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
               {[
-                { name: 'ElevenLabs', badge: 'Popular' },
-                { name: 'Sarvam AI',  badge: 'Indic' },
-                { name: 'Microsoft',  badge: 'Azure' },
-                { name: 'Amazon',     badge: 'Polly' },
-                { name: 'Google',     badge: undefined },
-                { name: 'Deepgram',   badge: 'Aura' },
-                { name: 'PlayHT',     badge: undefined },
-                { name: 'LMNT',       badge: 'Fast' },
+                { name: 'ElevenLabs', badge: 'Live' },
+                { name: 'Sarvam AI',  badge: 'Soon' },
+                { name: 'Microsoft',  badge: 'Soon' },
+                { name: 'Amazon',     badge: 'Soon' },
+                { name: 'Google',     badge: 'Soon' },
+                { name: 'Deepgram',   badge: 'Soon' },
+                { name: 'PlayHT',     badge: 'Soon' },
+                { name: 'LMNT',       badge: 'Soon' },
               ].map(p => <Chip key={p.name} name={p.name} badge={p.badge} />)}
             </div>
           </FadeSection>
@@ -719,19 +719,19 @@ export default function IntegrationsPage() {
                   <p className="mb-2 text-xs font-bold uppercase tracking-widest text-rose-400">Recommended for Voice Agents</p>
                   <h3 className="text-2xl font-bold text-white">ElevenLabs Turbo v2.5</h3>
                   <p className="mt-3 leading-relaxed text-white/60">
-                    The most natural-sounding TTS on the market. ElevenLabs Turbo delivers hyper-realistic voices with voice cloning, streaming-optimised latency under 75ms first chunk, and support for 32 languages — the default choice for Emaavy voice agents.
+                    ElevenLabs powers every Emaavy agent voice. Callers hear a clear, natural voice that responds without delay — making every conversation feel smooth and professional from the very first word.
                   </p>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {['<75ms first audio', 'Voice cloning', '32 languages', 'SSML support', 'Emotional range'].map(f => (
+                    {['<500ms response', 'Natural voices', 'Custom voice cloning', 'Multiple languages', 'Always live'].map(f => (
                       <span key={f} className="rounded-full border border-rose-500/20 bg-rose-500/10 px-3 py-1 text-xs font-medium text-rose-300">{f}</span>
                     ))}
                   </div>
                 </div>
                 <div className="flex flex-col gap-4">
                   {[
-                    { val: '<75ms',  label: 'First audio chunk' },
-                    { val: '32',     label: 'Languages supported' },
-                    { val: '1000+',  label: 'Voice models' },
+                    { val: '<500ms', label: 'End-to-end latency' },
+                    { val: 'Live',   label: 'Available now' },
+                    { val: '24/7',   label: 'Always on' },
                   ].map(({ val, label }) => (
                     <div key={label} className="rounded-xl border border-rose-500/20 bg-rose-500/8 p-4 text-center">
                       <p className="text-2xl font-black text-rose-400">{val}</p>
@@ -745,7 +745,7 @@ export default function IntegrationsPage() {
 
           <FadeSection className="mt-8">
             <div className="flex flex-wrap gap-2">
-              {['AI voice agents', 'IVR responses', 'Custom brand voice', 'Multilingual TTS', 'Audio content', 'Real-time dialogue', 'Accessibility tooling'].map(uc => (
+              {['AI voice agents', 'Outbound sales calls', 'Custom brand voice', 'Inbound support calls', 'Appointment reminders', 'Real-time conversations', 'Lead follow-up calls'].map(uc => (
                 <span key={uc} className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/20 bg-rose-500/8 px-3 py-1.5 text-xs font-medium text-rose-300">
                   <HiOutlineCheckCircle className="h-3 w-3" /> {uc}
                 </span>
