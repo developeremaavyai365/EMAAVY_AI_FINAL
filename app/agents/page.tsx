@@ -13,7 +13,7 @@ const AGENTS = [
     vertical: 'Sales',
     name: 'Sales Qualifier',
     tagline: 'Qualifies every lead before your team picks up the phone.',
-    description: 'Calls every inbound lead the moment they show interest, asks smart questions to identify serious buyers, logs everything to your CRM, and only books a meeting if they\'re a genuine fit. Your sales team walks into every call with context — and zero time wasted on leads that were never going to convert.',
+    description: 'Calls every inbound lead the moment they show interest, has a natural conversation, captures their details and requirements, logs everything to your CRM, and books a meeting — every time. No lead goes unanswered, no opportunity slips through.',
     stat: { val: '74%', label: 'avg. qualification rate' },
     efficiency: '6x faster than manual SDR qualification',
     metrics: [
@@ -22,7 +22,7 @@ const AGENTS = [
       { label: 'Avg. handle time', val: '3.4 min' },
     ],
     useCases: ['Inbound lead routing', 'Trade show follow-up', 'Trial-to-paid conversion', 'Partner referral intake'],
-    capabilities: ['Smart lead qualification', 'Intent detection', 'CRM auto-logging', 'Calendar booking', 'Objection handling', 'Multi-language support'],
+    capabilities: ['Instant lead response', 'Natural conversation', 'CRM auto-logging', 'Calendar booking', 'Objection handling', 'Multi-language support'],
     callSim: [
       { speaker: 'Agent', text: 'Hi, this is Aria from Emaavy. Is this a good time to connect about your inquiry?' },
       { speaker: 'Prospect', text: 'Sure, I have a few minutes.' },
