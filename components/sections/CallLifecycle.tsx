@@ -27,7 +27,7 @@ const STAGES = [
       { label: 'CRM context', val: 'Loaded' },
     ],
     transcript: null,
-    tech: ['Campaign DAG evaluated', 'Lead scored: 82', 'Agent: Aria-SalesQualifier-v2', 'CRM context pulled from HubSpot'],
+    tech: ['Campaign DAG evaluated', 'Lead scored: 82', 'Agent: Aria-SalesQualifier-v2', 'Lead details pulled via webhook'],
   },
   {
     id: 'routing',
@@ -164,14 +164,14 @@ const STAGES = [
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
       </svg>
     ),
-    detail: 'Mid-call, Aria fires tool calls to HubSpot (contact log), Google Calendar (slot check), and Slack (#deals-alerts) all resolving within 38ms, completely invisible to the prospect.',
+    detail: 'Mid-call, the agent fires webhooks to your backend, checks Google Calendar for an open slot, and sends a WhatsApp confirmation — all within 38ms, completely invisible to the prospect.',
     metrics: [
-      { label: 'HubSpot write', val: '22ms' },
+      { label: 'Webhook fired', val: '22ms' },
       { label: 'Calendar check', val: '38ms' },
-      { label: 'Slack alert', val: '11ms' },
+      { label: 'WhatsApp sent', val: '11ms' },
     ],
     transcript: { speaker: 'Aria', text: "Perfect. I've found Thursday at 2pm, booking that in now." },
-    tech: ['hubspot.updateContact()', 'calendar.checkSlot()', 'calendar.bookMeeting()', 'slack.postMessage(#deals)'],
+    tech: ['webhook.fire(lead_qualified)', 'calendar.checkSlot()', 'calendar.bookMeeting()', 'whatsapp.sendConfirmation()'],
   },
   {
     id: 'outcome',
@@ -195,7 +195,7 @@ const STAGES = [
       { label: 'Call outcome', val: 'Positive' },
     ],
     transcript: { speaker: 'Prospect', text: 'Thursday works. Looking forward to it.' },
-    tech: ['Transcript: 847 words indexed', 'Outcome: Positive', 'Meeting: Thu 2pm confirmed', 'HubSpot deal stage -> qualified'],
+    tech: ['Transcript: 847 words indexed', 'Outcome: Positive', 'Meeting: Thu 2pm confirmed', 'Webhook fired: deal_qualified'],
   },
 ] as const;
 

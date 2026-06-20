@@ -31,7 +31,7 @@ const FLOW_NODES = [
     bg: '#5b21b6', border: '#8b5cf6', dot: '#c4b5fd', labelColor: '#f5f3ff',
   },
   {
-    id: 'crm',     label: 'Update CRM',       sub: 'Salesforce · POST /leads',
+    id: 'crm',     label: 'Fire Webhook',     sub: 'Webhooks · POST /lead-update',
     x: 412, y: 34,  w: 136, h: 54,
     bg: '#0e7490', border: '#22d3ee', dot: '#67e8f9', labelColor: '#ecfeff',
   },
