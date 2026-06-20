@@ -188,14 +188,14 @@ const STAGES = [
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
       </svg>
     ),
-    detail: 'Call ends. Full word-level transcript is indexed in under 2s. Sentiment scores, intent signals, and the meeting booking are synced to HubSpot. Analytics update instantly.',
+    detail: 'Call ends. The full conversation is transcribed and logged in under 2s. The meeting booking, call notes, and outcome are synced to your CRM automatically — nothing needs to be filled in manually.',
     metrics: [
       { label: 'Result', val: 'Booked' },
       { label: 'Duration', val: '3m 22s' },
-      { label: 'Sentiment', val: '+0.82' },
+      { label: 'Call outcome', val: 'Positive' },
     ],
     transcript: { speaker: 'Prospect', text: 'Thursday works. Looking forward to it.' },
-    tech: ['Transcript: 847 words indexed', 'Sentiment: 0.82 (positive)', 'Meeting: Thu 2pm confirmed', 'HubSpot deal stage -> qualified'],
+    tech: ['Transcript: 847 words indexed', 'Outcome: Positive', 'Meeting: Thu 2pm confirmed', 'HubSpot deal stage -> qualified'],
   },
 ] as const;
 

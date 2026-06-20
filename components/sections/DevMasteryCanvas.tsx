@@ -268,7 +268,7 @@ function ConversationControlCard() {
         {/* Status bar */}
         <div className="grid grid-cols-2 gap-3 pt-4 border-t" style={{ borderColor: '#211d12' }}>
           {[
-            { label: 'Sentiment Score', val: '8.4 / 10' },
+            { label: 'Call Outcome', val: 'Meeting Booked' },
             { label: 'Caller / Agent Talk', val: '62% / 38%' },
           ].map(s => (
             <div key={s.label} className="rounded-lg px-4 py-3" style={{ background: '#181208', border: '1px solid #2a2010' }}>
