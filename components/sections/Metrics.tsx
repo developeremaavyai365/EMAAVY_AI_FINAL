@@ -8,7 +8,7 @@ const STATS = [
   { val: '2.5M+',     label: 'calls supported' },
   { val: '99.9%',     label: 'uptime for enterprise clients' },
   { val: '24,000+',   label: 'agents launched' },
-  { val: '750K+',     label: 'developers' },
+  { val: '8,500+',    label: 'developers' },
   { val: '<500ms',    label: 'average latency' },
 ];
 
