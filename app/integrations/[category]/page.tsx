@@ -1,60 +1,64 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { HiArrowLeft, HiOutlineCheckCircle, HiOutlineArrowTopRightOnSquare } from 'react-icons/hi2';
+import { HiArrowLeft, HiOutlineCheckCircle, HiOutlineArrowTopRightOnSquare, HiOutlineClock } from 'react-icons/hi2';
 import { INTEGRATION_CATEGORIES } from '@/lib/constants';
 
-/* Brand-coloured letter chip — pure server-renderable, no client state */
+/* Brand-coloured letter chip */
 const BRAND_COLORS: Record<string, { bg: string; fg: string }> = {
-  Twilio:      { bg: '#F22F46', fg: '#fff' },
-  Plivo:       { bg: '#5856D6', fg: '#fff' },
-  Exotel:      { bg: '#1A56DB', fg: '#fff' },
-  Telnyx:      { bg: '#00C5C1', fg: '#fff' },
-  Vonage:      { bg: '#7C3AED', fg: '#fff' },
-  Bandwidth:   { bg: '#E63946', fg: '#fff' },
-  Aircall:     { bg: '#00D4B1', fg: '#fff' },
-  RingCentral: { bg: '#F6821F', fg: '#fff' },
-  OpenAI:      { bg: '#10A37F', fg: '#fff' },
-  Anthropic:   { bg: '#D97757', fg: '#fff' },
-  Google:      { bg: '#4285F4', fg: '#fff' },
-  Mistral:     { bg: '#FF7000', fg: '#fff' },
-  Meta:        { bg: '#0866FF', fg: '#fff' },
-  Groq:        { bg: '#F55036', fg: '#fff' },
+  Vobiz:         { bg: '#4F46E5', fg: '#fff' },
+  Twilio:        { bg: '#F22F46', fg: '#fff' },
+  Plivo:         { bg: '#5856D6', fg: '#fff' },
+  Exotel:        { bg: '#1A56DB', fg: '#fff' },
+  Telnyx:        { bg: '#00C5C1', fg: '#fff' },
+  Vonage:        { bg: '#7C3AED', fg: '#fff' },
+  Bandwidth:     { bg: '#E63946', fg: '#fff' },
+  Aircall:       { bg: '#00D4B1', fg: '#fff' },
+  RingCentral:   { bg: '#F6821F', fg: '#fff' },
+  OpenAI:        { bg: '#10A37F', fg: '#fff' },
+  Anthropic:     { bg: '#D97757', fg: '#fff' },
+  Google:        { bg: '#4285F4', fg: '#fff' },
+  Mistral:       { bg: '#FF7000', fg: '#fff' },
+  Meta:          { bg: '#0866FF', fg: '#fff' },
+  Groq:          { bg: '#F55036', fg: '#fff' },
   'Together AI': { bg: '#6C47FF', fg: '#fff' },
-  Cohere:      { bg: '#39594D', fg: '#fff' },
-  Deepgram:    { bg: '#101827', fg: '#fff' },
-  Sarvam:      { bg: '#FF6B35', fg: '#fff' },
-  'Sarvam AI': { bg: '#FF6B35', fg: '#fff' },
-  AssemblyAI:  { bg: '#1A1A2E', fg: '#fff' },
-  Rev:         { bg: '#0070C9', fg: '#fff' },
-  Microsoft:   { bg: '#00A4EF', fg: '#fff' },
-  Amazon:      { bg: '#FF9900', fg: '#fff' },
-  ElevenLabs:  { bg: '#111',    fg: '#fff' },
-  PlayHT:      { bg: '#7B2FBE', fg: '#fff' },
-  LMNT:        { bg: '#2563EB', fg: '#fff' },
-  Salesforce:  { bg: '#00A1E0', fg: '#fff' },
-  HubSpot:     { bg: '#FF7A59', fg: '#fff' },
-  Slack:       { bg: '#4A154B', fg: '#fff' },
-  WhatsApp:    { bg: '#25D366', fg: '#fff' },
-  Shopify:     { bg: '#96BF48', fg: '#fff' },
-  Stripe:      { bg: '#635BFF', fg: '#fff' },
-  Notion:      { bg: '#222',    fg: '#fff' },
-  Zapier:      { bg: '#FF4A00', fg: '#fff' },
-  Airtable:    { bg: '#FCB400', fg: '#111' },
-  Pipedrive:   { bg: '#1A1F36', fg: '#fff' },
-  Zoho:        { bg: '#E42527', fg: '#fff' },
-  Intercom:    { bg: '#286EFA', fg: '#fff' },
-  Freshdesk:   { bg: '#25C16F', fg: '#fff' },
-  Calendly:    { bg: '#006BFF', fg: '#fff' },
-  Zoom:        { bg: '#2D8CFF', fg: '#fff' },
+  Cohere:        { bg: '#39594D', fg: '#fff' },
+  'Custom LLM':  { bg: '#7C3AED', fg: '#fff' },
+  ElevenLabs:    { bg: '#111',    fg: '#fff' },
+  Deepgram:      { bg: '#101827', fg: '#fff' },
+  'Sarvam AI':   { bg: '#FF6B35', fg: '#fff' },
+  AssemblyAI:    { bg: '#1A1A2E', fg: '#fff' },
+  Rev:           { bg: '#0070C9', fg: '#fff' },
+  Microsoft:     { bg: '#00A4EF', fg: '#fff' },
+  Amazon:        { bg: '#FF9900', fg: '#fff' },
+  PlayHT:        { bg: '#7B2FBE', fg: '#fff' },
+  LMNT:          { bg: '#2563EB', fg: '#fff' },
+  Webhooks:      { bg: '#059669', fg: '#fff' },
+  WhatsApp:      { bg: '#25D366', fg: '#fff' },
+  'Google Calendar': { bg: '#4285F4', fg: '#fff' },
+  'Cal.com':     { bg: '#111',    fg: '#fff' },
+  Salesforce:    { bg: '#00A1E0', fg: '#fff' },
+  HubSpot:       { bg: '#FF7A59', fg: '#fff' },
+  Slack:         { bg: '#4A154B', fg: '#fff' },
+  Shopify:       { bg: '#96BF48', fg: '#fff' },
+  Stripe:        { bg: '#635BFF', fg: '#fff' },
+  Notion:        { bg: '#222',    fg: '#fff' },
+  Zapier:        { bg: '#FF4A00', fg: '#fff' },
+  Airtable:      { bg: '#FCB400', fg: '#111' },
+  Pipedrive:     { bg: '#1A1F36', fg: '#fff' },
+  Zoho:          { bg: '#E42527', fg: '#fff' },
+  Intercom:      { bg: '#286EFA', fg: '#fff' },
+  Freshdesk:     { bg: '#25C16F', fg: '#fff' },
+  Calendly:      { bg: '#006BFF', fg: '#fff' },
+  Zoom:          { bg: '#2D8CFF', fg: '#fff' },
 };
 
-function BrandChip({ name }: { name: string }) {
+function BrandChip({ name, dimmed }: { name: string; dimmed?: boolean }) {
   const color = BRAND_COLORS[name] ?? { bg: '#4a658b', fg: '#fff' };
   return (
     <div
       className="flex h-11 w-11 items-center justify-center rounded-xl text-xs font-bold shadow-sm"
-      style={{ background: color.bg, color: color.fg }}
+      style={{ background: color.bg, color: color.fg, opacity: dimmed ? 0.45 : 1 }}
     >
       {name.slice(0, 2).toUpperCase()}
     </div>
@@ -65,6 +69,7 @@ type Integration = {
   name: string;
   desc: string;
   badge?: string;
+  live?: boolean;
 };
 
 type CategoryData = {
@@ -77,86 +82,86 @@ type CategoryData = {
 const CATEGORY_DATA: Record<string, CategoryData> = {
   telephone: {
     headline: 'Telephony & Voice Integrations',
-    subhead: 'Connect Emaavy with leading voice and telephony platforms to deploy AI calling agents, run outbound campaigns, and handle inbound calls at scale.',
+    subhead: 'Connect Emaavy with leading voice and telephony providers to deploy AI calling agents, run outbound campaigns, and handle inbound calls at scale.',
     integrations: [
-      { name: 'Twilio',      desc: 'Global programmable voice & SMS leader. Deploy AI agents on any number worldwide.', badge: 'Most popular' },
-      { name: 'Plivo',       desc: 'High-volume voice API with low-latency performance across 190+ countries.' },
-      { name: 'Exotel',      desc: 'India-first cloud telephony platform built for high-volume enterprise calling.', badge: 'India' },
+      { name: 'Vobiz',       desc: "Emaavy's native telephony partner for India — the default carrier powering Emaavy calls.", badge: 'Native', live: true },
+      { name: 'Exotel',      desc: "India's leading cloud telephony platform built for high-volume enterprise calling.", badge: 'India', live: true },
+      { name: 'Plivo',       desc: 'High-volume voice API with strong India and global coverage.', live: true },
+      { name: 'Twilio',      desc: 'Global programmable voice with automatic failover and wide number availability.', live: true },
       { name: 'Telnyx',      desc: 'Carrier-grade SIP trunking and programmable voice with real-time analytics.' },
-      { name: 'Vonage',      desc: 'Enterprise voice API with advanced call routing and PSTN connectivity.' },
-      { name: 'Bandwidth',   desc: 'Carrier-owned platform for direct-to-network voice with ultra-low latency.' },
-      { name: 'Aircall',     desc: 'Cloud call center solution with agent productivity tools and CRM sync.' },
-      { name: 'RingCentral', desc: 'UCaaS platform for enterprise voice, video, and messaging automation.' },
+      { name: 'Vonage',      desc: 'Enterprise voice API with advanced call routing.' },
+      { name: 'Aircall',     desc: 'Cloud call center solution with agent productivity tools.' },
+      { name: 'RingCentral', desc: 'UCaaS platform for enterprise voice, video, and messaging.' },
     ],
-    useCases: ['AI outbound sales calls', 'Automated appointment reminders', 'Inbound support routing', 'IVR replacement with AI', 'Lead follow-up campaigns'],
+    useCases: ['AI outbound sales calls', 'Automated appointment reminders', 'Inbound support routing', 'Lead follow-up campaigns', 'Missed call automation'],
   },
   llm: {
     headline: 'LLM & AI Model Integrations',
-    subhead: "Power your Emaavy agents with the world's most capable language models — mix and match providers based on task, cost, and latency requirements.",
+    subhead: 'Plug in your preferred language model — or bring your own. Emaavy routes intelligently and streams tokens directly into the voice pipeline for natural, low-latency conversations.',
     integrations: [
-      { name: 'OpenAI',       desc: 'Frontier GPT-4o model for complex reasoning, function calling, and long-context tasks.', badge: 'Most popular' },
-      { name: 'Anthropic',    desc: 'Constitutional AI model (Claude) with exceptional instruction-following and safety guardrails.' },
-      { name: 'Google',       desc: 'Gemini — natively multimodal model with deep Google ecosystem integration.' },
-      { name: 'Mistral',      desc: 'European open-weight models optimised for efficiency and on-premise deployment.' },
-      { name: 'Meta',         desc: 'Llama — open-source frontier model for self-hosted, cost-effective inference.' },
-      { name: 'Groq',         desc: 'LPU-powered inference at 300+ tokens/second for real-time voice agent use cases.', badge: 'Fast' },
+      { name: 'OpenAI',       desc: 'GPT-4o with streaming support for complex reasoning and natural conversations.', badge: 'Popular', live: true },
+      { name: 'Anthropic',    desc: 'Claude — thoughtful, nuanced responses with strong instruction-following.', live: true },
+      { name: 'Google',       desc: 'Gemini — multimodal model with strong multilingual and reasoning capabilities.', live: true },
+      { name: 'Groq',         desc: 'Ultra-fast inference for real-time voice agent conversations.', badge: 'Fast', live: true },
+      { name: 'Custom LLM',   desc: 'Bring your own model — any OpenAI-compatible endpoint works with Emaavy.', badge: 'BYOM', live: true },
+      { name: 'Mistral',      desc: 'European open-weight models optimised for efficiency.' },
+      { name: 'Meta',         desc: 'Llama — open-source frontier model for self-hosted inference.' },
       { name: 'Together AI',  desc: 'Managed inference for 50+ open models with fine-tuning support.' },
-      { name: 'Cohere',       desc: 'Enterprise RAG and embedding models optimised for search and retrieval.' },
     ],
-    useCases: ['Intelligent agent reasoning', 'Knowledge base Q&A', 'Intent classification', 'Personalised content generation', 'Multilingual conversations'],
+    useCases: ['Intelligent agent reasoning', 'Multilingual conversations', 'Knowledge base Q&A', 'Personalised conversations', 'Custom model deployment'],
   },
   'speech-to-text': {
     headline: 'Speech-to-Text Integrations',
-    subhead: 'Accurately transcribe voice in real time or batch mode across languages and accents — powering your AI agents with precise spoken understanding.',
+    subhead: 'Accurately transcribe voice in real time — powering your AI agents with precise spoken understanding so they can respond naturally without any delay.',
     integrations: [
-      { name: 'Deepgram',    desc: 'Real-time Nova-2 STT with word-level timestamps and speaker diarisation.', badge: 'Recommended' },
-      { name: 'OpenAI',      desc: 'Whisper — open-source model with exceptional multilingual accuracy for batch transcription.' },
-      { name: 'Sarvam AI',   desc: 'Indian language-specialised STT for Hindi, Tamil, Telugu, and 10+ Indic languages.', badge: 'India' },
-      { name: 'AssemblyAI',  desc: 'Audio intelligence API with sentiment analysis, topic detection, and PII redaction.' },
-      { name: 'Rev',         desc: 'Human-in-the-loop hybrid transcription for maximum accuracy on difficult audio.' },
-      { name: 'Microsoft',   desc: 'Azure Speech — enterprise STT with speaker ID and custom vocabulary support.' },
-      { name: 'Google',      desc: 'Google STT — high-accuracy recognition optimised for telephony and media audio.' },
-      { name: 'Amazon',      desc: 'AWS Transcribe — serverless transcription with medical and call analytics specialisation.' },
+      { name: 'ElevenLabs',  desc: "Emaavy's primary STT provider — real-time transcription with high accuracy across accents and languages.", badge: 'Live', live: true },
+      { name: 'Deepgram',    desc: 'Real-time STT with word-level timestamps and speaker identification.' },
+      { name: 'Sarvam AI',   desc: 'Indian language STT for Hindi, Tamil, Telugu, and 10+ Indic languages.', badge: 'India' },
+      { name: 'AssemblyAI',  desc: 'Audio intelligence API with topic detection and PII redaction.' },
+      { name: 'Microsoft',   desc: 'Azure Speech — enterprise STT with custom vocabulary support.' },
+      { name: 'Google',      desc: 'Google STT — high-accuracy recognition optimised for telephony audio.' },
+      { name: 'Amazon',      desc: 'AWS Transcribe — serverless transcription with call analytics.' },
+      { name: 'Rev',         desc: 'Hybrid transcription for maximum accuracy on difficult audio.' },
     ],
-    useCases: ['Real-time call transcription', 'Voice bot understanding', 'Meeting summarisation', 'Compliance recording analysis', 'Multilingual support'],
+    useCases: ['Real-time call transcription', 'Voice agent understanding', 'Call recording analysis', 'Multilingual support', 'Compliance transcription'],
   },
   'text-to-speech': {
     headline: 'Text-to-Speech Integrations',
-    subhead: 'Give your AI agents a natural, expressive voice — choose from dozens of voices across providers to match your brand and audience.',
+    subhead: 'Give your AI agents a natural, expressive voice — ElevenLabs powers Emaavy voices today, with more providers coming soon.',
     integrations: [
-      { name: 'ElevenLabs',  desc: 'Hyper-realistic voice cloning and multilingual TTS with ultra-low latency streaming.', badge: 'Most popular' },
+      { name: 'ElevenLabs',  desc: 'Hyper-realistic voice synthesis with ultra-low latency streaming — the voice behind every Emaavy agent.', badge: 'Live', live: true },
       { name: 'Sarvam AI',   desc: 'Natural Indic language TTS across Hindi, Tamil, Telugu, and 10+ languages.', badge: 'India' },
-      { name: 'Microsoft',   desc: 'Azure Neural TTS — neural voices with SSML fine-tuning for enterprise call centers.' },
-      { name: 'Amazon',      desc: 'Amazon Polly — neural TTS with 60+ voices, NTTS support, and AWS-native latency.' },
-      { name: 'Google',      desc: 'Google Cloud TTS — WaveNet voices with pitch, speed, and volume controls via SSML.' },
-      { name: 'Deepgram',    desc: 'Deepgram Aura — sub-100ms latency TTS purpose-built for conversational AI voice agents.' },
+      { name: 'Microsoft',   desc: 'Azure Neural TTS — neural voices for enterprise call centres.' },
+      { name: 'Google',      desc: 'Google Cloud TTS — WaveNet voices with pitch, speed, and volume controls.' },
+      { name: 'Amazon',      desc: 'Amazon Polly — neural TTS with 60+ voices.' },
+      { name: 'Deepgram',    desc: 'Deepgram Aura — sub-100ms latency TTS for conversational AI.' },
       { name: 'PlayHT',      desc: 'Voice cloning and ultra-realistic voices with streaming support.' },
       { name: 'LMNT',        desc: 'Low-latency TTS optimised for real-time conversational applications.' },
     ],
-    useCases: ['AI voice agents', 'IVR responses', 'Personalised audio content', 'Multilingual TTS', 'Custom branded voices'],
+    useCases: ['AI voice agents', 'Natural caller conversations', 'Multilingual TTS', 'Custom branded voices', 'Low-latency voice responses'],
   },
   tools: {
     headline: 'Business Tool Integrations',
-    subhead: 'Connect Emaavy to your CRM, support desk, communication, and productivity tools — so your agents and workflows run inside the systems your team already uses.',
+    subhead: 'Connect Emaavy to the tools your team already uses — Webhooks, WhatsApp, and Calendar are live today. CRM and productivity integrations are coming soon.',
     integrations: [
-      { name: 'Salesforce',  desc: 'Create contacts, update opportunities, log calls, and trigger workflows directly from Emaavy agents.', badge: 'CRM' },
-      { name: 'HubSpot',     desc: 'Sync leads, deals, and conversations bidirectionally with full CRM automation.', badge: 'CRM' },
-      { name: 'Slack',       desc: 'Send agent alerts, workflow notifications, and escalation messages to any Slack channel.' },
-      { name: 'Google',      desc: 'Gmail — send personalised emails, read threads, and trigger automations based on inbox events.' },
-      { name: 'WhatsApp',    desc: 'Deploy AI agents on WhatsApp for support, lead gen, and transactional messaging.' },
-      { name: 'Shopify',     desc: 'Sync orders, customers, and inventory — trigger automations on purchase events.' },
-      { name: 'Stripe',      desc: 'Handle billing events, subscriptions, and payment notifications inside workflows.' },
-      { name: 'Notion',      desc: 'Read and write Notion databases to create tickets, update records, and log activity.' },
-      { name: 'Zapier',      desc: 'Connect to 5,000+ apps via Zapier webhooks as a catch-all integration layer.' },
-      { name: 'Airtable',    desc: 'Use Airtable as a dynamic data source or output for agent actions and workflow results.' },
-      { name: 'Pipedrive',   desc: 'Auto-create deals, update stages, and log agent call outcomes into your pipeline.' },
-      { name: 'Zoho',        desc: 'Full bidirectional sync with Zoho CRM modules, activities, and custom fields.' },
-      { name: 'Intercom',    desc: 'Escalate agent conversations to Intercom live chat with full context transfer.' },
-      { name: 'Freshdesk',   desc: 'Auto-create and update support tickets from AI agent conversations.' },
-      { name: 'Calendly',    desc: 'Book meetings directly from agent conversations using real-time availability.' },
-      { name: 'Zoom',        desc: 'Schedule, update, and cancel Zoom meetings through natural language agent interactions.' },
+      { name: 'Webhooks',        desc: 'Send real-time event data to your own backend or any third-party service the moment a call ends.', badge: 'Live', live: true },
+      { name: 'WhatsApp',        desc: 'Send follow-up messages and notifications via MSG91 WhatsApp API after every call.', badge: 'Live', live: true },
+      { name: 'Google Calendar', desc: 'Book meetings directly into Google Calendar mid-call via Cal.com or Google integration.', badge: 'Live', live: true },
+      { name: 'Cal.com',         desc: 'Open-source scheduling — let agents check availability and book slots in real time.', badge: 'Live', live: true },
+      { name: 'HubSpot',         desc: 'Sync leads, deals, and call outcomes bidirectionally with full CRM automation.' },
+      { name: 'Salesforce',      desc: 'Create contacts, update opportunities, and log calls directly from Emaavy agents.' },
+      { name: 'Slack',           desc: 'Send agent alerts, workflow notifications, and escalation messages to any Slack channel.' },
+      { name: 'Zapier',          desc: 'Connect to 5,000+ apps via Zapier as a catch-all integration layer.' },
+      { name: 'Pipedrive',       desc: 'Auto-create deals, update stages, and log agent call outcomes into your pipeline.' },
+      { name: 'Zoho',            desc: 'Full bidirectional sync with Zoho CRM modules and custom fields.' },
+      { name: 'Freshdesk',       desc: 'Auto-create and update support tickets from AI agent conversations.' },
+      { name: 'Intercom',        desc: 'Escalate agent conversations to Intercom live chat with full context.' },
+      { name: 'Shopify',         desc: 'Sync orders, customers, and inventory — trigger automations on purchase events.' },
+      { name: 'Stripe',          desc: 'Handle billing events, subscriptions, and payment notifications inside workflows.' },
+      { name: 'Notion',          desc: 'Read and write Notion databases to log activity and update records.' },
+      { name: 'Airtable',        desc: 'Use Airtable as a dynamic data source or output for agent actions.' },
     ],
-    useCases: ['CRM auto-update', 'Support ticket creation', 'Lead routing', 'Meeting booking', 'E-commerce automation', 'Notification workflows'],
+    useCases: ['Webhook-based automation', 'WhatsApp follow-ups', 'Meeting booking', 'CRM sync (coming soon)', 'Notification workflows'],
   },
 };
 
@@ -218,21 +223,31 @@ export default function IntegrationCategoryPage({ params }: { params: { category
         {/* Integration cards */}
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.integrations.map((integ) => (
-            <div key={integ.name} className="glass-card group flex flex-col rounded-2xl p-6 transition-all duration-300 hover:shadow-brand">
+            <div
+              key={integ.name}
+              className="glass-card group flex flex-col rounded-2xl p-6 transition-all duration-300"
+              style={{ opacity: integ.live ? 1 : 0.65 }}
+            >
               <div className="mb-3 flex items-start justify-between gap-2">
-                <BrandChip name={integ.name} />
-                {integ.badge && (
-                  <span className="rounded-full bg-emaavy-bolt/10 px-2 py-0.5 text-[10px] font-semibold text-emaavy-bolt">
-                    {integ.badge}
+                <BrandChip name={integ.name} dimmed={!integ.live} />
+                {integ.live ? (
+                  <span className="rounded-full bg-emerald-50 border border-emerald-200 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+                    {integ.badge ?? 'Live'}
+                  </span>
+                ) : (
+                  <span className="rounded-full bg-gray-100 border border-gray-200 px-2 py-0.5 text-[10px] font-semibold text-gray-400 flex items-center gap-1">
+                    <HiOutlineClock className="h-3 w-3" /> Coming Soon
                   </span>
                 )}
               </div>
               <h3 className="font-semibold text-emaavy-deep">{integ.name}</h3>
               <p className="mt-1.5 flex-1 text-sm leading-relaxed text-emaavy-secondary">{integ.desc}</p>
-              <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-emaavy-bolt opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                <HiOutlineCheckCircle className="h-3.5 w-3.5 text-emerald-500" />
-                Native integration
-              </div>
+              {integ.live && (
+                <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-emerald-600">
+                  <HiOutlineCheckCircle className="h-3.5 w-3.5" />
+                  Available now
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -260,7 +275,7 @@ export default function IntegrationCategoryPage({ params }: { params: { category
         {/* CTA */}
         <div className="mt-14 rounded-3xl bg-emaavy-deep p-12 text-center">
           <h2 className="font-display text-2xl font-semibold text-white">Ready to connect your stack?</h2>
-          <p className="mt-3 text-white/60">Start for free — all integrations included on every plan.</p>
+          <p className="mt-3 text-white/60">Get started today — live integrations available on every plan.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link href="/signup" className="inline-flex rounded-xl bg-white px-6 py-3 text-sm font-semibold text-emaavy-deep transition-all hover:bg-white/90">
               Start Free
