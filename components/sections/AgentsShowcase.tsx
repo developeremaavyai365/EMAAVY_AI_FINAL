@@ -37,8 +37,8 @@ const AGENTS = [
     vertical: 'Customer Support',
     name: 'Customer Success Agent',
     headline: 'Monitors accounts proactively and intervenes before churn occurs.',
-    body: 'Tracks health scores across your entire book of business, calls at-risk accounts before they escalate, and handles QBR prep, check-ins, and NPS follow-ups at full scale.',
-    capabilities: ['Health score monitoring', 'Proactive outreach', 'QBR preparation', 'NPS follow-up'],
+    body: 'Tracks health scores across your entire book of business, calls at-risk accounts before they escalate, and handles periodic account check-ins and customer feedback calls at full scale.',
+    capabilities: ['Health score monitoring', 'Proactive outreach', 'Account check-ins', 'Customer feedback calls'],
     stat: { val: '$2.1M', label: 'ARR retained per month' },
   },
   {
