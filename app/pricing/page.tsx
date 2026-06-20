@@ -9,19 +9,37 @@ import Footer from '@/components/layout/Footer';
 /* ─── Plans ──────────────────────────────────────────────────────────────── */
 const PLANS = [
   {
+    name: 'Free',
+    price: { monthly: 0, annual: 0, annualTotal: 0 },
+    tagline: 'Try Emaavy with no commitment. No credit card needed.',
+    highlight: false,
+    badge: 'No card needed',
+    features: [
+      '1 active AI agent',
+      '50 calls / month',
+      'ElevenLabs voice included',
+      'Webhook integration',
+      'Basic call analytics',
+      'Community support',
+    ],
+    cta: 'Start for free',
+    href: '/signup',
+    color: '#10b981',
+  },
+  {
     name: 'Starter',
     price: { monthly: 2499, annual: 2249, annualTotal: 26989 },
     tagline: 'For teams launching their first AI agent.',
     highlight: false,
     badge: null,
     features: [
+      'Everything in Free',
       '3 active AI agents',
       'Up to 5,000 calls / month',
-      '1 CRM integration',
-      'Standard voice (Deepgram)',
+      'Webhooks + Google Calendar',
+      'ElevenLabs voice',
       'Basic call analytics dashboard',
       'Email & chat support',
-      'Community access',
     ],
     cta: 'Get started',
     href: '/book-demo',
@@ -37,14 +55,14 @@ const PLANS = [
       'Everything in Starter',
       'Unlimited active agents',
       'Up to 50,000 calls / month',
-      'All CRM + calendar integrations',
-      'Premium voice (ElevenLabs)',
+      'Webhooks, WhatsApp & Calendar',
+      'ElevenLabs premium voice',
       'Advanced analytics & reporting',
       'A/B script testing',
       'Priority support (4h SLA)',
       'Dedicated onboarding session',
       'Custom call scripts',
-      'Multi-language support',
+      'Custom flows & logic',
     ],
     cta: 'Get started',
     href: '/book-demo',
@@ -242,7 +260,7 @@ export default function PricingPage() {
 
         {/* ── Pricing cards ── */}
         <section className="pb-28 px-6">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
             {PLANS.map((plan, i) => (
               <motion.div key={plan.name}
                 initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
@@ -295,7 +313,7 @@ export default function PricingPage() {
                     animate={{ opacity: [0.8, 1, 0.8] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}>
                     <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
-                      style={{ background: 'rgba(99,102,241,0.2)', color: '#818cf8', border: '1px solid rgba(99,102,241,0.35)' }}>
+                      style={{ background: `${plan.color}22`, color: plan.color, border: `1px solid ${plan.color}40` }}>
                       {plan.badge}
                     </span>
                   </motion.div>
@@ -312,7 +330,15 @@ export default function PricingPage() {
 
                   {/* Price */}
                   <div className="mb-8 pb-8" style={{ borderBottom: '1px solid #ffffff06' }}>
-                    {plan.price.monthly !== null ? (
+                    {plan.price.monthly === 0 ? (
+                      <>
+                        <span className="text-[42px] sm:text-[48px] font-extrabold text-white font-mono leading-none"
+                          style={{ letterSpacing: '-0.04em' }}>
+                          Free
+                        </span>
+                        <p className="text-[11px] mt-2" style={{ color: '#52525b' }}>Forever free. No credit card required.</p>
+                      </>
+                    ) : plan.price.monthly !== null ? (
                       <div className="flex items-end gap-2">
                         <AnimatePresence mode="wait">
                           <motion.span key={annual ? 'a' : 'm'}
@@ -333,13 +359,13 @@ export default function PricingPage() {
                         Custom
                       </span>
                     )}
-                    {annual && plan.price.monthly && (
+                    {annual && plan.price.monthly && plan.price.monthly > 0 && (
                       <p className="text-[11px] mt-2" style={{ color: '#52525b' }}>
                         ₹{plan.price.monthly.toLocaleString('en-IN')}/mo billed annually &mdash;{' '}
                         <span style={{ color: '#34d399' }}>save ₹{(plan.price.monthly * 12 - plan.price.annualTotal!).toLocaleString('en-IN')}</span>
                       </p>
                     )}
-                    {!annual && plan.price.monthly && (
+                    {!annual && plan.price.monthly && plan.price.monthly > 0 && (
                       <p className="text-[11px] mt-2" style={{ color: '#52525b' }}>
                         Billed monthly &mdash; switch to annual to save 10%
                       </p>
