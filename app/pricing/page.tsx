@@ -88,13 +88,6 @@ const PLANS = [
   },
 ] as const;
 
-/* ─── Add-ons ────────────────────────────────────────────────────────────── */
-const ADDONS = [
-  { name: 'Extra calls', desc: 'Additional call capacity beyond your plan limit.', price: '$0.08 / call' },
-  { name: 'Extra agents', desc: 'Add more concurrent AI agents to your workspace.', price: '$299 / agent / mo' },
-  { name: 'White-label', desc: 'Remove Emaavy branding. Use your own domain and voice.', price: '$799 / mo' },
-  { name: 'Custom voice clone', desc: 'Clone your brand voice or a specific persona.', price: '$1,200 one-time' },
-];
 
 /* ─── FAQs ───────────────────────────────────────────────────────────────── */
 const FAQS = [
@@ -420,35 +413,6 @@ export default function PricingPage() {
                   <p className="text-[13px] font-medium text-white mb-1">{s.label}</p>
                   <p className="text-[11px]" style={{ color: '#3f3f46' }}>{s.sub}</p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Add-ons ── */}
-        <section className="py-20 px-6 border-t" style={{ borderColor: '#ffffff06', background: '#06070a' }}>
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <p className="text-[11px] uppercase tracking-[0.22em] font-semibold mb-3" style={{ color: '#52525b' }}>Add-ons</p>
-              <h2 className="text-[32px] md:text-[38px] font-bold text-white" style={{ letterSpacing: '-0.03em' }}>
-                Extend any plan.
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {ADDONS.map((a, i) => (
-                <motion.div key={i}
-                  initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.35, delay: i * 0.06 }}
-                  className="flex items-start justify-between gap-6 rounded-2xl p-6"
-                  style={{ background: '#0d0e13', border: '1px solid #ffffff08' }}>
-                  <div>
-                    <p className="text-[14px] font-semibold text-white mb-1">{a.name}</p>
-                    <p className="text-[12.5px]" style={{ color: '#52525b' }}>{a.desc}</p>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <span className="text-[13px] font-bold" style={{ color: '#a1a1aa' }}>{a.price}</span>
-                  </div>
-                </motion.div>
               ))}
             </div>
           </div>
