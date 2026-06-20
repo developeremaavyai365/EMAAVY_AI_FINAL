@@ -70,7 +70,7 @@ const STAGES = [
     ),
     detail: "The prospect picks up. Emaavy confirms the connection through Vobiz, opens a clear two-way audio channel, and the AI agent begins speaking within milliseconds — no delay, no awkward silence.",
     metrics: [
-      { label: 'Ring-to-answer', val: '3 rings' },
+      { label: 'Ring-to-answer', val: 'Before your 2nd ring' },
       { label: 'Call quality', val: 'HD Audio' },
       { label: 'Connection time', val: '< 1.2s' },
     ],
