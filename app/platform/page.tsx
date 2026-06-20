@@ -129,7 +129,7 @@ export default function PlatformPage() {
               className="mt-20 grid grid-cols-2 gap-5 sm:grid-cols-4 w-full max-w-3xl"
             >
               {[
-                { val: '312ms',  label: 'Median Round-trip Latency' },
+                { val: '<500ms', label: 'Median Round-trip Latency' },
                 { val: '99.99%', label: 'Guaranteed Platform Uptime' },
                 { val: '50+',    label: 'Native API Integrations' },
                 { val: '5M+',    label: 'Orchestrated Executions' },

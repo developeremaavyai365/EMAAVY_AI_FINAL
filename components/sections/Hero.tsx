@@ -132,7 +132,7 @@ function TiltCard() {
         style={{ background: 'rgba(15,20,30,0.95)', border: '1px solid rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)' }}
       >
         <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">Latency</p>
-        <p className="mt-0.5 text-xl font-bold text-white">&lt;480ms</p>
+        <p className="mt-0.5 text-xl font-bold text-white">&lt;500ms</p>
         <p className="text-[10px] text-blue-400">↓ Global avg</p>
       </motion.div>
     </motion.div>

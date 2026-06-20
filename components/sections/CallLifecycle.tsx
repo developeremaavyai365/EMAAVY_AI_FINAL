@@ -140,11 +140,11 @@ const STAGES = [
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
       </svg>
     ),
-    detail: 'LLM tokens stream directly into ElevenLabs Turbo v2.5. Audio chunks play before the model finishes generating, delivering natural speech with under 320ms end-to-end latency.',
+    detail: 'LLM tokens stream directly into ElevenLabs Turbo v2.5. Audio chunks play before the model finishes generating, delivering natural speech with under 500ms end-to-end latency.',
     metrics: [
       { label: 'TTS provider', val: 'ElevenLabs' },
       { label: 'Voice', val: 'Aria-Neural' },
-      { label: 'E2E latency', val: '320ms' },
+      { label: 'E2E latency', val: '<500ms' },
     ],
     transcript: { speaker: 'Aria', text: 'Hi, this is Aria from Emaavy. Is this Marcus?' },
     tech: ['ElevenLabs Turbo v2.5', 'Voice: aria-neural', 'Chunk size: 50ms', 'Played before gen ends'],
@@ -592,7 +592,7 @@ export default function CallLifecycle() {
             >
               {[
                 { label: 'Total call duration', val: '3m 22s', color: '#4ade80' },
-                { label: 'End-to-end latency', val: '320ms', color: '#38bdf8' },
+                { label: 'End-to-end latency', val: '<500ms', color: '#38bdf8' },
                 { label: 'Meeting outcome', val: 'Booked', color: '#a78bfa' },
                 { label: 'CRM fields updated', val: '14 fields', color: '#f59e0b' },
               ].map((s, i) => (

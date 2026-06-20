@@ -472,7 +472,7 @@ export default function AgentsPage() {
               { val: '9',     label: 'Purpose-built agents' },
               { val: '4',     label: 'Business verticals' },
               { val: '4.2M+', label: 'Calls handled monthly' },
-              { val: '312ms', label: 'Avg. response latency' },
+              { val: '<500ms', label: 'Avg. response latency' },
             ].map((s, i) => (
               <div key={i} className="px-8 py-7 text-center" style={{ background: '#06070a' }}>
                 <p className="text-[30px] font-extrabold text-white mb-1 font-mono" style={{ letterSpacing: '-0.04em' }}>{s.val}</p>

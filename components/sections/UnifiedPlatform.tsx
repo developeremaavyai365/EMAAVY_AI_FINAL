@@ -242,7 +242,7 @@ function MonitoringVisual() {
     const t1 = setInterval(() => {
       setBars(p => [...p.slice(1), 12 + Math.random() * 78]);
       setMetrics(m => ({
-        latency:     Math.max(340, Math.min(600, m.latency + (Math.random() - 0.5) * 20)),
+        latency:     Math.max(340, Math.min(499, m.latency + (Math.random() - 0.5) * 20)),
         cost:        Math.max(0.002, Math.min(0.007, m.cost + (Math.random() - 0.5) * 0.0003)),
         concurrency: Math.max(88, Math.min(160, m.concurrency + Math.floor((Math.random() - 0.5) * 6))),
       }));
@@ -358,7 +358,7 @@ function MonitoringVisual() {
           {/* Three metric boxes */}
           <div className="flex flex-col divide-y divide-slate-100">
             {[
-              { label: 'Latency',     val: `${Math.round(metrics.latency)}ms`,  sub: 'p95: 620ms',     color: '#6366f1' },
+              { label: 'Latency',     val: `${Math.round(metrics.latency)}ms`,  sub: 'p95: <500ms',    color: '#6366f1' },
               { label: 'Cost / call', val: `$${metrics.cost.toFixed(4)}`,        sub: 'budget: $0.008', color: '#8b5cf6' },
               { label: 'Concurrency', val: `${metrics.concurrency} active`,      sub: 'peak: 184',      color: '#059669' },
             ].map(m => (
