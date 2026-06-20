@@ -35,8 +35,8 @@ const LAYERS = [
     accentDim: '#0891b215',
     accentBorder: '#0891b230',
     chips: ['GPT-4o', 'Claude 3.5', 'Gemini 1.5', 'Groq', 'Cerebras', 'Custom'],
-    stat: { val: '<320ms', label: 'Median TTFB' },
-    detail: 'Route to any OpenAI-compatible endpoint with automatic model fallback, cost caps per-call, and temperature presets per agent persona. Streaming tokens hit the voice pipeline before the model finishes generating — shaving 200–400 ms off every turn.',
+    stat: { val: '<500ms', label: 'Median TTFB' },
+    detail: 'Route to any OpenAI-compatible endpoint with automatic model fallback, cost caps per-call, and temperature presets per agent persona. Streaming tokens hit the voice pipeline before the model finishes generating — shaving latency off every turn.',
     flow: ['Prompt Assembly', 'Model Router', 'Stream Parser', 'TTS Pipeline'],
     flowColors: ['#0891b2', '#06b6d4', '#67e8f9', '#cffafe'],
     integrations: [

@@ -183,7 +183,7 @@ function ConversationControlCard() {
   const [drift, setDrift]             = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setDrift(d => d + 0.04), 80);
+    const id = setInterval(() => setDrift(d => d + 0.04), 160);
     return () => clearInterval(id);
   }, []);
 
@@ -234,13 +234,12 @@ function ConversationControlCard() {
               <div key={s.label}>
                 <div className="flex justify-between mb-3">
                   <span className="text-[12px]" style={{ color: '#8a7455' }}>{s.label}</span>
-                  <motion.span
-                    key={fillPct.toFixed(1)}
+                  <span
                     className="text-[12px] font-semibold tabular-nums"
                     style={{ color: s.color }}
                   >
                     {s.fmt(s.val)}
-                  </motion.span>
+                  </span>
                 </div>
                 <div className="relative h-[2px] rounded-full" style={{ background: '#221d12' }}>
                   <motion.div

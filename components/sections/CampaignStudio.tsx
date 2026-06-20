@@ -123,6 +123,8 @@ function FlowCanvas({ activeNode }: { activeNode: string }) {
   );
 }
 
+const NODE_ORDER = FLOW_NODES.map(n => n.id);
+
 /* ─── Main component ─────────────────────────────────────────────────────────── */
 export default function CampaignStudio() {
   const [activeNode, setActiveNode]   = useState<(typeof FLOW_NODES)[number]['id']>('trigger');
@@ -130,15 +132,14 @@ export default function CampaignStudio() {
   const [activeTab, setActiveTab]     = useState<'flows' | 'templates'>('flows');
   const [launching, setLaunching]     = useState<string | null>(null);
   const [hoveredTpl, setHoveredTpl]  = useState<string | null>(null);
-  const nodeOrder = FLOW_NODES.map(n => n.id);
   const timerRef = useRef<ReturnType<typeof setTimeout>>(null!);
 
   /* Auto-walk nodes */
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       setActiveNode(n => {
-        const idx = nodeOrder.indexOf(n);
-        return nodeOrder[(idx + 1) % nodeOrder.length];
+        const idx = NODE_ORDER.indexOf(n);
+        return NODE_ORDER[(idx + 1) % NODE_ORDER.length];
       });
     }, 1400);
     return () => clearTimeout(timerRef.current);
