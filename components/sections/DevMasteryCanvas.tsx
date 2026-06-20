@@ -508,15 +508,14 @@ function OwnLLMCard() {
    bg: deep purple #12082e — lavender tones, live call routing animation
 ───────────────────────────────────────────────────────────────────────────── */
 const PHONE_OPTS = [
-  { id: 'twilio', label: 'Import Twilio',        desc: 'Bring existing Twilio numbers'     },
-  { id: 'vonage', label: 'Import Vonage',        desc: 'Vonage API integration'            },
-  { id: 'telnyx', label: 'Import Telnyx',        desc: 'Telnyx SIP + PSTN'                 },
-  { id: 'sip',    label: 'Custom SIP Trunk',     desc: 'Self-managed SIP infrastructure'  },
-  { id: 'byop',   label: 'BYOP SIP Trunk',       desc: 'Bring your own provider'           },
+  { id: 'vobiz',  label: 'Vobiz',   desc: 'Emaavy\'s native telephony partner'   },
+  { id: 'exotel', label: 'Exotel',  desc: 'India\'s leading cloud telephony'     },
+  { id: 'plivo',  label: 'Plivo',   desc: 'High-volume voice API, India & global' },
+  { id: 'twilio', label: 'Twilio',  desc: 'Global carrier with India coverage'   },
 ];
 
 function OmnichannelCard() {
-  const [sel, setSel]   = useState('twilio');
+  const [sel, setSel]   = useState('vobiz');
   const [calls, setCalls] = useState(24);
 
   useEffect(() => {
