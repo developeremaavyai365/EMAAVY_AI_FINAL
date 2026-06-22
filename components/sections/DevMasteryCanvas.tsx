@@ -679,32 +679,46 @@ function EnterpriseReliabilityCard() {
 
 /* ─────────────────────────────────────────────────────────────────────────────
    ROOT — sticky-scroll split layout
-   • Outer wrapper is tall (N × scrollBudget px) so the page scroll acts as
-     the timeline.
-   • Inner container is position:sticky, pinned to the top of the viewport,
-     showing one card at a time.
-   • A scroll event maps raw scrollY → section index → card transition.
+   Geometry:
+   • .site-nav is sticky top-0, height 64px.
+   • Outer wrapper height = N × SCROLL_PER_SECTION + (100vh - NAV_H) so
+     the last card gets a full viewport of dwell time.
+   • Sticky inner: top=NAV_H, height=calc(100vh - NAV_H) — sits flush below
+     the navbar, fills the rest of the screen.
+   • Scroll math: sticky pins when scrollY = outerDocTop - NAV_H.
+     scrolled = scrollY - (outerDocTop - NAV_H) → maps directly to idx.
 ───────────────────────────────────────────────────────────────────────────── */
 
-const SCROLL_PER_SECTION = 700; // px of scroll budget per section
+const NAV_H              = 64;  // .site-nav height (h-16)
+const SCROLL_PER_SECTION = 650; // px of scroll per card
 
 export default function DevMasteryCanvas() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const outerRef  = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
 
-  const activeConfig = SECTIONS[activeIndex] ?? SECTIONS[0];
-  const isDark       = activeConfig.dark;
+  const activeConfig  = SECTIONS[activeIndex] ?? SECTIONS[0];
+  const isDark        = activeConfig.dark;
   const activeSection = activeConfig.id;
 
-  // Read scroll position and map to section index
+  // Cache the section's document-absolute top so we don't recompute in the
+  // hot scroll path (getBoundingClientRect inside scroll is fine but this is cleaner).
+  const sectionTopRef = useRef(0);
+
+  useEffect(() => {
+    const measure = () => {
+      if (!outerRef.current) return;
+      sectionTopRef.current =
+        outerRef.current.getBoundingClientRect().top + window.scrollY;
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
   useEffect(() => {
     const onScroll = () => {
-      if (!outerRef.current || !headerRef.current) return;
-      const outerTop    = outerRef.current.getBoundingClientRect().top + window.scrollY;
-      const headerH     = headerRef.current.offsetHeight;
-      const scrollStart = outerTop + headerH;           // cards start here
-      const scrolled    = window.scrollY - scrollStart;
+      // scrolled = 0 when the sticky frame first pins (outer top hits NAV_H from top)
+      const scrolled = window.scrollY - (sectionTopRef.current - NAV_H);
       if (scrolled < 0) { setActiveIndex(0); return; }
       const idx = Math.min(
         Math.floor(scrolled / SCROLL_PER_SECTION),
@@ -714,62 +728,63 @@ export default function DevMasteryCanvas() {
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // set initial state
+    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Clicking a nav item scrolls to the right position in the outer container
   const navClick = useCallback((idx: number) => {
-    if (!outerRef.current || !headerRef.current) return;
-    const outerTop    = outerRef.current.getBoundingClientRect().top + window.scrollY;
-    const headerH     = headerRef.current.offsetHeight;
-    const scrollStart = outerTop + headerH;
-    const target      = scrollStart + idx * SCROLL_PER_SECTION + 1;
+    const target = sectionTopRef.current - NAV_H + idx * SCROLL_PER_SECTION + 1;
     window.scrollTo({ top: target, behavior: 'smooth' });
   }, []);
-
-  // Total outer height: header + (N sections × budget) + one viewport so the
-  // last card has enough scroll room to fully activate.
-  const totalScrollH = `calc(${SECTIONS.length * SCROLL_PER_SECTION}px + 100vh)`;
 
   return (
     <div
       ref={outerRef}
-      style={{ height: totalScrollH, backgroundColor: activeConfig.bg, transition: 'background-color 600ms ease-in-out' }}
+      style={{
+        // paddingBottom creates the scroll budget.
+        // Outer natural height = sticky child height (calc(100vh - NAV_H)) + paddingBottom.
+        // Sticky active range = outerHeight - viewportHeight + NAV_H
+        //   = (100vh - NAV_H + N*SCROLL) - 100vh + NAV_H = N*SCROLL  ✓
+        paddingBottom: SECTIONS.length * SCROLL_PER_SECTION,
+        backgroundColor: activeConfig.bg,
+        transition: 'background-color 600ms ease-in-out',
+      }}
       className="relative border-b border-white/5"
     >
-      {/* ── Sticky viewport ─────────────────────────────────────── */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
-
-        {/* Section header (not sticky itself — lives inside the sticky frame) */}
-        <div ref={headerRef} className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-12 pt-16 pb-8 shrink-0">
-          <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-4 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
+      {/* Sticky viewport — sits flush below the navbar */}
+      <div
+        className="sticky overflow-hidden flex flex-col"
+        style={{ top: NAV_H, height: `calc(100vh - ${NAV_H}px)` }}
+      >
+        {/* ── Section header ── */}
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 pt-10 pb-6 shrink-0">
+          <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
             THE EMAAVY PLATFORM
           </span>
           <h2
-            className={`text-[26px] sm:text-[34px] md:text-[42px] lg:text-[50px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
+            className={`text-[28px] sm:text-[36px] lg:text-[46px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
             style={{ letterSpacing: '-0.025em' }}
           >
-            Every capability your AI agents<br className="hidden sm:inline" /> need to close deals.
+            Every capability your AI agents need to close deals.
           </h2>
         </div>
 
-        {/* Split layout — fills remaining height */}
-        <div className="flex-1 min-h-0 mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-12 pb-8 flex gap-12 xl:gap-20 items-stretch">
+        {/* ── Split body ── */}
+        <div className="flex-1 min-h-0 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 pb-6 flex gap-14 xl:gap-20 items-stretch">
 
           {/* LEFT NAV */}
           <div className="hidden lg:flex w-52 xl:w-60 shrink-0 flex-col justify-center">
             <nav className="relative py-2">
-              {/* Track line */}
-              <div className={`absolute left-0 top-0 bottom-0 w-px transition-colors duration-700 ${isDark ? 'bg-white/10' : 'bg-neutral-200'}`} />
-              {/* Active indicator bar */}
+              <div
+                className={`absolute left-0 top-0 bottom-0 w-px transition-colors duration-700 ${isDark ? 'bg-white/10' : 'bg-neutral-200'}`}
+              />
               <motion.div
-                className={`absolute left-0 w-px transition-colors duration-700 ${isDark ? 'bg-white' : 'bg-neutral-800'}`}
+                className={`absolute left-0 w-[2px] rounded-full transition-colors duration-700 ${isDark ? 'bg-white' : 'bg-neutral-900'}`}
                 animate={{
                   top:    `${(activeIndex / SECTIONS.length) * 100}%`,
                   height: `${(1 / SECTIONS.length) * 100}%`,
                 }}
-                transition={{ type: 'spring', stiffness: 380, damping: 36 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 38 }}
               />
 
               {SECTIONS.map((s, i) => {
@@ -778,19 +793,22 @@ export default function DevMasteryCanvas() {
                   <button
                     key={s.id}
                     onClick={() => navClick(i)}
-                    className="relative w-full pl-6 py-4 text-left outline-none group"
+                    className="relative w-full pl-6 py-[14px] text-left outline-none"
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-dot"
                         className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full"
-                        style={{ backgroundColor: isDark ? '#ffffff' : '#111111', boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
+                        style={{
+                          backgroundColor: isDark ? '#fff' : '#111',
+                          boxShadow: `0 0 0 2px ${activeConfig.bg}`,
+                        }}
                         transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                       />
                     )}
                     <motion.span
                       animate={{ opacity: isActive ? 1 : 0.28 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.18 }}
                       className={`block text-[13px] leading-snug ${isActive ? 'font-semibold' : 'font-normal'} ${isDark ? 'text-white' : 'text-[#111111]'} transition-colors duration-700`}
                     >
                       {s.label}
@@ -801,20 +819,15 @@ export default function DevMasteryCanvas() {
             </nav>
           </div>
 
-          {/* RIGHT CARD — one at a time, animated */}
+          {/* RIGHT — one card at a time, AnimatePresence transition */}
           <div className="flex-1 min-w-0 flex flex-col justify-center overflow-hidden">
-            {/* Mobile section label */}
-            <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] mb-3 transition-colors duration-700 lg:hidden ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
-              {activeConfig.label}
-            </p>
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSection}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
                 {activeSection === 'voice-calling'          && <VoiceCallingCard />}
@@ -828,18 +841,8 @@ export default function DevMasteryCanvas() {
           </div>
 
         </div>
-
-        {/* Progress dots — mobile */}
-        <div className="lg:hidden flex justify-center gap-2 pb-6 shrink-0">
-          {SECTIONS.map((_, i) => (
-            <button key={i} onClick={() => navClick(i)}
-              className="w-1.5 h-1.5 rounded-full transition-all duration-300"
-              style={{ background: i === activeIndex ? (isDark ? '#fff' : '#111') : (isDark ? '#ffffff30' : '#11111130') }}
-            />
-          ))}
-        </div>
-
       </div>
     </div>
   );
 }
+
