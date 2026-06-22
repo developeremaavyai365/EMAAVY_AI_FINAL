@@ -794,11 +794,14 @@ export default function DevMasteryCanvas() {
               {SECTIONS.map((s, i) => (
                 <div
                   key={s.id}
-                  className="absolute inset-0 w-full h-full transition-opacity duration-500"
+                  className="absolute inset-0 w-full h-full"
                   style={{
                     opacity:       i === activeIndex ? 1 : 0,
                     pointerEvents: i === activeIndex ? 'auto' : 'none',
                     zIndex:        i === activeIndex ? 10 : 0,
+                    transition:    i === activeIndex
+                      ? 'opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.08s'
+                      : 'opacity 0.35s cubic-bezier(0.4, 0, 1, 1)',
                   }}
                 >
                   {s.id === 'voice-calling'          && <VoiceCallingCard />}
