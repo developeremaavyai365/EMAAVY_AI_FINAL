@@ -691,30 +691,26 @@ export default function DevMasteryCanvas() {
   const activeConfig = SECTIONS[activeIndex] ?? SECTIONS[0];
   const isDark       = activeConfig.dark;
 
-  // IntersectionObserver — triggers when a card enters the middle 40% of the viewport
+  // Scroll-spy: on every scroll, find which section's top is closest to
+  // 30% down the viewport (just below the sticky nav).
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Pick the intersecting entry whose centre is closest to the viewport centre
-        let best: Element | null = null;
-        let bestDist = Infinity;
-        entries.forEach(e => {
-          if (!e.isIntersecting) return;
-          const midY = e.boundingClientRect.top + e.boundingClientRect.height / 2;
-          const dist = Math.abs(midY - window.innerHeight / 2);
-          if (dist < bestDist) { bestDist = dist; best = e.target; }
-        });
-        if (best) setActiveSection((best as Element).id as SectionId);
-      },
-      // Observe a band 20%–60% from the top of the viewport
-      { rootMargin: '-20% 0px -40% 0px', threshold: 0 },
-    );
+    const TRIGGER = window.innerHeight * 0.3; // 30% down from top
 
-    SECTIONS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
+    const onScroll = () => {
+      let current: SectionId = SECTIONS[0].id;
+      for (const { id } of SECTIONS) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= TRIGGER) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // set correct section on mount / page refresh
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const navClick = useCallback((id: SectionId) => {
