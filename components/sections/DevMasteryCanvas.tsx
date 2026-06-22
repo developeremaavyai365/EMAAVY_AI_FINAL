@@ -678,33 +678,34 @@ function EnterpriseReliabilityCard() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   ROOT
-   Layout: section is N×100vh tall. A single sticky inner frame fills the
-   viewport below the navbar. Scroll progress drives the active card index.
-   getBoundingClientRect() in the scroll handler always gives fresh values —
-   no stale refs, no mount-timing issues.
+   ROOT — desktop sticky-scroll architecture
+   ─────────────────────────────────────────────────────────────────────────────
+   1. SCROLL TRACK  — tall wrapper (N+1 × 100vh) creates the scroll budget.
+   2. STICKY VIEWPORT — `sticky top-0 h-screen` locks to the viewport.
+   3. 2-COL LAYOUT  — left nav (static inside sticky) + right card container.
+   4. CARD STACK    — every card is `absolute inset-0`, toggled with CSS opacity.
+      Active: opacity-100 z-10 | Inactive: opacity-0 pointer-events-none z-0
+   Scroll math: -rect.top / budget → 0…1 progress → card index.
 ───────────────────────────────────────────────────────────────────────────── */
 
-const NAV_H = 64; // .site-nav h-16
+const NAV_H = 64; // h-16 sticky navbar
 
 export default function DevMasteryCanvas() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const activeConfig  = SECTIONS[activeIndex] ?? SECTIONS[0];
-  const isDark        = activeConfig.dark;
-  const activeSection = activeConfig.id;
+  const activeConfig = SECTIONS[activeIndex] ?? SECTIONS[0];
+  const isDark       = activeConfig.dark;
 
+  /* ── Scroll handler — reads live getBoundingClientRect, no stale refs ── */
   useEffect(() => {
     const onScroll = () => {
-      const el = sectionRef.current;
+      const el = wrapperRef.current;
       if (!el) return;
       const rect      = el.getBoundingClientRect();
-      // How far we've scrolled into the section past the sticky pin point
-      const scrolledIn = -(rect.top - NAV_H);
+      const scrolledIn = -rect.top;                          // 0 when section top hits viewport top
       if (scrolledIn <= 0) { setActiveIndex(0); return; }
-      // Total scrollable distance while sticky is active
-      const budget = rect.height - (window.innerHeight - NAV_H);
+      const budget = rect.height - window.innerHeight;       // total active scroll range
       if (budget <= 0) return;
       const idx = Math.min(
         Math.floor((scrolledIn / budget) * SECTIONS.length),
@@ -718,112 +719,147 @@ export default function DevMasteryCanvas() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  /* ── Nav click — jumps to the exact scroll position for that card ── */
   const navClick = useCallback((idx: number) => {
-    const el = sectionRef.current;
+    const el = wrapperRef.current;
     if (!el) return;
-    const rect        = el.getBoundingClientRect();
-    const docTop      = rect.top + window.scrollY;
-    const budget      = rect.height - (window.innerHeight - NAV_H);
-    const target      = docTop - NAV_H + (idx / SECTIONS.length) * budget + 1;
+    const rect   = el.getBoundingClientRect();
+    const docTop = rect.top + window.scrollY;
+    const budget = el.offsetHeight - window.innerHeight;
+    const target = docTop + (idx / SECTIONS.length) * budget + 1;
     window.scrollTo({ top: target, behavior: 'smooth' });
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      style={{
-        height: `${SECTIONS.length * 100}vh`,
-        backgroundColor: activeConfig.bg,
-        transition: 'background-color 600ms ease-in-out',
-      }}
-      className="relative border-b border-white/5"
-    >
-      {/* Single sticky frame — fills viewport below navbar */}
+    <>
+      {/* ═══════════════════════════════════════════════════════════
+          DESKTOP STICKY SCROLL  (lg and above)
+      ═══════════════════════════════════════════════════════════ */}
       <div
-        className="sticky flex flex-col"
-        style={{ top: NAV_H, height: `calc(100vh - ${NAV_H}px)` }}
+        ref={wrapperRef}
+        className="hidden lg:block relative border-b border-white/5"
+        style={{
+          /* (N + 1) × 100vh gives N full scroll steps plus one viewport of
+             dwell time so the last card isn't immediately exited. */
+          height: `${(SECTIONS.length + 1) * 100}vh`,
+          backgroundColor: activeConfig.bg,
+          transition: 'background-color 600ms ease-in-out',
+        }}
       >
-        {/* ── Header ── */}
-        <div className="shrink-0 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 pt-10 pb-5">
-          <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
-            THE EMAAVY PLATFORM
-          </span>
-          <h2
-            className={`text-[26px] sm:text-[32px] lg:text-[44px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
-            style={{ letterSpacing: '-0.025em' }}
-          >
-            Every capability your AI agents need to close deals.
-          </h2>
-        </div>
+        {/* ── STICKY VIEWPORT ── */}
+        <div className="sticky top-0 h-screen w-full flex flex-col" style={{ paddingTop: NAV_H }}>
 
-        {/* ── Body: left nav + right card ── */}
-        <div className="flex-1 min-h-0 flex gap-12 xl:gap-20 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 pb-6 items-stretch">
+          {/* ── Section header ── */}
+          <div className="shrink-0 max-w-7xl mx-auto w-full px-10 pt-8 pb-6">
+            <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 text-neutral-500">
+              THE EMAAVY PLATFORM
+            </span>
+            <h2
+              className="text-[44px] font-bold leading-[1.06] text-white"
+              style={{ letterSpacing: '-0.025em' }}
+            >
+              Every capability your AI agents<br />need to close deals.
+            </h2>
+          </div>
 
-          {/* LEFT NAV */}
-          <div className="hidden lg:flex w-52 xl:w-60 shrink-0 flex-col justify-center">
-            <nav className="relative py-1">
-              <div className={`absolute left-0 top-0 bottom-0 w-px transition-colors duration-700 ${isDark ? 'bg-white/10' : 'bg-neutral-200'}`} />
-              <motion.div
-                className={`absolute left-0 w-[2px] rounded-full transition-colors duration-700 ${isDark ? 'bg-white' : 'bg-neutral-900'}`}
-                animate={{
-                  top:    `${(activeIndex / SECTIONS.length) * 100}%`,
-                  height: `${(1 / SECTIONS.length) * 100}%`,
-                }}
-                transition={{ type: 'spring', stiffness: 360, damping: 34 }}
-              />
-              {SECTIONS.map((s, i) => {
-                const isActive = i === activeIndex;
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => navClick(i)}
-                    className="relative w-full pl-6 py-[14px] text-left outline-none"
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-dot"
-                        className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full"
-                        style={{ backgroundColor: isDark ? '#fff' : '#111', boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
-                        transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                      />
-                    )}
-                    <motion.span
-                      animate={{ opacity: isActive ? 1 : 0.28 }}
-                      transition={{ duration: 0.18 }}
-                      className={`block text-[13px] leading-snug ${isActive ? 'font-semibold' : 'font-normal'} ${isDark ? 'text-white' : 'text-[#111111]'} transition-colors duration-700`}
+          {/* ── 2-COL LAYOUT ── */}
+          <div className="flex-1 min-h-0 max-w-7xl mx-auto w-full px-10 pb-8 flex gap-16 xl:gap-24">
+
+            {/* LEFT — vertical nav menu */}
+            <div className="w-56 xl:w-64 shrink-0 flex flex-col justify-center">
+              <nav className="relative">
+                {/* Track line */}
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+                {/* Active indicator bar */}
+                <motion.div
+                  className="absolute left-0 w-[2px] bg-white rounded-full"
+                  animate={{
+                    top:    `${(activeIndex / SECTIONS.length) * 100}%`,
+                    height: `${(1 / SECTIONS.length) * 100}%`,
+                  }}
+                  transition={{ type: 'spring', stiffness: 360, damping: 34 }}
+                />
+
+                {SECTIONS.map((s, i) => {
+                  const isActive = i === activeIndex;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => navClick(i)}
+                      className="relative w-full pl-6 py-[14px] text-left outline-none"
                     >
-                      {s.label}
-                    </motion.span>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-dot"
+                          className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-white"
+                          style={{ boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
+                          transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                        />
+                      )}
+                      <span
+                        className="block text-[13px] leading-snug text-white transition-opacity duration-200"
+                        style={{ opacity: isActive ? 1 : 0.28, fontWeight: isActive ? 600 : 400 }}
+                      >
+                        {s.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
 
-          {/* RIGHT — cards are absolute-positioned so they stack in one spot */}
-          <div className="flex-1 min-w-0 relative">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSection}
-                initial={{ opacity: 0, y: 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute inset-0 flex flex-col justify-center"
-              >
-                {activeSection === 'voice-calling'          && <VoiceCallingCard />}
-                {activeSection === 'conversation-control'   && <ConversationControlCard />}
-                {activeSection === 'workflow-automation'    && <WorkflowAutomationCard />}
-                {activeSection === 'own-llm'                && <OwnLLMCard />}
-                {activeSection === 'omnichannel'            && <OmnichannelCard />}
-                {activeSection === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
-              </motion.div>
-            </AnimatePresence>
-          </div>
+            {/* RIGHT — card stack container */}
+            <div className="flex-1 relative">
+              {SECTIONS.map((s, i) => (
+                <div
+                  key={s.id}
+                  className="absolute inset-0 w-full h-full transition-opacity duration-500"
+                  style={{
+                    opacity:       i === activeIndex ? 1 : 0,
+                    pointerEvents: i === activeIndex ? 'auto' : 'none',
+                    zIndex:        i === activeIndex ? 10 : 0,
+                  }}
+                >
+                  <div className="h-full flex flex-col justify-center">
+                    {s.id === 'voice-calling'          && <VoiceCallingCard />}
+                    {s.id === 'conversation-control'   && <ConversationControlCard />}
+                    {s.id === 'workflow-automation'    && <WorkflowAutomationCard />}
+                    {s.id === 'own-llm'                && <OwnLLMCard />}
+                    {s.id === 'omnichannel'            && <OmnichannelCard />}
+                    {s.id === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
+                  </div>
+                </div>
+              ))}
+            </div>
 
+          </div>
         </div>
       </div>
-    </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          MOBILE / TABLET  (below lg) — simple stacked list, untouched
+      ═══════════════════════════════════════════════════════════ */}
+      <section
+        className="lg:hidden border-b border-white/5"
+        style={{ backgroundColor: SECTIONS[0].bg }}
+      >
+        <div className="mx-auto max-w-2xl px-5 pt-20 pb-32 space-y-28">
+          {SECTIONS.map(s => (
+            <div key={s.id}>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] mb-4 text-neutral-500">
+                {s.label}
+              </p>
+              {s.id === 'voice-calling'          && <VoiceCallingCard />}
+              {s.id === 'conversation-control'   && <ConversationControlCard />}
+              {s.id === 'workflow-automation'    && <WorkflowAutomationCard />}
+              {s.id === 'own-llm'                && <OwnLLMCard />}
+              {s.id === 'omnichannel'            && <OmnichannelCard />}
+              {s.id === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 
