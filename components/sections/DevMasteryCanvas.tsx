@@ -678,115 +678,118 @@ function EnterpriseReliabilityCard() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   ROOT — stacked cards + sticky left nav
-   All six cards are rendered in a scrolling column (each min-h-screen).
-   The left nav is position:sticky and tracks which card occupies the
-   viewport centre via IntersectionObserver.
+   ROOT
+   Layout: section is N×100vh tall. A single sticky inner frame fills the
+   viewport below the navbar. Scroll progress drives the active card index.
+   getBoundingClientRect() in the scroll handler always gives fresh values —
+   no stale refs, no mount-timing issues.
 ───────────────────────────────────────────────────────────────────────────── */
 
+const NAV_H = 64; // .site-nav h-16
+
 export default function DevMasteryCanvas() {
-  const [activeSection, setActiveSection] = useState<SectionId>(SECTIONS[0].id);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const activeIndex  = SECTIONS.findIndex(s => s.id === activeSection);
-  const activeConfig = SECTIONS[activeIndex] ?? SECTIONS[0];
-  const isDark       = activeConfig.dark;
+  const activeConfig  = SECTIONS[activeIndex] ?? SECTIONS[0];
+  const isDark        = activeConfig.dark;
+  const activeSection = activeConfig.id;
 
-  // Scroll-spy: on every scroll, find which section's top is closest to
-  // 30% down the viewport (just below the sticky nav).
   useEffect(() => {
-    const TRIGGER = window.innerHeight * 0.3; // 30% down from top
-
     const onScroll = () => {
-      let current: SectionId = SECTIONS[0].id;
-      for (const { id } of SECTIONS) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top <= TRIGGER) {
-          current = id;
-        }
-      }
-      setActiveSection(current);
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect      = el.getBoundingClientRect();
+      // How far we've scrolled into the section past the sticky pin point
+      const scrolledIn = -(rect.top - NAV_H);
+      if (scrolledIn <= 0) { setActiveIndex(0); return; }
+      // Total scrollable distance while sticky is active
+      const budget = rect.height - (window.innerHeight - NAV_H);
+      if (budget <= 0) return;
+      const idx = Math.min(
+        Math.floor((scrolledIn / budget) * SECTIONS.length),
+        SECTIONS.length - 1,
+      );
+      setActiveIndex(idx);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // set correct section on mount / page refresh
+    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navClick = useCallback((id: SectionId) => {
-    const el = document.getElementById(id);
+  const navClick = useCallback((idx: number) => {
+    const el = sectionRef.current;
     if (!el) return;
-    // 64px navbar + 8px breathing room
-    const offset = 72;
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    const rect        = el.getBoundingClientRect();
+    const docTop      = rect.top + window.scrollY;
+    const budget      = rect.height - (window.innerHeight - NAV_H);
+    const target      = docTop - NAV_H + (idx / SECTIONS.length) * budget + 1;
+    window.scrollTo({ top: target, behavior: 'smooth' });
   }, []);
 
   return (
     <section
-      style={{ backgroundColor: activeConfig.bg, transition: 'background-color 700ms ease-in-out' }}
-      className="border-b border-white/5"
+      ref={sectionRef}
+      style={{
+        height: `${SECTIONS.length * 100}vh`,
+        backgroundColor: activeConfig.bg,
+        transition: 'background-color 600ms ease-in-out',
+      }}
+      className="relative border-b border-white/5"
     >
-      {/* ── Section header ── */}
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 pt-24 pb-16">
-        <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-4 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
-          THE EMAAVY PLATFORM
-        </span>
-        <h2
-          className={`text-[28px] sm:text-[36px] lg:text-[50px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
-          style={{ letterSpacing: '-0.025em' }}
-        >
-          Every capability your AI agents<br /> need to close deals.
-        </h2>
-        <p className={`mt-5 max-w-lg text-[16px] leading-relaxed transition-colors duration-700 ${isDark ? 'text-neutral-400' : 'text-neutral-500'}`}>
-          Full-stack voice AI, CRM automation, and developer-grade control — built for revenue teams that move fast.
-        </p>
-      </div>
-
-      {/* ── Split layout ── */}
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10 pb-40">
-        <div className="flex gap-16 xl:gap-24 items-start">
-
-          {/* LEFT — sticky nav */}
-          <div
-            className="hidden lg:block w-56 xl:w-64 shrink-0"
-            style={{ position: 'sticky', top: '88px' }}
+      {/* Single sticky frame — fills viewport below navbar */}
+      <div
+        className="sticky flex flex-col overflow-hidden"
+        style={{ top: NAV_H, height: `calc(100vh - ${NAV_H}px)` }}
+      >
+        {/* ── Header ── */}
+        <div className="shrink-0 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 pt-10 pb-5">
+          <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
+            THE EMAAVY PLATFORM
+          </span>
+          <h2
+            className={`text-[26px] sm:text-[32px] lg:text-[44px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
+            style={{ letterSpacing: '-0.025em' }}
           >
-            <nav className="relative">
-              {/* Track */}
+            Every capability your AI agents need to close deals.
+          </h2>
+        </div>
+
+        {/* ── Body: left nav + right card ── */}
+        <div className="flex-1 min-h-0 flex gap-12 xl:gap-20 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10 pb-6 items-stretch">
+
+          {/* LEFT NAV */}
+          <div className="hidden lg:flex w-52 xl:w-60 shrink-0 flex-col justify-center">
+            <nav className="relative py-1">
               <div className={`absolute left-0 top-0 bottom-0 w-px transition-colors duration-700 ${isDark ? 'bg-white/10' : 'bg-neutral-200'}`} />
-              {/* Active bar */}
               <motion.div
                 className={`absolute left-0 w-[2px] rounded-full transition-colors duration-700 ${isDark ? 'bg-white' : 'bg-neutral-900'}`}
                 animate={{
                   top:    `${(activeIndex / SECTIONS.length) * 100}%`,
                   height: `${(1 / SECTIONS.length) * 100}%`,
                 }}
-                transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+                transition={{ type: 'spring', stiffness: 360, damping: 34 }}
               />
-
               {SECTIONS.map((s, i) => {
-                const isActive = s.id === activeSection;
+                const isActive = i === activeIndex;
                 return (
                   <button
                     key={s.id}
-                    onClick={() => navClick(s.id)}
-                    className="relative w-full pl-6 py-5 text-left outline-none"
+                    onClick={() => navClick(i)}
+                    className="relative w-full pl-6 py-[14px] text-left outline-none"
                   >
                     {isActive && (
                       <motion.span
                         layoutId="nav-dot"
                         className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full"
-                        style={{
-                          backgroundColor: isDark ? '#fff' : '#111',
-                          boxShadow: `0 0 0 2px ${activeConfig.bg}`,
-                        }}
+                        style={{ backgroundColor: isDark ? '#fff' : '#111', boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
                         transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                       />
                     )}
                     <motion.span
                       animate={{ opacity: isActive ? 1 : 0.28 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.18 }}
                       className={`block text-[13px] leading-snug ${isActive ? 'font-semibold' : 'font-normal'} ${isDark ? 'text-white' : 'text-[#111111]'} transition-colors duration-700`}
                     >
                       {s.label}
@@ -797,26 +800,25 @@ export default function DevMasteryCanvas() {
             </nav>
           </div>
 
-          {/* RIGHT — all cards stacked, each one viewport-height tall */}
-          <div className="flex-1 min-w-0">
-            {SECTIONS.map(s => (
-              <div
-                key={s.id}
-                id={s.id}
-                className="flex flex-col justify-center py-20"
-                style={{ minHeight: '90vh' }}
+          {/* RIGHT — one card, transitions in place */}
+          <div className="flex-1 min-w-0 flex flex-col justify-center overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full"
               >
-                <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] mb-4 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
-                  {s.label}
-                </p>
-                {s.id === 'voice-calling'          && <VoiceCallingCard />}
-                {s.id === 'conversation-control'   && <ConversationControlCard />}
-                {s.id === 'workflow-automation'    && <WorkflowAutomationCard />}
-                {s.id === 'own-llm'                && <OwnLLMCard />}
-                {s.id === 'omnichannel'            && <OmnichannelCard />}
-                {s.id === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
-              </div>
-            ))}
+                {activeSection === 'voice-calling'          && <VoiceCallingCard />}
+                {activeSection === 'conversation-control'   && <ConversationControlCard />}
+                {activeSection === 'workflow-automation'    && <WorkflowAutomationCard />}
+                {activeSection === 'own-llm'                && <OwnLLMCard />}
+                {activeSection === 'omnichannel'            && <OmnichannelCard />}
+                {activeSection === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
         </div>
