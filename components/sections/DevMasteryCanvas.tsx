@@ -691,7 +691,7 @@ export default function DevMasteryCanvas() {
     const onScroll = () => {
       const el = wrapperRef.current;
       if (!el) return;
-      const rect   = el.getBoundingClientRect();
+      const rect       = el.getBoundingClientRect();
       const scrolledIn = -rect.top;
       if (scrolledIn <= 0) { setActiveIndex(0); return; }
       const budget = rect.height - window.innerHeight;
@@ -716,98 +716,101 @@ export default function DevMasteryCanvas() {
   }, []);
 
   const activeConfig = SECTIONS[activeIndex] ?? SECTIONS[0];
-  const isDark       = activeConfig.dark;
 
   return (
     <>
-      {/* ── DESKTOP (lg+): sticky-scroll ── */}
+      {/* ── DESKTOP (lg+) ── */}
       <div
         ref={wrapperRef}
         className="hidden lg:block border-b border-white/5"
         style={{
+          /* Scroll track: 1 viewport per card + 1 extra to dwell on the last */
           height: `${(SECTIONS.length + 1) * 100}vh`,
           backgroundColor: activeConfig.bg,
           transition: 'background-color 600ms ease-in-out',
         }}
       >
-        {/* Sticky viewport — 100vh, clears the h-16 sticky navbar */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ paddingTop: 64 }}>
-          <div className="h-full flex flex-col max-w-7xl mx-auto px-10">
+        {/* Sticky viewport — locks to screen while user scrolls through the track */}
+        <div className="sticky top-0 h-screen w-full flex items-center">
+          <div className="w-full max-w-7xl mx-auto px-10 flex gap-16 xl:gap-24 items-center">
 
-            {/* Section header */}
-            <div className="shrink-0 pt-10 pb-8">
-              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 text-neutral-500">
-                THE EMAAVY PLATFORM
-              </span>
-              <h2 className="text-[44px] font-bold leading-[1.06] text-white" style={{ letterSpacing: '-0.025em' }}>
-                Every capability your AI agents<br />need to close deals.
-              </h2>
-            </div>
+            {/* LEFT COL — header + nav */}
+            <div className="w-72 xl:w-80 shrink-0">
 
-            {/* Two-column body */}
-            <div className="flex-1 min-h-0 flex gap-16 xl:gap-24 pb-10">
+              {/* Header */}
+              <div className="mb-10">
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 text-neutral-500">
+                  THE EMAAVY PLATFORM
+                </span>
+                <h2
+                  className="text-[34px] xl:text-[38px] font-bold leading-[1.1] text-white"
+                  style={{ letterSpacing: '-0.025em' }}
+                >
+                  Every capability your AI agents need to close deals.
+                </h2>
+              </div>
 
-              {/* Left nav */}
-              <div className="w-56 xl:w-64 shrink-0 flex flex-col justify-center">
-                <nav className="relative">
-                  <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
-                  <motion.div
-                    className="absolute left-0 w-[2px] bg-white rounded-full"
-                    animate={{
-                      top:    `${(activeIndex / SECTIONS.length) * 100}%`,
-                      height: `${(1 / SECTIONS.length) * 100}%`,
-                    }}
-                    transition={{ type: 'spring', stiffness: 360, damping: 34 }}
-                  />
-                  {SECTIONS.map((s, i) => {
-                    const isActive = i === activeIndex;
-                    return (
-                      <button
-                        key={s.id}
-                        onClick={() => navClick(i)}
-                        className="relative w-full pl-6 py-[14px] text-left outline-none"
+              {/* Nav */}
+              <nav className="relative">
+                <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+                <motion.div
+                  className="absolute left-0 w-[2px] bg-white rounded-full"
+                  animate={{
+                    top:    `${(activeIndex / SECTIONS.length) * 100}%`,
+                    height: `${(1 / SECTIONS.length) * 100}%`,
+                  }}
+                  transition={{ type: 'spring', stiffness: 360, damping: 34 }}
+                />
+                {SECTIONS.map((s, i) => {
+                  const isActive = i === activeIndex;
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => navClick(i)}
+                      className="relative w-full pl-6 py-3 text-left outline-none"
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-dot"
+                          className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-white"
+                          style={{ boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
+                          transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                        />
+                      )}
+                      <span
+                        className="block text-[13px] leading-snug text-white transition-opacity duration-200"
+                        style={{ opacity: isActive ? 1 : 0.28, fontWeight: isActive ? 600 : 400 }}
                       >
-                        {isActive && (
-                          <motion.span
-                            layoutId="nav-dot"
-                            className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-white"
-                            style={{ boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
-                            transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                          />
-                        )}
-                        <span
-                          className="block text-[13px] leading-snug text-white transition-opacity duration-200"
-                          style={{ opacity: isActive ? 1 : 0.28, fontWeight: isActive ? 600 : 400 }}
-                        >
-                          {s.label}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </nav>
-              </div>
-
-              {/* Right — one card at a time, fades in place */}
-              <div className="flex-1 min-w-0 flex flex-col justify-center overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.35, ease: 'easeInOut' }}
-                  >
-                    {activeIndex === 0 && <VoiceCallingCard />}
-                    {activeIndex === 1 && <ConversationControlCard />}
-                    {activeIndex === 2 && <WorkflowAutomationCard />}
-                    {activeIndex === 3 && <OwnLLMCard />}
-                    {activeIndex === 4 && <OmnichannelCard />}
-                    {activeIndex === 5 && <EnterpriseReliabilityCard />}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
+                        {s.label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </nav>
             </div>
+
+            {/* RIGHT COL — card deck, explicit height so absolute children resolve */}
+            <div className="flex-1 relative" style={{ height: 520 }}>
+              {SECTIONS.map((s, i) => (
+                <div
+                  key={s.id}
+                  className="absolute inset-0 w-full h-full transition-opacity duration-500"
+                  style={{
+                    opacity:       i === activeIndex ? 1 : 0,
+                    pointerEvents: i === activeIndex ? 'auto' : 'none',
+                    zIndex:        i === activeIndex ? 10 : 0,
+                  }}
+                >
+                  {s.id === 'voice-calling'          && <VoiceCallingCard />}
+                  {s.id === 'conversation-control'   && <ConversationControlCard />}
+                  {s.id === 'workflow-automation'    && <WorkflowAutomationCard />}
+                  {s.id === 'own-llm'                && <OwnLLMCard />}
+                  {s.id === 'omnichannel'            && <OmnichannelCard />}
+                  {s.id === 'enterprise-reliability' && <EnterpriseReliabilityCard />}
+                </div>
+              ))}
+            </div>
+
           </div>
         </div>
       </div>
@@ -821,13 +824,18 @@ export default function DevMasteryCanvas() {
           <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 text-neutral-500">
             THE EMAAVY PLATFORM
           </span>
-          <h2 className="text-[28px] sm:text-[36px] font-bold leading-[1.08] text-white mb-16" style={{ letterSpacing: '-0.025em' }}>
+          <h2
+            className="text-[28px] sm:text-[36px] font-bold leading-[1.08] text-white mb-16"
+            style={{ letterSpacing: '-0.025em' }}
+          >
             Every capability your AI agents need to close deals.
           </h2>
           <div className="space-y-24">
             {SECTIONS.map(s => (
               <div key={s.id}>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] mb-4 text-neutral-500">{s.label}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] mb-4 text-neutral-500">
+                  {s.label}
+                </p>
                 {s.id === 'voice-calling'          && <VoiceCallingCard />}
                 {s.id === 'conversation-control'   && <ConversationControlCard />}
                 {s.id === 'workflow-automation'    && <WorkflowAutomationCard />}
