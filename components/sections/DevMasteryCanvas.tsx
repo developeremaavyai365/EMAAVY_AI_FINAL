@@ -691,17 +691,21 @@ export default function DevMasteryCanvas() {
 
   useEffect(() => {
     if (observerRef.current) observerRef.current.disconnect();
+
+    // Trigger zone: a narrow band ~25–35% from the top of the viewport.
+    // As the user scrolls, whichever section enters this band becomes active.
+    // threshold:0 fires as soon as any pixel crosses the margin boundary.
     observerRef.current = new IntersectionObserver(
       entries => {
-        const visible = entries.filter(e => e.isIntersecting);
-        if (!visible.length) return;
-        const topmost = visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        const id = topmost.target.id as SectionId;
-        setActiveSection(id);
-        window.history.replaceState(null, '', `#${id}`);
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            setActiveSection(e.target.id as SectionId);
+          }
+        });
       },
-      { rootMargin: '-10% 0px -10% 0px', threshold: 0.2 },
+      { rootMargin: '-25% 0px -65% 0px', threshold: 0 },
     );
+
     SECTIONS.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) observerRef.current?.observe(el);
@@ -710,7 +714,12 @@ export default function DevMasteryCanvas() {
   }, []);
 
   const navClick = useCallback((id: SectionId) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Offset accounts for announce bar (~36px) + sticky navbar (64px) + breathing room
+    const offset = 110;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
   }, []);
 
   const activeIndex  = SECTIONS.findIndex(s => s.id === activeSection);
