@@ -589,7 +589,7 @@ export default function UnifiedPlatform() {
     <div>
 
       {/* ── Intro header ── */}
-      <section className="py-12 lg:py-14" style={{ background: '#fafbff' }}>
+      <section className="py-10 md:py-12 lg:py-14" style={{ background: '#fafbff' }}>
         <div className="site-container">
           <motion.div
             className="mx-auto max-w-3xl text-center"
@@ -625,7 +625,7 @@ export default function UnifiedPlatform() {
         {SECTIONS.map((sec) => (
           <section
             key={sec.tag}
-            className="py-14 lg:py-16"
+            className="py-10 md:py-14 lg:py-16"
             style={{ ...sec.bgStyle, borderBottom: '1px solid rgba(99,102,241,0.07)' }}
           >
             <div className="site-container">

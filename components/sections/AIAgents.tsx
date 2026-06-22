@@ -40,13 +40,13 @@ const CAPS = [
 
 export default function AIAgents() {
   return (
-    <section id="enterprise" className="section-py" style={{ background: '#f5f5f5' }}>
+    <section id="enterprise" className="py-12 md:py-20 lg:py-28" style={{ background: '#f5f5f5' }}>
       <div className="site-container">
         <div className="flex flex-col gap-14 lg:flex-row">
           {/* Left heading */}
           <div className="lg:w-[38%]">
             <span className="text-xs font-semibold uppercase tracking-widest text-gray-500">Built for enterprises</span>
-            <h2 className="mt-4 font-display text-4xl font-bold leading-tight text-gray-900 sm:text-5xl">
+            <h2 className="mt-4 font-display text-3xl font-bold leading-tight text-gray-900 sm:text-4xl md:text-5xl">
               Enterprise-ready<br />capabilities
             </h2>
             <p className="mt-5 text-base leading-relaxed text-gray-500">

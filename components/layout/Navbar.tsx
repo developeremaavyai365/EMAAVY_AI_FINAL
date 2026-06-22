@@ -103,7 +103,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile hamburger */}
-          <button onClick={() => setMobileOpen(!mobileOpen)} className="rounded-lg p-2 text-gray-700 lg:hidden">
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="flex items-center justify-center min-h-[44px] min-w-[44px] rounded-lg p-2 text-gray-700 lg:hidden">
             {mobileOpen ? <HiX size={22} /> : <HiMenuAlt3 size={22} />}
           </button>
         </div>
@@ -118,7 +118,7 @@ export default function Navbar() {
               <div className="flex flex-col gap-1">
                 <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0 }}>
                   <Link href="/platform" onClick={() => setMobileOpen(false)}
-                    className="block rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
+                    className="block min-h-[44px] rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
                     Platform
                   </Link>
                 </motion.div>
@@ -126,14 +126,14 @@ export default function Navbar() {
                 {NAV_LINKS.slice(1, 4).map((l, i) => (
                   <motion.div key={l.href} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: (i + 1) * 0.04 }}>
                     <Link href={l.href} onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
+                      className="block min-h-[44px] rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
                       {l.label}
                     </Link>
                   </motion.div>
                 ))}
                 <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.12 }}>
                   <button onClick={() => setMobileInteg(!mobileInteg)}
-                    className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
+                    className="flex min-h-[44px] w-full items-center justify-between rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
                     Integrations <HiChevronDown className={cn('h-4 w-4 transition-transform', mobileInteg && 'rotate-180')} />
                   </button>
                   <AnimatePresence>
@@ -159,7 +159,7 @@ export default function Navbar() {
                 {NAV_LINKS.slice(4).map((l, i) => (
                   <motion.div key={l.href} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: (i + 5) * 0.04 }}>
                     <Link href={l.href} onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
+                      className="block min-h-[44px] rounded-xl px-4 py-3 text-lg font-medium text-gray-800 hover:bg-gray-100">
                       {l.label}
                     </Link>
                   </motion.div>

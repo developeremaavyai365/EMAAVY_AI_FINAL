@@ -41,7 +41,7 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="bg-[#f9f9f7] border-b border-neutral-200">
       {/* Header */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-16 text-center">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-10 md:pb-16 text-center">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.07 }}
-          className="text-[40px] md:text-[56px] font-bold text-[#111111] leading-[1.06] tracking-tight"
+          className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] font-bold text-[#111111] leading-[1.06] tracking-tight"
         >
           From zero to revenue<br className="hidden sm:block" /> in minutes.
         </motion.h2>
@@ -71,8 +71,40 @@ export default function HowItWorks() {
         </motion.p>
       </div>
 
-      {/* Grid */}
-      <div className="mx-auto max-w-7xl px-0 pb-0 overflow-hidden">
+      {/* Mobile steps — simple 2-col grid on mobile, hidden on lg+ */}
+      <div className="mx-auto max-w-7xl px-4 pb-10 lg:hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {STEPS.map((step) => (
+            <motion.div
+              key={step.col}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: (step.col - 1) * 0.1 }}
+              className="rounded-2xl p-6 flex flex-col gap-3"
+              style={{ border: '1px solid #e5e4e0', background: '#fafaf8' }}
+            >
+              <p className="text-[10px] font-mono text-neutral-400 mb-1">
+                {String(step.col).padStart(2, '0')}
+              </p>
+              <div>
+                <span
+                  className="inline-block px-4 py-2 rounded-xl text-[15px] font-semibold leading-snug"
+                  style={{ background: step.bg, color: step.text }}
+                >
+                  {step.label}
+                </span>
+              </div>
+              <p className="text-[13px] leading-relaxed text-neutral-400 mt-1">
+                {step.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop Grid — hidden on mobile */}
+      <div className="mx-auto max-w-7xl px-0 pb-0 overflow-hidden hidden lg:block">
         {/*
           4 columns × 4 rows of equal cells separated by hairline borders.
           Each step card sits in its column, staggered one row lower.

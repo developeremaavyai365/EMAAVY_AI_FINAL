@@ -85,7 +85,7 @@ function MonitorMiniUI() {
 
 export default function Features() {
   return (
-    <section className="border-b border-gray-100 bg-white section-py">
+    <section className="border-b border-gray-100 bg-white py-12 md:py-20 lg:py-28">
       <div className="site-container">
         {/* Header */}
         <div className="mb-14 max-w-2xl">

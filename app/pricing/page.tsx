@@ -190,7 +190,7 @@ export default function PricingPage() {
       <main style={{ background: '#06070a' }}>
 
         {/* ── Hero ── */}
-        <section className="relative overflow-hidden pt-36 pb-20 px-6">
+        <section className="relative overflow-hidden pt-28 md:pt-36 pb-14 md:pb-20 px-4 md:px-6">
           <div className="absolute inset-0 pointer-events-none">
             <motion.div className="absolute rounded-full"
               style={{ width: 700, height: 700, top: '-250px', left: '50%', transform: 'translateX(-50%)', background: 'radial-gradient(circle, rgba(99,102,241,0.10) 0%, transparent 70%)', filter: 'blur(70px)' }}
@@ -249,7 +249,7 @@ export default function PricingPage() {
         </section>
 
         {/* ── Pricing cards ── */}
-        <section className="pb-28 px-6">
+        <section className="pb-16 md:pb-20 lg:pb-28 px-4 md:px-6">
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
             {PLANS.map((plan, i) => (
               <motion.div key={plan.name}
@@ -309,7 +309,7 @@ export default function PricingPage() {
                   </motion.div>
                 )}
 
-                <div className="relative z-10 p-8 flex flex-col flex-1">
+                <div className="relative z-10 p-5 md:p-8 flex flex-col flex-1">
                   {/* Plan name + tagline */}
                   <div className="mb-7">
                     <p className="text-[11px] font-bold uppercase tracking-[0.18em] mb-2" style={{ color: plan.color }}>
@@ -401,9 +401,9 @@ export default function PricingPage() {
         </section>
 
         {/* ── Comparison note ── */}
-        <section className="py-4 px-6 border-t" style={{ borderColor: '#ffffff06', background: '#08090d' }}>
-          <div className="max-w-4xl mx-auto py-14">
-            <div className="rounded-2xl p-8 md:p-10 grid md:grid-cols-3 gap-8"
+        <section className="py-4 px-4 md:px-6 border-t" style={{ borderColor: '#ffffff06', background: '#08090d' }}>
+          <div className="max-w-4xl mx-auto py-10 md:py-14">
+            <div className="rounded-2xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
               style={{ background: '#0d0e13', border: '1px solid #ffffff08' }}>
               {[
                 { val: '20 min', label: 'Time to first live call', sub: 'Fastest in the industry' },
@@ -421,7 +421,7 @@ export default function PricingPage() {
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-20 px-6 border-t" style={{ borderColor: '#ffffff06', background: '#08090d' }}>
+        <section className="py-14 md:py-20 px-4 md:px-6 border-t" style={{ borderColor: '#ffffff06', background: '#08090d' }}>
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-14">
               <p className="text-[11px] uppercase tracking-[0.22em] font-semibold mb-3" style={{ color: '#52525b' }}>FAQ</p>
@@ -448,7 +448,7 @@ export default function PricingPage() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="py-24 px-6 border-t relative overflow-hidden" style={{ borderColor: '#ffffff06', background: '#06070a' }}>
+        <section className="py-16 md:py-20 lg:py-24 px-4 md:px-6 border-t relative overflow-hidden" style={{ borderColor: '#ffffff06', background: '#06070a' }}>
           <div className="absolute inset-0 pointer-events-none">
             <motion.div className="absolute rounded-full"
               style={{ width: 500, height: 500, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', background: 'radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%)', filter: 'blur(60px)' }}

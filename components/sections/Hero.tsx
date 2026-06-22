@@ -175,7 +175,7 @@ export default function Hero() {
 
   return (
     <HeroBackground>
-      <div className="site-container flex min-h-screen flex-col justify-center py-24 lg:py-32">
+      <div className="site-container flex min-h-screen flex-col justify-center py-20 md:py-24 lg:py-32">
         <div className="flex flex-col items-start gap-16 lg:flex-row lg:items-center lg:gap-20">
 
           {/* ── LEFT: Text + Widget ── */}
@@ -224,15 +224,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-8 flex flex-wrap items-center gap-3"
+              className="mb-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3"
             >
               <Link href="/book-demo"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-gray-900 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-gray-900 shadow-lg transition-all hover:bg-gray-100 hover:shadow-xl w-full sm:w-auto"
               >
                 Contact Sales
               </Link>
               <Link href="/book-demo"
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10 w-full sm:w-auto"
                 style={{ border: '1px solid rgba(255,255,255,0.2)' }}
               >
                 Start Building
@@ -257,7 +257,7 @@ export default function Hero() {
                   <div className="relative">
                     <button
                       onClick={() => setDropOpen(!dropOpen)}
-                      className="flex w-full sm:min-w-[210px] items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white transition-all"
+                      className="flex w-full sm:min-w-[210px] items-center justify-between gap-3 rounded-xl px-4 py-3 text-base sm:text-sm font-medium text-white transition-all"
                       style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}
                     >
                       <span>{USE_CASES[caseIdx]}</span>

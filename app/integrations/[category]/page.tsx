@@ -273,7 +273,7 @@ export default function IntegrationCategoryPage({ params }: { params: { category
         </div>
 
         {/* CTA */}
-        <div className="mt-14 rounded-3xl bg-emaavy-deep p-12 text-center">
+        <div className="mt-14 rounded-3xl bg-emaavy-deep p-6 md:p-10 lg:p-12 text-center">
           <h2 className="font-display text-2xl font-semibold text-white">Ready to connect your stack?</h2>
           <p className="mt-3 text-white/60">Get started today — live integrations available on every plan.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">

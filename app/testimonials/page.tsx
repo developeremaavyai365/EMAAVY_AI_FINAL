@@ -281,7 +281,7 @@ export default function TestimonialsPage() {
       <div className="min-h-screen" style={{ background: '#05060f' }}>
 
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
-        <section className="relative overflow-hidden px-4 pb-24 pt-44 text-center">
+        <section className="relative overflow-hidden px-4 pb-16 md:pb-20 lg:pb-24 pt-28 md:pt-36 lg:pt-44 text-center">
           {/* Background orbs */}
           <div className="pointer-events-none absolute inset-0">
             <motion.div className="absolute left-1/2 top-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full"
@@ -305,7 +305,7 @@ export default function TestimonialsPage() {
 
             <motion.h1
               initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
-              className="mt-8 text-[40px] sm:text-[60px] lg:text-[76px] font-black text-white leading-[1.02] tracking-tight">
+              className="mt-8 text-[32px] sm:text-[48px] md:text-[60px] lg:text-[76px] font-black text-white leading-[1.02] tracking-tight">
               They said it.<br />
               <span className="bg-gradient-to-r from-indigo-400 via-violet-400 to-pink-400 bg-clip-text text-transparent">
                 We proved it.

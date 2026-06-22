@@ -102,13 +102,13 @@ export default function AgentsShowcase() {
 
   return (
     <section id="ai-agents" className="border-b border-white/5" style={{ background: '#08090c' }}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-28">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-28">
 
         {/* ── Header ── */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-16 border-b pb-16" style={{ borderColor: '#ffffff0a' }}>
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-600 mb-5">AI Agent Fleet</p>
-            <h2 className="text-[42px] md:text-[56px] font-bold text-white leading-[1.06]" style={{ letterSpacing: '-0.03em' }}>
+            <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] font-bold text-white leading-[1.06]" style={{ letterSpacing: '-0.03em' }}>
               Purpose-built agents<br />for every business function.
             </h2>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-neutral-500">

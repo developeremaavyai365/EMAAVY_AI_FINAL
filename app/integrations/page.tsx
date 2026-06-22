@@ -158,7 +158,7 @@ export default function IntegrationsPage() {
     <div className="min-h-screen" style={{ background: '#060913' }}>
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden px-4 pb-20 pt-40 text-center">
+      <section className="relative overflow-hidden px-4 pb-16 md:pb-20 pt-28 md:pt-36 lg:pt-40 text-center">
         {/* background orbs */}
         <div className="pointer-events-none absolute inset-0">
           <motion.div className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full opacity-20"
@@ -177,7 +177,7 @@ export default function IntegrationsPage() {
             </span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-6 text-5xl font-extrabold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+            className="mt-6 text-[32px] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight text-white">
             Everything connects.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-purple-400">Nothing breaks.</span>
           </motion.h1>

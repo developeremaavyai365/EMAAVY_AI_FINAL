@@ -174,7 +174,7 @@ export default function SystemArchitecture() {
       className="border-b border-white/5"
     >
       {/* ── Header ── */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-14">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-10 md:pb-14">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -187,7 +187,7 @@ export default function SystemArchitecture() {
               System Architecture
             </span>
             <h2
-              className="text-[38px] md:text-[52px] font-bold text-white leading-[1.06]"
+              className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[52px] font-bold text-white leading-[1.06]"
               style={{ letterSpacing: '-0.025em' }}
             >
               Five integrated layers.
@@ -226,7 +226,7 @@ export default function SystemArchitecture() {
       </div>
 
       {/* ── Body ── */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 pb-28">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pb-16 md:pb-20 lg:pb-28">
 
         {/* ── Detail panel full width ── */}
         <div

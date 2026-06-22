@@ -183,7 +183,7 @@ export default function CampaignStudio() {
         }}
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-28">
+      <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-28">
 
         {/* ── Header ── */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
@@ -199,7 +199,7 @@ export default function CampaignStudio() {
               Campaign Studio
             </span>
             <h2
-              className="text-[40px] md:text-[56px] font-bold text-white leading-[1.05]"
+              className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[56px] font-bold text-white leading-[1.05]"
               style={{ letterSpacing: '-0.03em' }}
             >
               Build it once.
@@ -218,7 +218,7 @@ export default function CampaignStudio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="flex gap-3 shrink-0"
+            className="flex flex-col sm:flex-row gap-3 shrink-0 w-full md:w-auto"
           >
             <Link
               href="/signup"

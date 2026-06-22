@@ -65,11 +65,11 @@ function VoiceCallingCard() {
         <span className="font-mono text-[11px] text-neutral-600">emaavy-voice-v3</span>
       </div>
 
-      <div className="flex flex-1"
+      <div className="flex flex-col md:flex-row flex-1"
         style={{ borderTop: '1px solid transparent' }}
       >
         {/* Left — dial + bars */}
-        <div className="flex-1 p-8 flex flex-col gap-8" style={{ borderRight: '1px solid #1a1a1a' }}>
+        <div className="flex-1 p-5 md:p-8 flex flex-col gap-6 md:gap-8" style={{ borderRight: '1px solid #1a1a1a' }}>
           <div className="flex items-center gap-6">
             {/* Donut */}
             <div className="relative w-28 h-28 shrink-0">
@@ -141,7 +141,7 @@ function VoiceCallingCard() {
         </div>
 
         {/* Right — transcript */}
-        <div className="flex-1 p-8 flex flex-col">
+        <div className="flex-1 p-5 md:p-8 flex flex-col border-t md:border-t-0" style={{ borderColor: '#1a1a1a' }}>
           <p className="text-[10px] uppercase tracking-widest text-neutral-600 mb-5">Live Transcript</p>
           <div className="flex-1 space-y-5 border-l pl-4" style={{ borderColor: '#222' }}>
             {transcript.map((m, i) => (
@@ -723,12 +723,12 @@ export default function DevMasteryCanvas() {
       className="border-b border-white/5"
     >
       {/* Section header */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-16">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-10 md:pb-16">
         <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-4 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
           THE EMAAVY PLATFORM
         </span>
         <h2
-          className={`text-[42px] md:text-[54px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
+          className={`text-[28px] sm:text-[36px] md:text-[46px] lg:text-[54px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
           style={{ letterSpacing: '-0.025em' }}
         >
           Every capability your AI agents<br className="hidden sm:inline" /> need to close deals.
@@ -739,7 +739,7 @@ export default function DevMasteryCanvas() {
       </div>
 
       {/* Split layout */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-12 pb-40">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pb-20 md:pb-32 lg:pb-40">
         <div className="flex gap-16 xl:gap-24 items-start">
 
           {/* LEFT STICKY NAV */}

@@ -294,7 +294,7 @@ export default function CallLifecycle() {
         />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-12 pt-24 pb-28">
+      <div className="relative mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-16 md:pb-20 lg:pb-28">
 
         {/* Header */}
         <div className="text-center mb-16">
@@ -305,7 +305,7 @@ export default function CallLifecycle() {
                 className="w-1.5 h-1.5 rounded-full" style={{ background: stage.color, transition: 'background 0.5s ease' }} />
               Call Lifecycle
             </span>
-            <h2 className="text-[40px] md:text-[58px] font-bold text-white leading-[1.04]"
+            <h2 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[58px] font-bold text-white leading-[1.04]"
               style={{ letterSpacing: '-0.03em' }}>
               From dial to deal &mdash;<br />
               <span style={{ color: stage.color, transition: 'color 0.5s ease' }}>in under 2 seconds.</span>
@@ -317,7 +317,7 @@ export default function CallLifecycle() {
         </div>
 
         {/* Stage pill selector */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6">
+        <div className="flex flex-wrap justify-center gap-2 mb-6 overflow-x-auto pb-2">
           {STAGES.map((s, i) => {
             const isActive = i === activeIdx;
             const isPast = i < activeIdx;
@@ -587,7 +587,7 @@ export default function CallLifecycle() {
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="mt-8 rounded-2xl grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 overflow-hidden"
+              className="mt-8 rounded-2xl grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 overflow-hidden"
               style={{ border: '1px solid #4ade8030', background: '#4ade8008' }}
             >
               {[

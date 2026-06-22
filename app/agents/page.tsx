@@ -407,7 +407,7 @@ export default function AgentsPage() {
         {/* ══════════════════════════════════════════
             HERO
             ══════════════════════════════════════════ */}
-        <section className="relative overflow-hidden pt-36 pb-28 px-6">
+        <section className="relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 lg:pb-28 px-4 md:px-6">
           {/* Background */}
           <div className="absolute inset-0 pointer-events-none">
             <motion.div className="absolute rounded-full"
@@ -433,7 +433,7 @@ export default function AgentsPage() {
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-[36px] sm:text-[52px] md:text-[72px] font-extrabold text-white leading-[1.02] mb-6"
+              className="text-[30px] sm:text-[44px] md:text-[60px] lg:text-[72px] font-extrabold text-white leading-[1.02] mb-6"
               style={{ letterSpacing: '-0.04em' }}>
               Every agent your<br />
               <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(90deg, #60a5fa 0%, #a78bfa 50%, #818cf8 100%)' }}>
@@ -449,7 +449,7 @@ export default function AgentsPage() {
 
             <motion.div
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18 }}
-              className="flex items-center justify-center gap-4 flex-wrap">
+              className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 flex-wrap">
               <Link href="/book-demo"
                 className="px-7 py-3.5 rounded-xl text-[14px] font-semibold text-white transition-all hover:opacity-90"
                 style={{ background: 'linear-gradient(135deg, #3b82f6, #6366f1)', boxShadow: '0 4px 24px rgba(99,102,241,0.35)' }}>
@@ -485,11 +485,11 @@ export default function AgentsPage() {
         {/* ══════════════════════════════════════════
             WHAT MAKES EMAAVY AGENTS DIFFERENT
             ══════════════════════════════════════════ */}
-        <section className="py-24 px-6 border-y" style={{ borderColor: '#ffffff06', background: '#08090d' }}>
+        <section className="py-14 md:py-20 lg:py-24 px-4 md:px-6 border-y" style={{ borderColor: '#ffffff06', background: '#08090d' }}>
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <p className="text-[11px] uppercase tracking-[0.22em] font-semibold mb-4" style={{ color: '#52525b' }}>Why Emaavy</p>
-              <h2 className="text-[38px] md:text-[48px] font-bold text-white" style={{ letterSpacing: '-0.03em' }}>
+              <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[48px] font-bold text-white" style={{ letterSpacing: '-0.03em' }}>
                 Not chatbots. Not voicebots.<br />Purpose-built agents.
               </h2>
             </div>
@@ -576,14 +576,14 @@ export default function AgentsPage() {
         {/* ══════════════════════════════════════════
             AGENT FLEET — INTERACTIVE
             ══════════════════════════════════════════ */}
-        <section id="fleet" className="py-24 px-6" style={{ background: '#06070a' }}>
+        <section id="fleet" className="py-14 md:py-20 lg:py-24 px-4 md:px-6" style={{ background: '#06070a' }}>
           <div className="max-w-7xl mx-auto">
 
             {/* Header */}
             <div className="mb-12">
               <p className="text-[11px] uppercase tracking-[0.22em] font-semibold mb-4" style={{ color: '#52525b' }}>The Fleet</p>
               <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-                <h2 className="text-[38px] md:text-[48px] font-bold text-white leading-[1.06]" style={{ letterSpacing: '-0.03em' }}>
+                <h2 className="text-[26px] sm:text-[34px] md:text-[44px] lg:text-[48px] font-bold text-white leading-[1.06]" style={{ letterSpacing: '-0.03em' }}>
                   Meet your agents.
                 </h2>
                 <p className="max-w-md text-[14px] leading-relaxed" style={{ color: '#52525b' }}>

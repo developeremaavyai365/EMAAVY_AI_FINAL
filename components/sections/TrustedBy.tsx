@@ -219,7 +219,7 @@ export default function TrustedBy() {
               </svg>
 
               {/* Blockquote with bold highlights */}
-              <blockquote className="text-[18px] font-medium leading-[1.55] tracking-tight text-gray-800 sm:text-[22px] lg:text-[28px]">
+              <blockquote className="text-[16px] font-medium leading-[1.55] tracking-tight text-gray-800 sm:text-[20px] lg:text-[26px]">
                 &ldquo;
                 {TESTIMONIAL.full.map((seg, i) =>
                   seg.bold ? (
