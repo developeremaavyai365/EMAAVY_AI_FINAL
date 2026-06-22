@@ -54,6 +54,7 @@ const PLANS = [
     features: [
       'Everything in Starter',
       'Unlimited active agents',
+      '240 minutes included',
       'Webhooks, WhatsApp & Calendar',
       'ElevenLabs premium voice',
       'Advanced analytics & reporting',
