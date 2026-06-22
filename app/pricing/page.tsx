@@ -16,7 +16,6 @@ const PLANS = [
     badge: 'No card needed',
     features: [
       '1 active AI agent',
-      '1 phone number included',
       'ElevenLabs voice included',
       'Multi-language support',
     ],
