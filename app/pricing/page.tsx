@@ -32,6 +32,7 @@ const PLANS = [
     features: [
       'Everything in Free',
       '3 active AI agents',
+      '1 phone number included',
       '3 campaigns',
       '60 minutes included',
       'Webhooks + Google Calendar',
