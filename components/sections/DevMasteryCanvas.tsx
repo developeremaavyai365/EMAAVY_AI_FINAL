@@ -680,127 +680,154 @@ function EnterpriseReliabilityCard() {
 /* ─────────────────────────────────────────────────────────────────────────────
    ROOT — scroll-linked split layout
 ───────────────────────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────────────
+   ROOT — desktop sticky-scroll, mobile stacked
+───────────────────────────────────────────────────────────────────────────── */
 export default function DevMasteryCanvas() {
-  const [activeSection, setActiveSection] = useState<SectionId>(SECTIONS[0].id);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const hash = window.location.hash.slice(1) as SectionId;
-    if (SECTIONS.some(s => s.id === hash)) setActiveSection(hash);
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const rect   = el.getBoundingClientRect();
+      const scrolledIn = -rect.top;
+      if (scrolledIn <= 0) { setActiveIndex(0); return; }
+      const budget = rect.height - window.innerHeight;
+      if (budget <= 0) return;
+      const idx = Math.min(
+        Math.floor((scrolledIn / budget) * SECTIONS.length),
+        SECTIONS.length - 1,
+      );
+      setActiveIndex(idx);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    if (observerRef.current) observerRef.current.disconnect();
-
-    // Trigger zone: a narrow band ~25–35% from the top of the viewport.
-    // As the user scrolls, whichever section enters this band becomes active.
-    // threshold:0 fires as soon as any pixel crosses the margin boundary.
-    observerRef.current = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            setActiveSection(e.target.id as SectionId);
-          }
-        });
-      },
-      { rootMargin: '-25% 0px -65% 0px', threshold: 0 },
-    );
-
-    SECTIONS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observerRef.current?.observe(el);
-    });
-    return () => observerRef.current?.disconnect();
-  }, []);
-
-  const navClick = useCallback((id: SectionId) => {
-    const el = document.getElementById(id);
+  const navClick = useCallback((idx: number) => {
+    const el = wrapperRef.current;
     if (!el) return;
-    // Offset accounts for announce bar (~36px) + sticky navbar (64px) + breathing room
-    const offset = 110;
-    const top = el.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    const budget = el.offsetHeight - window.innerHeight;
+    const docTop = el.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: docTop + (idx / SECTIONS.length) * budget + 1, behavior: 'smooth' });
   }, []);
 
-  const activeIndex  = SECTIONS.findIndex(s => s.id === activeSection);
   const activeConfig = SECTIONS[activeIndex] ?? SECTIONS[0];
   const isDark       = activeConfig.dark;
 
   return (
-    <section
-      style={{ backgroundColor: activeConfig.bg, transition: 'background-color 700ms ease-in-out' }}
-      className="border-b border-white/5"
-    >
-      {/* Section header */}
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pt-12 md:pt-20 lg:pt-24 pb-10 md:pb-16">
-        <span className={`block text-[11px] font-semibold uppercase tracking-[0.2em] mb-4 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
-          THE EMAAVY PLATFORM
-        </span>
-        <h2
-          className={`text-[28px] sm:text-[36px] md:text-[46px] lg:text-[54px] font-bold leading-[1.06] transition-colors duration-700 ${isDark ? 'text-white' : 'text-[#111111]'}`}
-          style={{ letterSpacing: '-0.025em' }}
-        >
-          Every capability your AI agents<br className="hidden sm:inline" /> need to close deals.
-        </h2>
-        <p className={`mt-5 max-w-lg text-[16px] leading-relaxed transition-colors duration-700 ${isDark ? 'text-neutral-400' : 'text-neutral-500'}`}>
-          Full-stack voice AI, CRM automation, and developer-grade control — built for revenue teams that move fast.
-        </p>
+    <>
+      {/* ── DESKTOP (lg+): sticky-scroll ── */}
+      <div
+        ref={wrapperRef}
+        className="hidden lg:block border-b border-white/5"
+        style={{
+          height: `${(SECTIONS.length + 1) * 100}vh`,
+          backgroundColor: activeConfig.bg,
+          transition: 'background-color 600ms ease-in-out',
+        }}
+      >
+        {/* Sticky viewport — 100vh, clears the h-16 sticky navbar */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ paddingTop: 64 }}>
+          <div className="h-full flex flex-col max-w-7xl mx-auto px-10">
+
+            {/* Section header */}
+            <div className="shrink-0 pt-10 pb-8">
+              <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 text-neutral-500">
+                THE EMAAVY PLATFORM
+              </span>
+              <h2 className="text-[44px] font-bold leading-[1.06] text-white" style={{ letterSpacing: '-0.025em' }}>
+                Every capability your AI agents<br />need to close deals.
+              </h2>
+            </div>
+
+            {/* Two-column body */}
+            <div className="flex-1 min-h-0 flex gap-16 xl:gap-24 pb-10">
+
+              {/* Left nav */}
+              <div className="w-56 xl:w-64 shrink-0 flex flex-col justify-center">
+                <nav className="relative">
+                  <div className="absolute left-0 top-0 bottom-0 w-px bg-white/10" />
+                  <motion.div
+                    className="absolute left-0 w-[2px] bg-white rounded-full"
+                    animate={{
+                      top:    `${(activeIndex / SECTIONS.length) * 100}%`,
+                      height: `${(1 / SECTIONS.length) * 100}%`,
+                    }}
+                    transition={{ type: 'spring', stiffness: 360, damping: 34 }}
+                  />
+                  {SECTIONS.map((s, i) => {
+                    const isActive = i === activeIndex;
+                    return (
+                      <button
+                        key={s.id}
+                        onClick={() => navClick(i)}
+                        className="relative w-full pl-6 py-[14px] text-left outline-none"
+                      >
+                        {isActive && (
+                          <motion.span
+                            layoutId="nav-dot"
+                            className="absolute left-[-3.5px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full bg-white"
+                            style={{ boxShadow: `0 0 0 2px ${activeConfig.bg}` }}
+                            transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                          />
+                        )}
+                        <span
+                          className="block text-[13px] leading-snug text-white transition-opacity duration-200"
+                          style={{ opacity: isActive ? 1 : 0.28, fontWeight: isActive ? 600 : 400 }}
+                        >
+                          {s.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+
+              {/* Right — one card at a time, fades in place */}
+              <div className="flex-1 min-w-0 flex flex-col justify-center overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeInOut' }}
+                  >
+                    {activeIndex === 0 && <VoiceCallingCard />}
+                    {activeIndex === 1 && <ConversationControlCard />}
+                    {activeIndex === 2 && <WorkflowAutomationCard />}
+                    {activeIndex === 3 && <OwnLLMCard />}
+                    {activeIndex === 4 && <OmnichannelCard />}
+                    {activeIndex === 5 && <EnterpriseReliabilityCard />}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Split layout */}
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-12 pb-20 md:pb-32 lg:pb-40">
-        <div className="flex gap-16 xl:gap-24 items-start">
-
-          {/* LEFT STICKY NAV */}
-          <div className="hidden lg:block w-56 xl:w-64 shrink-0" style={{ position: 'sticky', top: '120px', height: 'fit-content' }}>
-            <nav className="relative">
-              <div className={`absolute left-0 top-0 bottom-0 w-px transition-colors duration-700 ${isDark ? 'bg-white/10' : 'bg-neutral-200'}`} />
-              <motion.div
-                className={`absolute left-0 w-px transition-colors duration-700 ${isDark ? 'bg-white' : 'bg-[#111111]'}`}
-                animate={{ top: `${(activeIndex / SECTIONS.length) * 100}%`, height: `${(1 / SECTIONS.length) * 100}%` }}
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              />
-
-              {SECTIONS.map(s => {
-                const isActive = s.id === activeSection;
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => navClick(s.id)}
-                    className="relative w-full pl-6 py-5 text-left outline-none"
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-dot"
-                        className={`absolute left-[-3px] top-1/2 -translate-y-1/2 w-[7px] h-[7px] rounded-full transition-colors duration-700 ${isDark ? 'bg-white' : 'bg-[#111111]'}`}
-                        style={{ boxShadow: `0 0 0 2px ${activeConfig.bg}`, backgroundColor: isDark ? '#ffffff' : '#111111' }}
-                        transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                      />
-                    )}
-                    <motion.span
-                      animate={{ opacity: isActive ? 1 : 0.3 }}
-                      transition={{ duration: 0.18 }}
-                      className={`block text-[13px] leading-snug transition-colors duration-700 ${isActive ? 'font-semibold' : 'font-normal'} ${isDark ? 'text-white' : 'text-[#111111]'}`}
-                    >
-                      {s.label}
-                    </motion.span>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-
-          {/* RIGHT SCROLLING CARDS */}
-          <div className="flex-1 min-w-0">
+      {/* ── MOBILE (below lg): simple stacked ── */}
+      <section
+        className="lg:hidden border-b border-white/5"
+        style={{ backgroundColor: SECTIONS[0].bg }}
+      >
+        <div className="mx-auto max-w-2xl px-5 pt-16 pb-28">
+          <span className="block text-[11px] font-semibold uppercase tracking-[0.2em] mb-3 text-neutral-500">
+            THE EMAAVY PLATFORM
+          </span>
+          <h2 className="text-[28px] sm:text-[36px] font-bold leading-[1.08] text-white mb-16" style={{ letterSpacing: '-0.025em' }}>
+            Every capability your AI agents need to close deals.
+          </h2>
+          <div className="space-y-24">
             {SECTIONS.map(s => (
-              <div
-                key={s.id}
-                id={s.id}
-                className="min-h-screen flex flex-col justify-center py-20 scroll-mt-32"
-              >
-                <p className={`text-[10px] font-semibold uppercase tracking-[0.18em] mb-4 transition-colors duration-700 ${isDark ? 'text-neutral-500' : 'text-neutral-400'}`}>
-                  {s.label}
-                </p>
+              <div key={s.id}>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] mb-4 text-neutral-500">{s.label}</p>
                 {s.id === 'voice-calling'          && <VoiceCallingCard />}
                 {s.id === 'conversation-control'   && <ConversationControlCard />}
                 {s.id === 'workflow-automation'    && <WorkflowAutomationCard />}
@@ -810,11 +837,10 @@ export default function DevMasteryCanvas() {
               </div>
             ))}
           </div>
-
         </div>
-      </div>
+      </section>
 
       <style>{`@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
-    </section>
+    </>
   );
 }
