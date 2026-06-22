@@ -740,7 +740,7 @@ export default function DevMasteryCanvas() {
     >
       {/* Single sticky frame — fills viewport below navbar */}
       <div
-        className="sticky flex flex-col overflow-hidden"
+        className="sticky flex flex-col"
         style={{ top: NAV_H, height: `calc(100vh - ${NAV_H}px)` }}
       >
         {/* ── Header ── */}
@@ -800,16 +800,16 @@ export default function DevMasteryCanvas() {
             </nav>
           </div>
 
-          {/* RIGHT — one card, transitions in place */}
-          <div className="flex-1 min-w-0 flex flex-col justify-center overflow-hidden">
+          {/* RIGHT — cards are absolute-positioned so they stack in one spot */}
+          <div className="flex-1 min-w-0 relative">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSection}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 flex flex-col justify-center"
               >
                 {activeSection === 'voice-calling'          && <VoiceCallingCard />}
                 {activeSection === 'conversation-control'   && <ConversationControlCard />}
