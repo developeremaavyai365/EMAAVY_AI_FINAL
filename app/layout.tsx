@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
-        className="min-h-screen overflow-x-hidden"
+        className="min-h-screen"
         style={
           {
             '--font-clash': 'var(--font-jakarta), system-ui, sans-serif',
