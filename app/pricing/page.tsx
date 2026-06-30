@@ -233,7 +233,7 @@ export default function PricingPage() {
               style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.18)' }}>
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
               <span className="text-[13px] font-medium" style={{ color: '#a5b4fc' }}>
-                Calls starting from <span className="font-bold text-white">₹9 / minute</span>
+                Calls starting from <span className="font-bold text-white">INR 9 / minute</span>
               </span>
             </motion.div>
 
