@@ -222,9 +222,20 @@ export default function PricingPage() {
 
             <motion.p
               initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[16px] leading-relaxed mb-10" style={{ color: '#71717a' }}>
+              className="text-[16px] leading-relaxed mb-6" style={{ color: '#71717a' }}>
               Transparent pricing. No hidden fees, no lock-ins, no surprises.
             </motion.p>
+
+            {/* Call rate callout */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.13 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-10"
+              style={{ background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.18)' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
+              <span className="text-[13px] font-medium" style={{ color: '#a5b4fc' }}>
+                Calls starting from <span className="font-bold text-white">₹9 / minute</span>
+              </span>
+            </motion.div>
 
             {/* Billing toggle */}
             <motion.div
